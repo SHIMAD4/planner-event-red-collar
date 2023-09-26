@@ -1,15 +1,3 @@
-/* Общие стили документа*/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border: none !important;
-    outline: none;
-}
-body {
-    font-family: 'TT Commons', sans-serif;
-}
-
 /* Стили для общей таблицы */
 .fc {
     margin: 0px 50px 30px 50px;
@@ -20,9 +8,18 @@ body {
     float: right;
     background-color: #EFEFEF;
     border-radius: 8px;
+    margin-right: 11px;
+
 }
 .fc-daygrid-event-harness p{
     padding: 2px 6px;
+    max-width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.event.past {
+    color: #B3B3BC;
 }
 
 /* Стили для хедера */
