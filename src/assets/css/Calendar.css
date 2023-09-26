@@ -11,7 +11,6 @@
   border-radius: 8px;
   margin-right: 11px;
 }
-
 .fc-daygrid-event-harness p {
   padding: 2px 6px;
   max-width: 220px;
@@ -19,8 +18,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.event.past {
+.fc-daygrid-event-harness .event .past {
   color: #B3B3BC;
 }
 
@@ -36,35 +34,26 @@
   height: -moz-fit-content;
   height: fit-content;
 }
-
 .header__logo {
-  margin-right: 35px;
+  margin-right: 20px;
 }
-
 .header__alt {
   font-size: 26px;
   margin-right: 19px;
   font-weight: bold;
 }
-
 .header__heading {
   font-size: 64px;
   position: relative;
   top: -0.5rem;
-  left: 2rem;
+  left: 1rem;
   display: inline-block;
 }
-
 .header__heading span {
   color: #F51B1B;
 }
 
 /* Стили для тулбара таблицы */
-.fc .fc-toolbar-title {
-  font-size: 26px;
-  text-transform: capitalize;
-}
-
 .fc .fc-toolbar-chunk:nth-child(3) {
   display: flex;
   justify-content: center;
@@ -72,33 +61,35 @@
   margin-top: 40px;
   margin-bottom: 50px;
 }
-
 .fc .fc-toolbar-chunk:nth-child(3) > button:not(.fc-authButton-button) {
   margin-right: 20px;
 }
-
-.fc .fc-prev-button {
-  margin-right: 0 !important;
-  margin-left: 32px !important;
+.fc .fc-toolbar-chunk:nth-child(3) .fc-toolbar-title {
+  font-size: 26px;
+  text-transform: capitalize;
 }
-
-.fc .fc-next-button {
-  margin-right: 134px !important;
-  margin-left: 8px !important;
-}
-
-.fc .fc-button {
+.fc .fc-toolbar-chunk:nth-child(3) .fc-button {
   background-color: #EFEFEF;
   width: 64px;
   height: 48px;
   border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.fc .fc-button span {
+.fc .fc-toolbar-chunk:nth-child(3) .fc-button span {
   color: black;
+  font-size: 2.5rem;
 }
-
-.fc .fc-authButton-button {
+.fc .fc-toolbar-chunk:nth-child(3) .fc-prev-button {
+  margin-right: 0 !important;
+  margin-left: 32px !important;
+}
+.fc .fc-toolbar-chunk:nth-child(3) .fc-next-button {
+  margin-right: 134px !important;
+  margin-left: 8px !important;
+}
+.fc .fc-toolbar-chunk:nth-child(3) .fc-authButton-button {
   background-color: #0D0C0C;
   color: #EFEFEF;
   width: 124px;
@@ -107,14 +98,14 @@
 }
 
 /* Стили для таблицы с датами */
-.fc .fc-scroller {
-  overflow: hidden !important;
-}
-
 .fc .fc-scroller-harness-liquid {
   border-radius: 24px !important;
   border: 1px solid #B3B3BC !important;
   border-collapse: collapse;
+}
+
+.fc .fc-scroller {
+  overflow: hidden !important;
 }
 
 .fc .fc-scrollgrid-sync-table {

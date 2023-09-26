@@ -3,24 +3,27 @@
     margin: 0px 50px 30px 50px;
 }
 
+
 /* Стили для ивентов */
 .fc-daygrid-event-harness {
     float: right;
     background-color: #EFEFEF;
     border-radius: 8px;
     margin-right: 11px;
+    p {
+        padding: 2px 6px;
+        max-width: 220px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .event {
+        .past {
+            color: #B3B3BC;
+        }
+    } 
+}
 
-}
-.fc-daygrid-event-harness p{
-    padding: 2px 6px;
-    max-width: 220px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.event.past {
-    color: #B3B3BC;
-}
 
 /* Стили для хедера */
 .header {
@@ -32,76 +35,80 @@
     justify-content: center;
     align-items: center;
     height: fit-content;
-}
-.header__logo {
-    margin-right: 35px;
-}
-.header__alt {
-    font-size: 26px;
-    margin-right: 19px;
-    font-weight: bold;
-}
-.header__heading {
-    font-size: 64px;
-    position: relative;
-    top: -0.5rem;
-    left: 2rem;
-    display: inline-block;
-}
-.header__heading span {
-    color: #F51B1B;
+    &__logo {
+        margin-right: 20px;
+    }
+    &__alt {
+        font-size: 26px;
+        margin-right: 19px;
+        font-weight: bold;
+    }
+    &__heading {
+        font-size: 64px;
+        position: relative;
+        top: -0.5rem;
+        left: 1rem;
+        display: inline-block;
+        & span {
+            color: #F51B1B;
+        }
+    }
 }
 
 
 /* Стили для тулбара таблицы */
-.fc .fc-toolbar-title {
-    font-size: 26px;
-    text-transform: capitalize;
-}
 .fc .fc-toolbar-chunk:nth-child(3) {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 40px;
     margin-bottom: 50px;
-}
-.fc .fc-toolbar-chunk:nth-child(3) > button:not(.fc-authButton-button) {
-    margin-right: 20px;
-}
-.fc .fc-prev-button {
-    margin-right: 0 !important;
-    margin-left: 32px !important;
-}
-.fc .fc-next-button {
-    margin-right: 134px !important;
-    margin-left: 8px !important;
-}
-.fc .fc-button {
-    background-color: #EFEFEF;
-    width: 64px;
-    height: 48px;
-    border-radius: 8px;
-}
-.fc .fc-button span {
-    color: black;
-}
-.fc .fc-authButton-button {
-    background-color: #0D0C0C;
-    color: #EFEFEF;
-    width: 124px;
-    height: 60px;
-    border-radius: 12px;
+    & > button:not(.fc-authButton-button) {
+        margin-right: 20px;
+    }
+    .fc-toolbar-title {
+        font-size: 26px;
+        text-transform: capitalize;
+    }
+    .fc-button {
+        background-color: #EFEFEF;
+        width: 64px;
+        height: 48px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & span {
+            color: black;
+            font-size: 2.5rem;
+        }
+    }
+    .fc-prev-button {
+        margin-right: 0 !important;
+        margin-left: 32px !important;
+    }
+    .fc-next-button {
+        margin-right: 134px !important;
+        margin-left: 8px !important;
+    }
+    .fc-authButton-button {
+        background-color: #0D0C0C;
+        color: #EFEFEF;
+        width: 124px;
+        height: 60px;
+        border-radius: 12px;
+    }
 }
 
 
 /* Стили для таблицы с датами */
-.fc .fc-scroller {
-    overflow: hidden !important;
-}
 .fc .fc-scroller-harness-liquid {
     border-radius: 24px !important;
     border: 1px solid #B3B3BC !important;
     border-collapse: collapse;
+}
+.fc .fc-scroller {
+    overflow: hidden !important;
 }
 .fc .fc-scrollgrid-sync-table {
     width: calc(100% + 20px) !important;
