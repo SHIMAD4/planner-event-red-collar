@@ -5,9 +5,9 @@
 
 
 /* Стили для ивентов */
-.fc-h-event .fc-event-main {
-    background-color: #EFEFEF;
+.fc-daygrid-event-harness {
     float: right;
+    background-color: #EFEFEF;
     border-radius: 8px;
     margin-right: 11px;
     p {
@@ -16,14 +16,16 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: 20px;
     }
-    div.event{
+    .fc-h-event .fc-event-main {
+        background-color: #EFEFEF;
         color: #0D0C0C;
-    }
-    div.event.past{
-        color: #B3B3BC;
-    }
+        font-size: 20px;
+        .past {
+            background-color: #EFEFEF;
+            color: #B3B3BC;
+        }
+    } 
 }
 
 

@@ -5,24 +5,26 @@
 }
 
 /* Стили для ивентов */
-.fc-h-event .fc-event-main {
-  background-color: #EFEFEF;
+.fc-daygrid-event-harness {
   float: right;
+  background-color: #EFEFEF;
   border-radius: 8px;
   margin-right: 11px;
 }
-.fc-h-event .fc-event-main p {
+.fc-daygrid-event-harness p {
   padding: 2px 6px;
   max-width: 220px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.fc-daygrid-event-harness .fc-h-event .fc-event-main {
+  background-color: #EFEFEF;
+  color: #0D0C0C;
   font-size: 20px;
 }
-.fc-h-event .fc-event-main div.event {
-  color: #0D0C0C;
-}
-.fc-h-event .fc-event-main div.event.past {
+.fc-daygrid-event-harness .fc-h-event .fc-event-main .past {
+  background-color: #EFEFEF;
   color: #B3B3BC;
 }
 
