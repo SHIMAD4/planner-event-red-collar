@@ -15,7 +15,7 @@ export default function Calendar() {
   const authButton = {
     text: 'Войти',
     click: function() {
-      console.log()
+      console.log('Вход')
     }
   }
 

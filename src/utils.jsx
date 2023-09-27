@@ -1,10 +1,12 @@
 export default function closeModal(e) {
-    console.log(e.target.classList[0])
-    if(e.target.classList[0] !== 'event__title') {
-        if(e.target.classList[0] === 'modal__close-icon' || e.target.classList[0] === 'modal__bg') {
-            document.querySelector('.modal').classList.remove('active')
-        }
+    const eventClassList = e.target.classList
+    const modal = document.querySelector('.modal')
+    const closeTrigger = eventClassList.contains('modal__close-icon') || eventClassList.contains('modal__bg')
+    const openTrigger = eventClassList.contains('event__title')
+
+    if(!openTrigger && closeTrigger) {
+        modal.classList.remove('active')
     } else {
-        document.querySelector('.modal').classList.add('active')
+        modal.classList.add('active')
     }
 }
