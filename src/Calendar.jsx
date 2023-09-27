@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Modal from './Modal';
 import './assets/css/Calendar.css';
-import closeModal from './utils';
 
 export default function Calendar() {
   const [events, setEvents] = useState([])
@@ -25,7 +24,10 @@ export default function Calendar() {
 
   useEffect(() => {
     getEventsData().then(data => {
-      data.forEach(elem => elem.start = elem.dateStart.split('T')[0])
+      if(!data) return null
+      data.forEach(elem => {
+        elem.start = elem.dateStart.split('T')[0]
+      })
       setEvents(data)
     })
   }, [])
@@ -34,7 +36,6 @@ export default function Calendar() {
     console.log(arg)
   }
   const handleEventClick = (eventInfo) => {
-    console.log(eventInfo)
     setSelectedEvent(eventInfo.event)
   }
   
@@ -59,13 +60,13 @@ export default function Calendar() {
       dateClick={ handleDateClick }
       eventClick={ handleEventClick }
     />
-    {selectedEvent && <Modal event={selectedEvent} />}
+    {selectedEvent && <Modal event={selectedEvent} onClose={() => setSelectedEvent(null)} />}
     </>
   )
 }
 
 async function getEventsData() {
-  axios.defaults.baseURL = 'https://planner.rdclr.ru/api/events'
+  axios.defaults.baseURL = 'https://planner.rdclr.ru/api/events?populate=*&filter[date][$gte]=2022-10-14T14:00:00.000Z&filter[date][$lte]=2024-10-14T14:00:00.000Z'
   axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
   return axios()
@@ -76,13 +77,13 @@ async function getEventsData() {
 function renderEventContent(eventInfo) {
   if(eventInfo.event.start < new Date()) {
     return (
-      <div className="event past" onClick={(e) => closeModal(e)}>
+      <div className="event past">
         <p className="event__title">{eventInfo.event.title}</p>
       </div>
     )
   } else {
     return (
-      <div className="event" onClick={(e) => closeModal(e)}>
+      <div className="event">
         <p className="event__title">{eventInfo.event.title}</p>
       </div>
     )

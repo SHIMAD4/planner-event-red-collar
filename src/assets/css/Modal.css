@@ -1,7 +1,3 @@
-.modal {
-  display: none;
-}
-
 .modal.active {
   display: flex;
 }
