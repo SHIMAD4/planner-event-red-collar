@@ -17,8 +17,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    .event {
+    .fc-h-event .fc-event-main {
+        background-color: #EFEFEF;
+        color: #0D0C0C;
+        font-size: 20px;
         .past {
+            background-color: #EFEFEF;
             color: #B3B3BC;
         }
     } 
@@ -97,6 +101,14 @@
         width: 124px;
         height: 60px;
         border-radius: 12px;
+        &:hover {
+            background-color: #F51B1B;
+            color: #FFFFFF;
+        }
+        &:disabled {
+            background-color: #B3B3BC;
+            color: #EFEFEF;
+        }
     }
 }
 

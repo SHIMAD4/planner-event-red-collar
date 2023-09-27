@@ -18,7 +18,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.fc-daygrid-event-harness .event .past {
+.fc-daygrid-event-harness .fc-h-event .fc-event-main {
+  background-color: #EFEFEF;
+  color: #0D0C0C;
+  font-size: 20px;
+}
+.fc-daygrid-event-harness .fc-h-event .fc-event-main .past {
+  background-color: #EFEFEF;
   color: #B3B3BC;
 }
 
@@ -95,6 +101,14 @@
   width: 124px;
   height: 60px;
   border-radius: 12px;
+}
+.fc .fc-toolbar-chunk:nth-child(3) .fc-authButton-button:hover {
+  background-color: #F51B1B;
+  color: #FFFFFF;
+}
+.fc .fc-toolbar-chunk:nth-child(3) .fc-authButton-button:disabled {
+  background-color: #B3B3BC;
+  color: #EFEFEF;
 }
 
 /* Стили для таблицы с датами */
