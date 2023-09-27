@@ -1,12 +1,16 @@
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Modal from './Modal';
 import './assets/css/Calendar.css';
 import closeModal from './utils';
 
 export default function Calendar() {
   const [events, setEvents] = useState([])
+  const [selectedEvent, setSelectedEvent] = useState(null)
+
   const headerToolbar = {
     start: '',
     center: '',
@@ -20,10 +24,8 @@ export default function Calendar() {
   }
 
   useEffect(() => {
-    getData().then(data => {
-      data.forEach(elem => {
-        elem.start = elem.dateStart.split('T')[0]
-      })
+    getEventsData().then(data => {
+      data.forEach(elem => elem.start = elem.dateStart.split('T')[0])
       setEvents(data)
     })
   }, [])
@@ -31,41 +33,44 @@ export default function Calendar() {
   const handleDateClick = (arg) => {
     console.log(arg)
   }
-
+  const handleEventClick = (eventInfo) => {
+    console.log(eventInfo)
+    setSelectedEvent(eventInfo.event)
+  }
+  
   return (
+    <>
     <FullCalendar
+      height={851}
       plugins={[dayGridPlugin, interactionPlugin]}
-      dateClick={handleDateClick}
       initialView="dayGridMonth"
-      selectable={true}
-      editable={true}
-      events={events}
-      eventContent={renderEventContent}
-      headerToolbar={headerToolbar}
+      headerToolbar={ headerToolbar }
+      customButtons={{ authButton }}
       titleFormat={{ month: 'long' }}
       locale="ru"
-      height={851}
-      customButtons={{ authButton }}
-      firstDay={1}
+      firstDay={ 1 }
+
+      selectable={ true }
+      editable={ true }
+
+      events={ events }
+      eventContent={ renderEventContent }
+
+      dateClick={ handleDateClick }
+      eventClick={ handleEventClick }
     />
+    {selectedEvent && <Modal event={selectedEvent} />}
+    </>
   )
 }
 
-async function getData() {
-  try {
-    const response = await fetch('https://planner.rdclr.ru/api/events', {
-      method: 'GET',
-      headers: {
-        Authorization:
-          'Bearer e856de606d770bc1f0441a0c7fd8dc5297f855a8b96a00924fe2f1640ed949162dadbe0339a70e3e1717231d87c5e3328715a00f86aa21bf355a7f8146f1ad0287c5731f1a751dab6410d6afffe0909c7acaefdd639d89f6ab23a0e2b282ad3c85dd55bee58fe544ad112e7c683b6ff8db39cff814770f9d1a1d6ba4e3851d5e',
-      },
-    })
-    const json = await response.json()
-    return json.data
-  } catch (err) {
-    console.log(err)
-    return []
-  }
+async function getEventsData() {
+  axios.defaults.baseURL = 'https://planner.rdclr.ru/api/events'
+  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+
+  return axios()
+    .then(res => res.data.data)
+    .catch(err => console.log(err))
 }
 
 function renderEventContent(eventInfo) {
