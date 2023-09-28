@@ -55,9 +55,16 @@
         &__day {
             padding: 15px;
             font-weight: bold;
+
         }
         &__address {
             padding: 0px 0px 15px 15px;
+        }
+        &.past {
+            aside {
+                color: #B3B3BC;
+                background-color: #FAFAFA;
+            }
         }
     }
     &__desc {

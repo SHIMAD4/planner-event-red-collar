@@ -10,6 +10,7 @@ export default function Modal({ event, onClose }) {
   const description = event.extendedProps.description
   const location = event.extendedProps.location
   const photos = []
+  let isPast = event.classNames[0] === 'past' ? true : false
 
   if(event.extendedProps.photos) {
     event.extendedProps.photos.forEach(elem => {
@@ -26,7 +27,7 @@ export default function Modal({ event, onClose }) {
       <div className="modal__body">
         <h2 className="modal__title">{event.title}</h2>
         <img className='modal__close-icon' src={closeIcon} alt="close" onClick={(e) => onClose(e)}/>
-        <div className="modal__event-info">
+        <div className={ isPast ? "modal__event-info past" : "modal__event-info" }>
           <aside>
             <div className="modal__event-info__day">
               <p>{weekday}</p>

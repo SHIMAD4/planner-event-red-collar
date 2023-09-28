@@ -59,6 +59,10 @@
 .modal__event-info__address {
   padding: 0px 0px 15px 15px;
 }
+.modal__event-info.past aside {
+  color: #B3B3BC;
+  background-color: #FAFAFA;
+}
 .modal__desc {
   font-size: 20px;
   line-height: 140%;

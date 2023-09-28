@@ -27,6 +27,7 @@ export default function Calendar() {
       if(!data) return null
       data.forEach(elem => {
         elem.start = elem.dateStart.split('T')[0]
+        if(new Date(elem.start) < new Date()) elem.className = 'past'
       })
       setEvents(data)
     })
@@ -52,7 +53,6 @@ export default function Calendar() {
       firstDay={ 1 }
 
       selectable={ true }
-      editable={ true }
 
       events={ events }
       eventContent={ renderEventContent }
