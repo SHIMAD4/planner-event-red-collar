@@ -1,4 +1,12 @@
 /* Общие стили документа*/
+@font-face {
+    font-family: "Redcollar";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Roboto"),
+         url("/public/fonts/Redcollar.woff2") format("woff2")
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,5 +15,5 @@
     outline: none;
 }
 body {
-    font-family: 'TT Commons', sans-serif;
+    font-family: 'Redcollar', sans-serif;
 }
