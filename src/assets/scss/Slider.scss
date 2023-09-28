@@ -1,0 +1,33 @@
+.prev, .next {
+    width: 64px;
+    height: 48px;
+    background-color: #EFEFEF;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+.prev {
+    position: absolute;
+    top: 50%;
+    right: 12%;
+    img {
+        transform: rotate(180deg);
+    }
+}
+.next {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+}
+.swiper-button-disabled {
+    background-color: #EFEFEF;
+    img {
+        filter: opacity(.2);
+    }
+}

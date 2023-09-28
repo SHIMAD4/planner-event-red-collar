@@ -1,5 +1,12 @@
+import { useRef } from 'react';
+import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import arrow from './assets/icons/arrow.svg';
 import closeIcon from './assets/icons/close.svg';
 import './assets/scss/Modal.scss';
+import './assets/scss/Slider.scss';
 
 export default function Modal({ event, onClose }) {
   console.log("modal: ", event)
@@ -12,9 +19,13 @@ export default function Modal({ event, onClose }) {
   const photos = []
   let isPast = event.classNames[0] === 'past' ? true : false
 
+  const navigationPrevRef = useRef(null)
+  const navigationNextRef = useRef(null)
+
   if(event.extendedProps.photos) {
     event.extendedProps.photos.forEach(elem => {
-      photos.push('https://planner.rdclr.ru' + elem.url)
+      elem.src = 'https://planner.rdclr.ru' + elem.url
+      photos.push(elem)
     })
   }
   
@@ -42,11 +53,30 @@ export default function Modal({ event, onClose }) {
         <div className="modal__people"></div>
         <h2 className='modal__gallery__desc'>Галерея</h2>
         <ul className='modal__gallery__list'>
-          {
-            photos.map((item, key) => {
-              return <li key={key}><img src={item} alt=""/></li>
-            })
-          }
+          <Swiper
+            modules={[Navigation]}
+            navigation={{
+              prevEl: navigationPrevRef.current,
+              nextEl: navigationNextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+                  swiper.params.navigation.prevEl = navigationPrevRef.current;
+                  swiper.params.navigation.nextEl = navigationNextRef.current;
+            }}
+            slidesPerView={3.3}
+          >
+            {
+              photos.map((item, key) => {
+                return <SwiperSlide key={key}><li><img src={item.src} alt="" width={item.width} height={item.height}/></li></SwiperSlide>
+              })
+            }
+          </Swiper>
+          <div className="next" ref={navigationNextRef}>
+            <img src={arrow} alt="" />
+          </div>
+          <div className="prev" ref={navigationPrevRef}>
+            <img src={arrow} alt="" />
+          </div>
         </ul>
         <p className='modal__auth'><a href=''>Войдите</a>, чтобы присоединиться к событию</p>
       </div>
