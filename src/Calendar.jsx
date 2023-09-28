@@ -4,7 +4,7 @@ import FullCalendar from '@fullcalendar/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Modal from './Modal';
-import './assets/css/Calendar.css';
+import './assets/scss/Calendar.scss';
 
 export default function Calendar() {
   const [events, setEvents] = useState([])

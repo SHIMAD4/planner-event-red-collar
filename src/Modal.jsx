@@ -1,5 +1,5 @@
-import './assets/css/Modal.css';
 import closeIcon from './assets/icons/close.svg';
+import './assets/scss/Modal.scss';
 
 export default function Modal({ event, onClose }) {
   console.log("modal: ", event)
