@@ -22,9 +22,6 @@ export default function Slider({ event }) {
         sliderRef.current.swiper.slidePrev()
     }, [])
 
-    if(!event) {
-        return null
-    }
     if(event.photos) {
         event.photos.forEach(elem => {
             elem.src = 'https://planner.rdclr.ru' + elem.url
