@@ -22,16 +22,29 @@ export default function Calendar() {
     },
   }
 
+  const getAllData = axios.create({
+    baseURL: "https://planner.rdclr.ru/api/",
+    headers: {
+      post: { "Content-Type": "application/x-www-form-urlencoded" },
+    },
+  })
+
   useEffect(() => {
-    getEventsData().then((data) => {
-      if (!data) return null
-      data.forEach((elem) => {
-        elem.start = elem.dateStart.split("T")[0]
-        if (new Date(elem.start) < new Date()) elem.className = "past"
+    getAllData
+      .get("events?populate=*&")
+      .then((res) => res.data.data)
+      .then((data) => {
+        if (!data) return null
+        data.forEach((elem) => {
+          const elemDate = new Date(elem.start)
+          const dateNow = new Date()
+          elem.start = elem.dateStart.split("T")[0]
+          if (elemDate < dateNow) elem.className = "past"
+        })
+        setEvents(data)
       })
-      setEvents(data)
-    })
-  }, [])
+      .catch((err) => console.log(err))
+  }, [getAllData])
 
   const handleDateClick = (arg) => {
     console.log(arg)
@@ -66,16 +79,6 @@ export default function Calendar() {
       )}
     </>
   )
-}
-
-async function getEventsData() {
-  axios.defaults.baseURL = "https://planner.rdclr.ru/api/events?populate=*&"
-  axios.defaults.headers.post["Content-Type"] =
-    "application/x-www-form-urlencoded"
-
-  return axios()
-    .then((res) => res.data.data)
-    .catch((err) => console.log(err))
 }
 
 function renderEventContent(eventInfo) {
