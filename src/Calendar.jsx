@@ -69,8 +69,7 @@ export default function Calendar() {
 }
 
 async function getEventsData() {
-  axios.defaults.baseURL =
-    "https://planner.rdclr.ru/api/events?populate=*&filter[date][$gte]=2022-10-14T14:00:00.000Z&filter[date][$lte]=2024-10-14T14:00:00.000Z"
+  axios.defaults.baseURL = "https://planner.rdclr.ru/api/events?populate=*&"
   axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded"
 
