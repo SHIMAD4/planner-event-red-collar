@@ -1,8 +1,8 @@
-.modal.active {
+.modal.active  {
     display: flex;
 }
 
-.modal {
+.modal  {
     ul {
         display: flex;
         flex-direction: row;
@@ -123,6 +123,20 @@
         a {
             color: #F51B1B;
             text-decoration: none;
+        }
+    }
+    a {
+        &:focus {
+            border: 1px solid grey !important;
+        }
+    }
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        &:focus {
+            border: 1px solid grey !important;
         }
     }
 }
