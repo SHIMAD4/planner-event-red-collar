@@ -22,7 +22,6 @@ export default function Modal({ event, onClose, isOpen }) {
 
   return (
     <>
-      activeTrap ? (
       <FocusTrap focusTrapOptions={{ onDeactivate: unmountTrap }}>
         <div
           role="dialog"
@@ -50,7 +49,6 @@ export default function Modal({ event, onClose, isOpen }) {
           </div>
         </div>
       </FocusTrap>
-      ) : false
     </>
   )
 }

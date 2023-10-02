@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react"
-import { Navigation } from "swiper/modules"
+import { Navigation, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/scss"
 import "swiper/scss/navigation"
@@ -32,11 +32,15 @@ export default function Slider({ event }) {
   return (
     <>
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Pagination]}
         ref={sliderRef}
         navigation={{
           prevEl: document.querySelector(".prev"),
           nextEl: document.querySelector(".next"),
+        }}
+        pagination={{
+          el: ".swiper-pagination",
+          clickable: true,
         }}
         slidesPerView={photos.length >= 4 ? 3.3 : 1}
         slideToClickedSlide={true}
@@ -59,6 +63,7 @@ export default function Slider({ event }) {
             </SwiperSlide>
           )
         })}
+        {photos.length >= 4 ? <div className="swiper-pagination"></div> : null}
       </Swiper>
       {photos.length >= 4 ? (
         <>

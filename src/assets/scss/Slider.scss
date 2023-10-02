@@ -35,3 +35,24 @@
 .slide-photo {
     border-radius: 24px;
 }
+
+.swiper-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+    &-bullet {
+        width: 32px;
+        height: 4px;
+        display: block;
+        background-color: #EFEFEF;
+        margin-right: 12px;
+        border-radius: 4px;
+        &-active {
+            background-color: #F51B1B;
+        }
+        &:last-child {
+            margin-right: 0px;
+        }
+    }
+}
