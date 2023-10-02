@@ -38,7 +38,7 @@ export default function Slider({ event }) {
           prevEl: document.querySelector(".prev"),
           nextEl: document.querySelector(".next"),
         }}
-        slidesPerView={3.3}
+        slidesPerView={photos.length >= 4 ? 3.3 : 1}
         slideToClickedSlide={true}
         onSlideChange={(swiper) => {
           const lastSlideIndex = swiper.realIndex
@@ -49,26 +49,31 @@ export default function Slider({ event }) {
             <SwiperSlide key={key}>
               <li>
                 <img
+                  className="slide-photo"
                   src={item.src}
                   alt=""
-                  width={item.width}
-                  height={item.height}
+                  width={268}
+                  height={160}
                 />
               </li>
             </SwiperSlide>
           )
         })}
       </Swiper>
-      <button
-        className={pastPrev ? "next swiper-button-disabled" : "next"}
-        onClick={handlePrev}>
-        <img src={arrow} alt="" />
-      </button>
-      <button
-        className={pastNext ? "prev swiper-button-disabled" : "prev"}
-        onClick={handleNext}>
-        <img src={arrow} alt="" />
-      </button>
+      {photos.length >= 4 ? (
+        <>
+          <button
+            className={pastPrev ? "next swiper-button-disabled" : "next"}
+            onClick={handlePrev}>
+            <img src={arrow} alt="" />
+          </button>
+          <button
+            className={pastNext ? "prev swiper-button-disabled" : "prev"}
+            onClick={handleNext}>
+            <img src={arrow} alt="" />
+          </button>
+        </>
+      ) : null}
     </>
   )
 }

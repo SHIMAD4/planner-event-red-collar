@@ -21,7 +21,6 @@ export default function Calendar() {
       console.log("Вход")
     },
   }
-
   const getAllData = axios.create({
     baseURL: "https://planner.rdclr.ru/api/",
     headers: {
