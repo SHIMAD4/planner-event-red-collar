@@ -41,7 +41,6 @@ export default function Slider({ event }) {
         pagination={{
           el: ".swiper-pagination",
           clickable: true,
-          renderBullet: () => {},
         }}
         slidesPerView={photos.length >= 4 ? 3.3 : 1}
         slideToClickedSlide={true}

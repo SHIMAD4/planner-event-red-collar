@@ -1,14 +1,15 @@
 import dayGridPlugin from "@fullcalendar/daygrid"
 import interactionPlugin from "@fullcalendar/interaction"
 import FullCalendar from "@fullcalendar/react"
-import axios from "axios"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Modal from "./Modal"
 import "./assets/scss/Calendar.scss"
+import { baseRequestURL } from "./shared/api"
 
 export default function Calendar() {
   const [events, setEvents] = useState([])
   const [selectedEvent, setSelectedEvent] = useState(null)
+  const [loaded, setLoaded] = useState(false)
 
   const headerToolbar = {
     start: "",
@@ -21,16 +22,10 @@ export default function Calendar() {
       console.log("Вход")
     },
   }
-  const getAllData = axios.create({
-    baseURL: "https://planner.rdclr.ru/api/",
-    headers: {
-      post: { "Content-Type": "application/x-www-form-urlencoded" },
-    },
-  })
 
-  useEffect(() => {
-    getAllData
-      .get("events?populate=*&")
+  const getEvents = useCallback(() => {
+    baseRequestURL
+      .get("events?populate=*&", {})
       .then((res) => res.data.data)
       .then((data) => {
         if (!data) return null
@@ -42,8 +37,21 @@ export default function Calendar() {
         })
         setEvents(data)
       })
-      .catch((err) => console.log(err))
-  }, [getAllData])
+      .catch((err) => console.log(err.response.data.error))
+  }, [])
+  const getUsers = useCallback(() => {
+    baseRequestURL
+      .get("users")
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err.response.data.error))
+  }, [])
+
+  useEffect(() => {
+    if (loaded) return
+    getEvents()
+    getUsers()
+    setLoaded(true)
+  }, [getEvents, getUsers, loaded])
 
   const handleDateClick = (arg) => {
     console.log(arg)
