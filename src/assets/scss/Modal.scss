@@ -138,3 +138,56 @@
         }
     }
 }
+
+@media screen and (min-width: 1440px) {
+    .modal  {
+        &__body {
+            min-width: 1000px;
+            min-height: 500px;
+            max-width: 1000px;
+            max-height: 700px;
+        }
+        &__title {
+            font-size: 34px;
+        }
+        &__desc {
+            font-size: 20px;
+        }
+        &__people__desc {
+            font-size: 24px;
+        }
+        &__gallery__desc {
+            font-size: 24px;
+        }
+        &__gallery__list {
+            margin-bottom: 24px;
+        }
+        &__auth {
+            font-size: 16px;
+        }
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .modal  {
+        &__body {
+            min-width: 1100px;
+            min-height: 600px;
+            max-width: 1200px;
+            max-height: 1000px;
+        }
+        &__title {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        &__desc {
+            font-size: 22px;
+        }
+        &__gallery__list {
+            margin-bottom: 50px;
+        }
+        &__auth {
+            font-size: 22px;
+        }
+    }
+}
