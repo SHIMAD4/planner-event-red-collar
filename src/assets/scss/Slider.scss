@@ -56,3 +56,21 @@
         }
     }
 }
+
+@media screen and (min-width: 1440px) {
+    .prev {
+        top: 56%;
+    }
+    .next {
+        top: 56%;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .prev {
+        top: 50%;
+    }
+    .next {
+        top: 50%;
+    }
+}
