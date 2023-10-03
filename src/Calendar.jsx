@@ -30,10 +30,8 @@ export default function Calendar() {
       .then((data) => {
         if (!data) return null
         data.forEach((elem) => {
-          const elemDate = new Date(elem.start)
-          const dateNow = new Date()
           elem.start = elem.dateStart.split("T")[0]
-          if (elemDate < dateNow) elem.className = "past"
+          if (new Date(elem.start) < new Date()) elem.className = "past"
         })
         setEvents(data)
       })
