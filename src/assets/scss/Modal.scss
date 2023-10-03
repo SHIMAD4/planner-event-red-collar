@@ -170,7 +170,7 @@
     .modal  {
         &__body {
             min-width: 1100px;
-            min-height: 600px;
+            min-height: 400px;
             max-width: 1200px;
             max-height: 1000px;
         }
@@ -185,6 +185,7 @@
             margin-bottom: 50px;
         }
         &__auth {
+            padding-top: 30px;
             font-size: 22px;
         }
     }
