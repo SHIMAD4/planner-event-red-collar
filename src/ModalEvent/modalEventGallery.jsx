@@ -1,10 +1,7 @@
 import { useCallback, useRef, useState } from "react"
-import { Navigation, Pagination } from "swiper/modules"
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/scss"
-import "swiper/scss/navigation"
 import arrow from "../shared/icons/arrow.svg"
 import "../shared/scss/Modal.scss"
+import ModalEventSlider from "./modalEventSlider"
 
 export default function ModalEventGallery({ event }) {
   const sliderRef = useRef(null)
@@ -21,6 +18,13 @@ export default function ModalEventGallery({ event }) {
     if (!sliderRef.current) return
     sliderRef.current.swiper.slidePrev()
   }, [])
+
+  if (event.extendedProps.photos) {
+    event.extendedProps.photos.forEach((elem) => {
+      elem.src = "https://planner.rdclr.ru" + elem.url
+      photos.push(elem)
+    })
+  }
 
   return (
     <>
@@ -44,40 +48,14 @@ export default function ModalEventGallery({ event }) {
             ) : null}
           </div>
           <ul className="modal__gallery__list" role="list">
-            {event.extendedProps.photos.forEach((elem) => {
-              elem.src = "https://planner.rdclr.ru" + elem.url
-              photos.push(elem)
-            })}
-            <Swiper
-              modules={[Navigation, Pagination]}
+            <ModalEventSlider
               ref={sliderRef}
-              navigation={{
-                prevEl: document.querySelector(".prev"),
-                nextEl: document.querySelector(".next"),
-              }}
-              pagination={{
-                el: ".swiper-pagination",
-                clickable: true,
-              }}
-              slidesPerView={photos.length >= 4 ? 3.3 : 1}
-              slideToClickedSlide={true}
               onSlideChange={(swiper) => {
                 const lastSlideIndex = swiper.realIndex
                 lastSlideIndex > 0 ? setPastPrev(true) : setPastNext(true)
-              }}>
-              {photos.map((item, key) => {
-                return (
-                  <SwiperSlide key={key}>
-                    <li>
-                      <img className="slide-photo" src={item.src} alt="" />
-                    </li>
-                  </SwiperSlide>
-                )
-              })}
-              {photos.length >= 4 ? (
-                <div className="swiper-pagination"></div>
-              ) : null}
-            </Swiper>
+              }}
+              photos={photos}
+            />
           </ul>
         </>
       ) : null}
