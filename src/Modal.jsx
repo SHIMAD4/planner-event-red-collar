@@ -41,7 +41,7 @@ export default function Modal({ event, onClose, isOpen }) {
               <img src={closeIcon} alt="close" />
             </button>
             <ModalEventInfo event={event} />
-            <Participants />
+            <Participants event={event} />
             <Gallery event={event} />
             <p className="modal__auth">
               <a href="">Войдите</a>, чтобы присоединиться к событию

@@ -7,7 +7,6 @@ import arrow from "./assets/icons/arrow.svg"
 import "./assets/scss/Slider.scss"
 
 export default function Slider({ event }) {
-  console.log(event)
   const [pastPrev, setPastPrev] = useState(false)
   const [pastNext, setPastNext] = useState(true)
   const sliderRef = useRef(null)

@@ -82,29 +82,27 @@
     }
     &__people {
         margin-bottom: 56px;
-        &__list {
-            li {
-                display: flex;
-                align-items: center;
-                margin-right: 48px;
-                img {
-                    margin-right: 12px;
+        li {
+            display: flex;
+            align-items: center;
+            margin-right: 48px;
+            img {
+                margin-right: 12px;
+            }
+            div {
+                p:first-child {
+                    font-size: 16px;
+                    font-weight: medium;
                 }
-                div {
-                    p:first-child {
-                        font-size: 16px;
-                        font-weight: medium;
-                    }
-                    p:last-child {
-                        color: #6C27A3;
-                        background-color: #EFDAFC;
-                        border-radius: 8px;
-                        padding: 2px 4px;
-                    }
+                p:last-child {
+                    color: #6C27A3;
+                    background-color: #EFDAFC;
+                    border-radius: 8px;
+                    padding: 2px 4px;
                 }
-                :last-child {
-                    margin-right: 0;
-                }
+            }
+            :last-child {
+                margin-right: 0;
             }
         }
     }
