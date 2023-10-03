@@ -1,6 +1,6 @@
 .prev, .next {
-    width: 64px;
-    height: 48px;
+    width: 60px;
+    height: 42px;
     background-color: #EFEFEF !important;
     border-radius: 8px;
     display: flex;
@@ -14,7 +14,7 @@
 }
 .prev {
     position: absolute;
-    top: 48%;
+    top: 52.5%;
     right: 12%;
     img {
         transform: rotate(180deg);
@@ -22,7 +22,7 @@
 }
 .next {
     position: absolute;
-    top: 48%;
+    top: 52.5%;
     right: 5%;
 }
 .swiper-button-disabled {

@@ -20,8 +20,10 @@
         opacity: .4;
     }
     &__body {
-        max-width: 1075px;
-        max-height: 924px;
+        min-width: 975px;
+        min-height: 400px;
+        max-width: 975px;
+        max-height: 700px;
         background-color: #fff;
         position: absolute;
         top: 50%;
@@ -39,8 +41,8 @@
     }
     &__title {
         text-align: center;
-        font-size: 36px;
-        margin-bottom: 40px;
+        font-size: 30px;
+        margin-bottom: 20px;
     }
     &__event-info {
         margin-bottom: 40px;
@@ -69,13 +71,14 @@
     }
     &__desc {
         min-height: 124px;
-        font-size: 20px;
+        font-size: 18px;
         line-height: 140%;
         font-family: 'TT Commons', sans-serif;
         font-weight: 500;
     }
     &__people__desc {
-        margin-bottom: 24px;
+        font-size: 20px;
+        margin-bottom: 20px;
     }
     &__people {
         margin-bottom: 56px;
@@ -106,21 +109,15 @@
         }
     }
     &__gallery__desc {
-        font-size: 24px;
-        margin-bottom: 44px;
+        font-size: 20px;
+        margin-bottom: 24px;
     }
     &__gallery__list {
-        margin-bottom: 64px;
-        li {
-            margin-right: 16px;
-            :last-child {
-                margin-right: 0;
-            }
-        }
+        margin-bottom: 40px;
     }
     &__auth {
         text-align: center;
-        font-size: 18px;
+        font-size: 16px;
         a {
             color: #F51B1B;
             text-decoration: none;

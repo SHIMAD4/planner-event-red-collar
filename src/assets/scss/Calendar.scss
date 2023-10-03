@@ -4,45 +4,10 @@
 }
 
 
-/* Стили для ивентов */
-.fc-daygrid-event-harness {
-    float: right;
-    background-color: #EFEFEF;
-    border-radius: 8px;
-    margin-right: 11px;
-    margin-bottom: 3px;
-    cursor: pointer;
-    p {
-        padding: 2px 6px;
-        max-width: 220px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .fc-h-event .fc-event-main {
-        background-color: #EFEFEF;
-        color: #0D0C0C;
-        font-size: 20px;
-        font-family: 'TT Commons', sans-serif;
-        font-weight: 500;
-        .past {
-            background-color: #EFEFEF;
-            color: #B3B3BC;
-        }
-    } 
-}
-.fc .fc-daygrid-day-events {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    float: right;
-}
-
-
 /* Стили для хедера */
 .header {
     position: absolute;
-    top: 2rem;
+    top: 3.2rem;
     left: 3.2rem;
     display: flex;
     flex-direction: row;
@@ -53,14 +18,14 @@
         margin-right: 20px;
     }
     &__alt {
-        font-size: 26px;
+        font-size: 20px;
         margin-right: 19px;
         font-weight: bold;
     }
     &__heading {
-        font-size: 64px;
+        font-size: 40px;
         position: relative;
-        top: -0.5rem;
+        top: -0.2rem;
         left: 1rem;
         display: inline-block;
         & span {
@@ -76,12 +41,9 @@
     justify-content: center;
     align-items: center;
     margin-top: 40px;
-    margin-bottom: 50px;
-    & > button:not(.fc-authButton-button) {
-        margin-right: 20px;
-    }
+    margin-bottom: 20px;
     .fc-toolbar-title {
-        font-size: 26px;
+        font-size: 20px;
         text-transform: capitalize;
     }
     .fc-button {
@@ -99,10 +61,10 @@
     }
     .fc-prev-button {
         margin-right: 0 !important;
-        margin-left: 32px !important;
+        margin-left: 20px !important;
     }
     .fc-next-button {
-        margin-right: 134px !important;
+        margin-right: 100px !important;
         margin-left: 8px !important;
     }
     .fc-authButton-button {
@@ -123,19 +85,64 @@
 }
 
 
+/* Стили для ивентов */
+.fc-daygrid-event-harness {
+    float: right;
+    background-color: #EFEFEF;
+    border-radius: 8px;
+    margin-right: 11px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    p {
+        padding: 2px 6px;
+        max-width: 130px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .fc-h-event .fc-event-main {
+        background-color: #EFEFEF;
+        color: #0D0C0C;
+        font-size: 16px;
+        font-family: 'TT Commons', sans-serif;
+        font-weight: 500;
+        .past {
+            background-color: #EFEFEF;
+            color: #B3B3BC;
+        }
+    } 
+}
+.fc .fc-daygrid-day-events {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    float: right;
+}
+
+
 /* Стили для таблицы с датами */
 .fc .fc-scroller-harness-liquid {
     border-radius: 24px !important;
     border: 1px solid #B3B3BC !important;
     border-collapse: collapse;
+    height: 600px !important;
 }
 .fc .fc-scroller {
     overflow: hidden !important;
 }
+.fc.fc-media-screen.fc-direction-ltr.fc-theme-standard {
+    height: 625px !important;
+}
 .fc .fc-scrollgrid-sync-table {
-    width: calc(100% + 20px) !important;
+    width: 100% !important;
+    height: 490px !important;
+}
+.fc .fc-daygrid-day {
+    width: 150px;
+    height: 100px;
 }
 .fc .fc-daygrid-day-number {
+    font-size: 20px;
     padding-top: 10px;
     padding-right: 14px;
 }
@@ -147,10 +154,7 @@
     border-right: 1px solid #B3B3BC !important;
 }
 .fc-scrollgrid-sync-inner:not(.fc-daygrid-day-frame.fc-scrollgrid-sync-inner) {
-    font-size: 24px;
+    font-size: 18px;
     text-transform: capitalize;
     float: right;
-}
-.fc-daygrid-day-number {
-    font-size: 20px;
 }

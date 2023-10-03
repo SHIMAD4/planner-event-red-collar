@@ -56,8 +56,8 @@ export default function Slider({ event }) {
                   className="slide-photo"
                   src={item.src}
                   alt=""
-                  width={268}
-                  height={160}
+                  width={250}
+                  height={140}
                 />
               </li>
             </SwiperSlide>
