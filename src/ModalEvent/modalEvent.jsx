@@ -1,12 +1,12 @@
 import FocusTrap from "focus-trap-react"
 import { useEffect, useState } from "react"
-import Gallery from "./Modal/modalEventGallery"
-import ModalEventInfo from "./Modal/modalEventInfo"
-import Participants from "./Modal/modalEventParticipants"
-import closeIcon from "./assets/icons/close.svg"
-import "./assets/scss/Modal.scss"
+import closeIcon from "../shared/icons/close.svg"
+import "../shared/scss/Modal.scss"
+import ModalEventGallery from "./modalEventGallery"
+import ModalEventInfo from "./modalEventInfo"
+import ModalEventParticipants from "./modalEventParticipants"
 
-export default function Modal({ event, onClose, isOpen }) {
+export default function ModalEvent({ event, onClose, isOpen }) {
   const [activeTrap, setActiveTrap] = useState(false)
 
   useEffect(() => {
@@ -42,8 +42,8 @@ export default function Modal({ event, onClose, isOpen }) {
                 <img src={closeIcon} alt="close" />
               </button>
               <ModalEventInfo event={event} />
-              <Participants event={event} />
-              <Gallery event={event} />
+              <ModalEventParticipants event={event} />
+              <ModalEventGallery event={event} />
               <p className="modal__auth">
                 <a href="">Войдите</a>, чтобы присоединиться к событию
               </p>

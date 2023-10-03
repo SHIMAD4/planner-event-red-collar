@@ -21,7 +21,7 @@
     }
     &__body {
         min-width: 1000px;
-        min-height: 800px;
+        min-height: 500px;
         max-width: 1000px;
         max-height: 800px;
         background-color: #fff;
@@ -234,7 +234,7 @@
     .modal  {
         &__body {
             min-width: 1000px;
-            min-height: 780px;
+            min-height: 600px;
             max-width: 1000px;
             max-height: 780px;
         }
@@ -278,7 +278,7 @@
         &__gallery__list {
             margin-bottom: 24px;
             .slide-photo {
-                width: 260px;
+                width: 250px;
                 height: 150px;
             }
         }
@@ -306,7 +306,7 @@
         &__gallery__list {
             margin-bottom: 50px;
             .slide-photo {
-                width: 270px;
+                width: 250px;
                 height: 160px;
             }
         }

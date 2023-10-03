@@ -1,6 +1,6 @@
-import avatar from "../assets/icons/avatar.png"
+import avatar from "../shared/icons/avatar.png"
 
-export default function Participants({ event }) {
+export default function ModalEventParticipants({ event }) {
   const participants = event.extendedProps.participants
   const participantsCount = participants.length
 

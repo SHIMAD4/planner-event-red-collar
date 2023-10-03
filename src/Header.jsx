@@ -1,4 +1,4 @@
-import logo from "./assets/icons/logo.svg"
+import logo from "./shared/icons/logo.svg"
 
 export default function Header() {
   return (

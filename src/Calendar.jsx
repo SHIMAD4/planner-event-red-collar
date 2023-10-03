@@ -2,9 +2,9 @@ import dayGridPlugin from "@fullcalendar/daygrid"
 import interactionPlugin from "@fullcalendar/interaction"
 import FullCalendar from "@fullcalendar/react"
 import { useCallback, useEffect, useState } from "react"
-import Modal from "./Modal"
-import "./assets/scss/Calendar.scss"
+import ModalEvent from "./ModalEvent/modalEvent"
 import { baseRequestURL } from "./shared/api"
+import "./shared/scss/Calendar.scss"
 
 export default function Calendar() {
   const [events, setEvents] = useState([])
@@ -76,7 +76,7 @@ export default function Calendar() {
         eventClick={handleEventClick}
       />
       {selectedEvent && (
-        <Modal
+        <ModalEvent
           event={selectedEvent}
           onClose={() => setSelectedEvent(null)}
           isOpen={true}

@@ -3,10 +3,10 @@ import { Navigation, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/scss"
 import "swiper/scss/navigation"
-import arrow from "../assets/icons/arrow.svg"
-import "../assets/scss/Modal.scss"
+import arrow from "../shared/icons/arrow.svg"
+import "../shared/scss/Modal.scss"
 
-export default function Gallery({ event }) {
+export default function ModalEventGallery({ event }) {
   const sliderRef = useRef(null)
   const [pastPrev, setPastPrev] = useState(false)
   const [pastNext, setPastNext] = useState(true)
