@@ -81,7 +81,7 @@
         margin-bottom: 20px;
     }
     &__people {
-        margin-bottom: 56px;
+        margin-bottom: 70px;
         li {
             display: flex;
             align-items: center;
@@ -90,11 +90,11 @@
                 margin-right: 12px;
             }
             div {
-                p:first-child {
+                .modal__people__username:first-child {
                     font-size: 16px;
                     font-weight: medium;
                 }
-                p:last-child {
+                .modal__people__role:last-child {
                     color: #6C27A3;
                     background-color: #EFDAFC;
                     border-radius: 8px;
@@ -104,6 +104,23 @@
             :last-child {
                 margin-right: 0;
             }
+        }
+        .count {
+            min-width: 80px;
+            position: relative;
+            right: 90px;
+        }
+        .photo2 {
+            position: relative;
+            top: 0;
+            right: 50px;
+            z-index: -1;
+        }
+        .photo3 {
+            position: relative;
+            top: 0;
+            right: 100px;
+            z-index: -2;
         }
     }
     &__gallery__desc {
