@@ -1,7 +1,7 @@
 import FocusTrap from "focus-trap-react"
 import { useEffect, useState } from "react"
 import closeIcon from "../shared/icons/close.svg"
-import "../shared/scss/Modal.scss"
+import "../shared/scss/ModalEvent.scss"
 import ModalEventGallery from "./modalEventGallery"
 import ModalEventInfo from "./modalEventInfo"
 import ModalEventParticipants from "./modalEventParticipants"

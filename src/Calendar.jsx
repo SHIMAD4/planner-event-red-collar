@@ -2,14 +2,16 @@ import dayGridPlugin from "@fullcalendar/daygrid"
 import interactionPlugin from "@fullcalendar/interaction"
 import FullCalendar from "@fullcalendar/react"
 import { useCallback, useEffect, useState } from "react"
+import ModalAuth from "./ModalAuth/modalAuth"
 import ModalEvent from "./ModalEvent/modalEvent"
-import { baseRequestURL } from "./shared/api"
+import { api } from "./shared/api"
 import "./shared/scss/Calendar.scss"
 
 export default function Calendar() {
   const [events, setEvents] = useState([])
   const [selectedEvent, setSelectedEvent] = useState(null)
   const [loaded, setLoaded] = useState(false)
+  const [auth, setAuth] = useState(false)
 
   const headerToolbar = {
     start: "",
@@ -19,13 +21,13 @@ export default function Calendar() {
   const authButton = {
     text: "Войти",
     click: function () {
-      console.log("Вход")
+      setAuth(true)
     },
   }
 
   const getEvents = useCallback(() => {
-    baseRequestURL
-      .get("events?populate=*&", {})
+    api.event
+      .list()
       .then((res) => res.data.data)
       .then((data) => {
         if (!data) return null
@@ -37,19 +39,12 @@ export default function Calendar() {
       })
       .catch((err) => console.log(err.response.data.error))
   }, [])
-  const getUsers = useCallback(() => {
-    baseRequestURL
-      .get("users")
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err.response.data.error))
-  }, [])
 
   useEffect(() => {
     if (loaded) return
     getEvents()
-    getUsers()
     setLoaded(true)
-  }, [getEvents, getUsers, loaded])
+  }, [getEvents, loaded])
 
   const handleDateClick = (arg) => {
     console.log(arg)
@@ -82,6 +77,7 @@ export default function Calendar() {
           isOpen={true}
         />
       )}
+      {auth && <ModalAuth onClose={() => setAuth(false)} isOpen={true} />}
     </>
   )
 }
