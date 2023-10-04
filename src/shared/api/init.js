@@ -10,11 +10,13 @@ const getBearerToken = async () => {
     .catch((err) => console.log(err.response.data.error))
 }
 
+if (!localStorage.getItem("access_token")) getBearerToken()
+
 export const baseRequestURL = axios.create({
   baseURL: "https://planner.rdclr.ru/api/",
   headers: {
     post: { "Content-Type": "application/x-www-form-urlencoded" },
-    Authorization: `Bearer ${getBearerToken()}`,
+    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   },
 })
 
