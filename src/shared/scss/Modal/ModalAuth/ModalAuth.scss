@@ -1,0 +1,60 @@
+.modal-auth__form-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .modal-auth__form {
+        margin-top: 40px;
+        margin-bottom: 48px;
+        .modal-auth__input {
+            position: relative;
+            label {
+                position: absolute;
+                color: #B3B3BC;
+                font-size: 14px;
+                font-family: 'TT Commons', sans-serif;
+                font-weight: 400;
+                top: 20px;
+                left: 16px;
+                animation: labelMove .2s linear forwards paused;
+            }
+            input {
+                width: 346px;
+                height: 60px;
+                border: 1px solid #0D0C0C !important;
+                padding: 16px 16px 0px 16px; 
+                border-radius: 12px;
+            }
+            input:focus + label {
+                animation-play-state: running;
+            }
+        }
+    }
+    .modal-auth__button {
+        background-color: #0D0C0C;
+        color: #EFEFEF;
+        width: 346px;
+        height: 60px;
+        border-radius: 12px;
+        font-size: 18px;
+        font-family: 'Redcollar', sans-serif;
+        cursor: pointer;
+        &:hover {
+            background-color: #F51B1B;
+            color: #FFFFFF;
+        }
+        &:disabled {
+            background-color: #B3B3BC;
+            color: #EFEFEF;
+        }
+    }
+}
+
+@keyframes labelMove {
+    100% {
+        margin-top: 0px;
+    }
+    100% {
+        margin-top: -10px;
+    }
+}

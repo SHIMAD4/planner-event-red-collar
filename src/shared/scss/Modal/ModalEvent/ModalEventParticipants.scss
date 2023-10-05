@@ -1,0 +1,58 @@
+.modal__people__desc {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.modal__people__list {
+    margin-bottom: 40px;
+    li {
+        display: flex;
+        align-items: center;
+        margin-right: 30px;
+        .modal__people__avatar {
+            margin-right: 12px;
+        }
+        .modal__people__info {
+            display: flex;
+            flex-wrap: wrap;
+            .modal__people__username:first-child {
+                font-size: 14px;
+                font-weight: medium;
+            }
+            .modal__people__role:last-child {
+                color: #6C27A3;
+                background-color: #EFDAFC;
+                border-radius: 8px;
+                padding: 2px 4px;
+            }
+        }
+        :last-child {
+            margin-right: 0;
+        }
+    }
+    img {
+        width: 50px;
+        height: 50px;
+    }
+    div:not(.modal__people__info) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .count {
+            min-width: 80px;
+            position: relative;
+            right: 65px;
+        }
+        .photo2 {
+            position: relative;
+            top: 0;
+            right: 35px;
+            z-index: -1;
+        }
+        .photo3 {
+            position: relative;
+            top: 0;
+            right: 70px;
+            z-index: -2;
+        }
+    }
+}

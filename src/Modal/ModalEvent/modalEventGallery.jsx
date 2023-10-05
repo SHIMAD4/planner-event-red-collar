@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from "react"
-import arrow from "../shared/icons/arrow.svg"
-import "../shared/scss/ModalEvent.scss"
+import arrow from "../../shared/icons/arrow.svg"
+import "../../shared/scss/Modal/ModalEvent/ModalEventGallery.scss"
 import ModalEventSlider from "./modalEventSlider"
 
 export default function ModalEventGallery({ event }) {

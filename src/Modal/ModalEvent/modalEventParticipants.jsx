@@ -1,4 +1,5 @@
-import avatar from "../shared/icons/avatar.png"
+import avatar from "../../shared/icons/avatar.png"
+import "../../shared/scss/Modal/ModalEvent/ModalEventParticipants.scss"
 
 export default function ModalEventParticipants({ event }) {
   const participants = event.extendedProps.participants
@@ -9,11 +10,11 @@ export default function ModalEventParticipants({ event }) {
   return (
     <>
       <h2 className="modal__people__desc">Участники</h2>
-      <ul className="modal__people" role="list">
+      <ul className="modal__people__list" role="list">
         {participants.map((item, index) => {
           return index < 4 ? (
             <li key={self.crypto.randomUUID()}>
-              <img src={avatar} alt="" />
+              <img className="modal__people__avatar" src={avatar} alt="" />
               <div className="modal__people__info">
                 <p className="modal__people__username">{item.username}</p>
                 {+event.id === item.id ? (

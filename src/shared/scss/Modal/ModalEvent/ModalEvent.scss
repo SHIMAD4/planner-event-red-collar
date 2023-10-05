@@ -1,0 +1,127 @@
+.modal.active  {
+    display: flex;
+}
+
+.modal  {
+    &__auth {
+        text-align: center;
+        font-size: 16px;
+        a {
+            color: #F51B1B;
+            text-decoration: none;
+        }
+    }
+    a {
+        &:focus {
+            border: 1px solid grey !important;
+        }
+    }
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        &:focus {
+            border: 1px solid grey !important;
+        }
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .modal  {
+        &__desc {
+            font-size: 20px;
+        }
+        &__people__desc {
+            font-size: 20px;
+        }
+        &__people {
+            margin-bottom: 40px;
+            li {
+                display: flex;
+                margin-right: 48px;
+                img {
+                    margin-right: 12px;
+                }
+                .modal__people__info {
+                    .modal__people__username:first-child {
+                        font-size: 16px;
+                    }
+                }
+                :last-child {
+                    margin-right: 0;
+                }
+            }
+            div:not(.modal__people__info) {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        &__gallery__header {
+            .modal__gallery__desc {
+                font-size: 20px;
+            }
+        }
+        &__gallery__list {
+            margin-bottom: 24px;
+            .slide-photo {
+                width: 250px;
+                height: 150px;
+            }
+        }
+        &__auth {
+            font-size: 16px;
+        }
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .modal  {
+        &__desc {
+            font-size: 22px;
+        }
+        &__gallery__list {
+            margin-bottom: 50px;
+            .slide-photo {
+                width: 250px;
+                height: 160px;
+            }
+        }
+        &__people {
+            margin-bottom: 70px;
+            li {
+                display: flex;
+                margin-right: 48px;
+                img {
+                    margin-right: 12px;
+                }
+            }
+            img {
+                width: 65px;
+                height: 65px;
+            }
+            div:not(.modal__people__info) {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .photo2 {
+                    position: relative;
+                    top: 0;
+                    right: 45px;
+                    z-index: -1;
+                }
+                .photo3 {
+                    position: relative;
+                    top: 0;
+                    right: 90px;
+                    z-index: -2;
+                }
+            }
+        }
+        &__auth {
+            padding-top: 30px;
+            font-size: 22px;
+        }
+    }
+}

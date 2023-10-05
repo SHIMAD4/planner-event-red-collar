@@ -1,3 +1,5 @@
+import "../../shared/scss/Modal/ModalEvent/ModalEventInfo.scss"
+
 export default function modalEventInfo({ event }) {
   const start = new Date(event.extendedProps.dateStart)
   const weekday = start.toLocaleString("ru-RU", { weekday: "long" })
@@ -12,8 +14,11 @@ export default function modalEventInfo({ event }) {
 
   let isPast = event.classNames[0] === "past" ? true : false
   return (
-    <div className={isPast ? "modal__event-info past" : "modal__event-info"}>
-      <aside>
+    <div
+      className={
+        isPast ? "modal__event-info__block past" : "modal__event-info__block"
+      }>
+      <aside className="modal__event-info">
         <div className="modal__event-info__day">
           <p>{weekday}</p>
           <p>{date}</p>
