@@ -5,7 +5,12 @@ const event = {
 }
 
 const user = {
+  login: (data) => baseRequestURL.post("auth/local", data),
   register: (data) => baseRequestURL.post("auth/local/register", data),
 }
 
-export const api = { event, user }
+const check = {
+  email: (email, data) => baseRequestURL.get(`/taken-emails/${email}`, data),
+}
+
+export const api = { event, user, check }

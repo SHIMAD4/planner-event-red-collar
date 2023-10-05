@@ -5,9 +5,9 @@
     flex-direction: column;
     .modal-auth__form {
         margin-top: 40px;
-        margin-bottom: 48px;
         .modal-auth__input {
             position: relative;
+            margin-bottom: 48px;
             label {
                 position: absolute;
                 color: #B3B3BC;
@@ -29,24 +29,33 @@
                 animation-play-state: running;
             }
         }
-    }
-    .modal-auth__button {
-        background-color: #0D0C0C;
-        color: #EFEFEF;
-        width: 346px;
-        height: 60px;
-        border-radius: 12px;
-        font-size: 18px;
-        font-family: 'Redcollar', sans-serif;
-        cursor: pointer;
-        &:hover {
-            background-color: #F51B1B;
-            color: #FFFFFF;
-        }
-        &:disabled {
-            background-color: #B3B3BC;
+        .modal-auth__button {
+            background-color: #0D0C0C;
             color: #EFEFEF;
+            width: 346px;
+            height: 60px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-family: 'Redcollar', sans-serif;
+            cursor: pointer;
+            &:hover {
+                background-color: #F51B1B;
+                color: #FFFFFF;
+            }
+            &:disabled {
+                background-color: #B3B3BC;
+                color: #EFEFEF;
+            }
         }
+    }
+}
+
+.hide {
+    display: none;
+}
+.modal {
+    button.hide {
+        display: none;
     }
 }
 

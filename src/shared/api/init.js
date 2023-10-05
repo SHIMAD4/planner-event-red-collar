@@ -12,21 +12,23 @@ const getBearerToken = async () => {
 
 if (!localStorage.getItem("access_token")) getBearerToken()
 
-export const baseRequestURL = axios.create({
+const baseRequestURL = axios.create({
   baseURL: "https://planner.rdclr.ru/api/",
   headers: {
     post: { "Content-Type": "application/x-www-form-urlencoded" },
-    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   },
 })
 
 baseRequestURL.interceptors.request.use(
   (config) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem(
-      "access_token"
-    )}`
-
+    !config.flag
+      ? config
+      : (config.headers.Authorization = `Bearer ${localStorage.getItem(
+          "access_token"
+        )}`)
     return config
   },
   (error) => Promise.reject(error)
 )
+
+export { baseRequestURL }
