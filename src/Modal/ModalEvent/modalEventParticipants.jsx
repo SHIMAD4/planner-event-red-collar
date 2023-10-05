@@ -7,30 +7,38 @@ export default function ModalEventParticipants({ event }) {
 
   if (participants.length === 0) return null
 
+  const organizer = participants.find((item) => +event.id === item.id)
+  const otherParticipants = participants.filter((item) => +event.id !== item.id)
+
   return (
     <>
       <h2 className="modal__people__desc">Участники</h2>
       <ul className="modal__people__list" role="list">
-        {participants.map((item, index) => {
-          return index < 4 ? (
-            <li key={self.crypto.randomUUID()}>
-              <img className="modal__people__avatar" src={avatar} alt="" />
-              <div className="modal__people__info">
-                <p className="modal__people__username">{item.username}</p>
-                {+event.id === item.id ? (
-                  <p className="modal__people__role">Организатор</p>
-                ) : null}
-              </div>
-            </li>
-          ) : index > 4 ? (
-            <div key={self.crypto.randomUUID()}>
-              <img className="photo1" src={avatar} alt="" />
-              <img className="photo2" src={avatar} alt="" />
-              <img className="photo3" src={avatar} alt="" />
-              <p className="count">Eще +{participantsCount - 4}</p>
+        {organizer && (
+          <li key={self.crypto.randomUUID()}>
+            <img className="modal__people__avatar" src={avatar} alt="" />
+            <div className="modal__people__info">
+              <p className="modal__people__username">{organizer.username}</p>
+              <p className="modal__people__role">Организатор</p>
             </div>
-          ) : null
-        })}
+          </li>
+        )}
+        {otherParticipants.slice(0, 4).map((item) => (
+          <li key={self.crypto.randomUUID()}>
+            <img className="modal__people__avatar" src={avatar} alt="" />
+            <div className="modal__people__info">
+              <p className="modal__people__username">{item.username}</p>
+            </div>
+          </li>
+        ))}
+        {participantsCount > 4 && (
+          <div key={self.crypto.randomUUID()}>
+            <img className="photo1" src={avatar} alt="" />
+            <img className="photo2" src={avatar} alt="" />
+            <img className="photo3" src={avatar} alt="" />
+            <p className="count">Еще +{participantsCount - 4}</p>
+          </div>
+        )}
       </ul>
     </>
   )

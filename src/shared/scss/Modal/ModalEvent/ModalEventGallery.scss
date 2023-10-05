@@ -68,3 +68,28 @@
         }
     }
 }
+
+@media screen and (min-width: 1440px) {
+    .modal__gallery__header{
+        .modal__gallery__desc {
+            font-size: 20px;
+        }
+    }
+    .modal__gallery__list {
+        margin-bottom: 24px;
+        .slide-photo {
+            width: 250px;
+            height: 150px;
+        }
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .modal__gallery__list {
+        margin-bottom: 50px;
+        .slide-photo {
+            width: 250px;
+            height: 160px;
+        }
+    }
+}
