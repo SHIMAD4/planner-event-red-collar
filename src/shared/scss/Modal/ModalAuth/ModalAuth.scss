@@ -5,7 +5,7 @@
     flex-direction: column;
     .modal-auth__form {
         margin-top: 40px;
-        .modal-auth__input {
+        .modal-auth__input-block {
             position: relative;
             margin-bottom: 48px;
             label {
@@ -18,15 +18,33 @@
                 left: 16px;
                 animation: labelMove .2s linear forwards paused;
             }
-            input {
+            .modal-auth__input {
                 width: 346px;
                 height: 60px;
                 border: 1px solid #0D0C0C !important;
                 padding: 16px 16px 0px 16px; 
                 border-radius: 12px;
             }
-            input:focus + label {
+            .modal-auth__input:focus + label {
                 animation-play-state: running;
+            }
+            .modal-auth__input.isInvalid {
+                border: 1px solid #F51B1B !important;
+            }
+            .valid-error {
+                position: fixed;
+                top: 255px;
+                left: 180px;
+                font-size: 14px;
+                font-family: 'TT Commons', sans-serif;
+                color: #F51B1B;
+            }
+            .clear-icon {
+                position: fixed;
+                top: 205px;
+                right: 185px;
+                cursor: pointer;
+                z-index: 9999;
             }
         }
         .modal-auth__button {
@@ -65,5 +83,52 @@
     }
     100% {
         margin-top: -10px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .modal-auth__form-block {
+        .modal-auth__form {
+            .modal-auth__input-block {
+                .valid-error {
+                    position: fixed;
+                    top: 240px;
+                    left: 180px;
+                    font-size: 14px;
+                    font-family: 'TT Commons', sans-serif;
+                    color: #F51B1B;
+                }
+                .clear-icon {
+                    position: fixed;
+                    top: 190px;
+                    right: 185px;
+                    cursor: pointer;
+                    z-index: 9999;
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 1440px) {
+    .modal-auth__form-block {
+        .modal-auth__form {
+            .modal-auth__input-block {
+                .valid-error {
+                    position: fixed;
+                    top: 255px;
+                    left: 180px;
+                    font-size: 14px;
+                    font-family: 'TT Commons', sans-serif;
+                    color: #F51B1B;
+                }
+                .clear-icon {
+                    position: fixed;
+                    top: 205px;
+                    right: 185px;
+                    cursor: pointer;
+                    z-index: 9999;
+                }
+            }
+        }
     }
 }
