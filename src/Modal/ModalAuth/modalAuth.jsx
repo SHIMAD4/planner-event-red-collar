@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { api } from "../../shared/api"
-import clear from "../../shared/icons/clear.svg"
 import "../../shared/scss/Modal/ModalAuth/ModalAuth.scss"
 import Modal from "../Modal"
+import { ModalAuthLogin } from "./modalAuthLogin"
+import { ModalAuthPass } from "./modalAuthPass"
 
 export default function ModalAuth({ onClose, isOpen }) {
   const [emailToCheck, setEmailToCheck] = useState("")
@@ -15,19 +16,22 @@ export default function ModalAuth({ onClose, isOpen }) {
 
   const input = document.querySelector(".modal-auth__input")
   const validError = document.querySelector(".valid-error")
+  const clearIconError = document.querySelector(".clear-icon-alt")
   const clearIcon = document.querySelector(".clear-icon")
 
   const isEmailValid = (value) => {
     if (!EMAIL_REGEXP.test(value) && value !== "") {
-      input.classList.add("isInvalid")
-      if (validError && clearIcon) {
+      if (input && validError && clearIcon) {
+        input.classList.add("isInvalid")
         validError.classList.remove("hide")
-        clearIcon.classList.remove("hide")
+        clearIconError.classList.remove("hide")
+        clearIcon.classList.add("hide")
       }
     } else {
       input.classList.remove("isInvalid")
       validError.classList.add("hide")
-      clearIcon.classList.add("hide")
+      clearIconError.classList.add("hide")
+      clearIcon.classList.remove("hide")
     }
   }
   const checkEmail = (e) => {
@@ -74,62 +78,18 @@ export default function ModalAuth({ onClose, isOpen }) {
       <Modal onClose={onClose} isOpen={isOpen} title="Вход">
         <div className="modal-auth__form-block">
           <form action="#" className="modal-auth__form">
-            <div
-              className={
-                hide
-                  ? "modal-auth__input-block hide"
-                  : "modal-auth__input-block"
-              }>
-              <input
-                className="modal-auth__input"
-                type="text"
-                id="email"
-                name="email"
-                autoComplete="true"
-                onChange={(e) => {
-                  setEmailToCheck(e.target.value)
-                  isEmailValid(e.target.value)
-                }}
-                required
-              />
-              <label htmlFor="email">Email</label>
-              <img
-                className="clear-icon hide"
-                src={clear}
-                alt=""
-                onClick={() => clearInput()}
-              />
-              <p className="valid-error hide">Некорректный e-mail</p>
-            </div>
-            <button
-              type="submit"
-              className={
-                hide ? "modal-auth__button hide" : "modal-auth__button"
-              }
-              onClick={(e) => checkEmail(e)}>
-              Далее
-            </button>
+            <ModalAuthLogin
+              clearInput={clearInput}
+              checkEmail={checkEmail}
+              hide={hide}
+              setEmailToCheck={setEmailToCheck}
+              isEmailValid={isEmailValid}
+            />
             {emailInDB ? (
-              <>
-                <div className="modal-auth__input-block">
-                  <input
-                    className="modal-auth__input"
-                    type="password"
-                    id="password"
-                    name="password"
-                    autoComplete="true"
-                    onChange={(e) => setPassToCheck(e.target.value)}
-                    required
-                  />
-                  <label htmlFor="password">Пароль</label>
-                </div>
-                <button
-                  type="submit"
-                  className="modal-auth__button"
-                  onClick={(e) => checkPass(e)}>
-                  Вход
-                </button>
-              </>
+              <ModalAuthPass
+                setPassToCheck={(e) => setPassToCheck(e)}
+                checkPass={(e) => checkPass(e)}
+              />
             ) : null}
           </form>
         </div>
