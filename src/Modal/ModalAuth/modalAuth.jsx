@@ -2,6 +2,7 @@ import { useState } from "react"
 import { api } from "../../shared/api"
 import "../../shared/scss/Modal/ModalAuth/ModalAuth.scss"
 import Modal from "../Modal"
+import ModalAuthRegister from "../ModalRegister/modalRegister"
 import { ModalAuthLogin } from "./modalAuthLogin"
 import { ModalAuthPass } from "./modalAuthPass"
 
@@ -10,6 +11,7 @@ export default function ModalAuth({ onClose, isOpen }) {
   const [emailInDB, setEmailInDB] = useState(false)
   const [passToCheck, setPassToCheck] = useState("")
   const [hide, setHide] = useState(false)
+  const [registerUser, setRegisterUser] = useState(false)
 
   const checkEmail = (e) => {
     e.preventDefault()
@@ -24,6 +26,7 @@ export default function ModalAuth({ onClose, isOpen }) {
       .catch((err) => {
         if (err.response.status === 404) {
           console.log("Нет в базе")
+          setRegisterUser(true)
         }
       })
   }
@@ -48,16 +51,20 @@ export default function ModalAuth({ onClose, isOpen }) {
 
   return (
     <>
-      <Modal onClose={onClose} isOpen={isOpen} title="Вход">
-        <div className="modal-auth__form-block">
-          <form action="#" className="modal-auth__form">
-            <ModalAuthLogin checkEmail={checkEmail} hide={hide} setEmailToCheck={setEmailToCheck} />
-            {emailInDB ? (
-              <ModalAuthPass setPassToCheck={(e) => setPassToCheck(e)} checkPass={(e) => checkPass(e)} />
-            ) : null}
-          </form>
-        </div>
-      </Modal>
+      {registerUser ? (
+        <ModalAuthRegister onClose={onClose} isOpen={isOpen} />
+      ) : (
+        <Modal onClose={onClose} isOpen={isOpen} title="Вход">
+          <div className="modal-auth__form-block">
+            <form action="#" className="modal-auth__form">
+              <ModalAuthLogin checkEmail={checkEmail} hide={hide} setEmailToCheck={setEmailToCheck} />
+              {emailInDB ? (
+                <ModalAuthPass setPassToCheck={(e) => setPassToCheck(e)} checkPass={(e) => checkPass(e)} />
+              ) : null}
+            </form>
+          </div>
+        </Modal>
+      )}
     </>
   )
 }

@@ -1,0 +1,155 @@
+.modal-register__form-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .info-block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        width: 520px;
+        background-color: #FAFAFA;
+        padding: 8px 12px;
+        border-radius: 12px;
+        img {
+            width: 24px;
+            height: 24px;
+            margin-right: 7px;
+        }
+        p {
+            font-size: 14px;
+            font-family: 'TT Commons', sans-serif;
+            font-weight: 400;
+            line-height: 120%;
+        }
+    }
+    .modal-register__form {
+        margin-top: 40px;
+        .modal-register__input-block {
+            position: relative;
+            margin-bottom: 48px;
+            label {
+                position: absolute;
+                color: #B3B3BC;
+                font-size: 14px;
+                font-family: 'TT Commons', sans-serif;
+                font-weight: 400;
+                top: 20px;
+                left: 16px;
+                animation: labelMove .2s linear forwards paused;
+            }
+            .modal-register__input {
+                width: 346px;
+                height: 60px;
+                border: 1px solid #0D0C0C !important;
+                padding: 16px 16px 0px 16px; 
+                border-radius: 12px;
+            }
+            .modal-register__input:focus + label {
+                animation-play-state: running;
+            }
+            .modal-register__input.isInvalid {
+                border: 1px solid #F51B1B !important;
+            }
+            .valid-error {
+                position: fixed;
+                top: 255px;
+                left: 180px;
+                font-size: 14px;
+                font-family: 'TT Commons', sans-serif;
+                color: #F51B1B;
+            }
+            .clear-icon-alt {
+                position: fixed;
+                top: 205px;
+                right: 185px;
+                cursor: pointer;
+                z-index: 9999;
+            }
+        }
+        .modal-register__button {
+            background-color: #0D0C0C;
+            color: #EFEFEF;
+            width: 346px;
+            height: 60px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-family: 'Redcollar', sans-serif;
+            cursor: pointer;
+            &:hover {
+                background-color: #F51B1B;
+                color: #FFFFFF;
+            }
+            &:disabled {
+                background-color: #EFEFEF;
+                color:  #B3B3BC;
+            }
+        }
+    }
+}
+
+.hide {
+    display: none;
+}
+.modal {
+    button.hide {
+        display: none;
+    }
+}
+
+@keyframes labelMove {
+    100% {
+        margin-top: 0px;
+    }
+    100% {
+        margin-top: -10px;
+    }
+}
+
+// @media screen and (min-width: 1280px) {
+//     .modal-auth__form-block {
+//         .modal-auth__form {
+//             .modal-auth__input-block {
+//                 .valid-error {
+//                     position: fixed;
+//                     top: 240px;
+//                     left: 180px;
+//                     font-size: 14px;
+//                     font-family: 'TT Commons', sans-serif;
+//                     color: #F51B1B;
+//                 }
+//                 .clear-icon {
+//                     position: fixed;
+//                     top: 190px;
+//                     right: 185px;
+//                     cursor: pointer;
+//                     z-index: 9999;
+//                 }
+//             }
+//         }
+//     }
+// }
+// @media screen and (min-width: 1440px) {
+//     .modal-auth__form-block {
+//         .modal-auth__form {
+//             .modal-auth__input-block {
+//                 .valid-error {
+//                     position: fixed;
+//                     top: 255px;
+//                     left: 180px;
+//                     font-size: 14px;
+//                     font-family: 'TT Commons', sans-serif;
+//                     color: #F51B1B;
+//                 }
+//                 .clear-icon {
+//                     position: fixed;
+//                     top: 205px;
+//                     right: 185px;
+//                     cursor: pointer;
+//                     z-index: 9999;
+//                 }
+//             }
+//         }
+//     }
+// }
