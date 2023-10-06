@@ -11,20 +11,15 @@ export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
     /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu
 
   const isEmailValid = (value) => {
-    if (!EMAIL_REGEXP.test(value) && value !== "") {
-      if (input && validError) {
-        input.classList.add("isInvalid")
-        validError[0].classList.remove("hide")
-        clearIconError.classList.remove("hide")
-        clearIcon.classList.add("hide")
-      }
-    } else {
-      input.classList.remove("isInvalid")
-      validError[0].classList.add("hide")
-      clearIconError.classList.add("hide")
-      clearIcon.classList.remove("hide")
+    const isValid = EMAIL_REGEXP.test(value) || value === ""
+    if (input && validError) {
+      input.classList.toggle("isInvalid", !isValid)
+      validError[0].classList.toggle("hide", isValid)
+      clearIconError.classList.toggle("hide", isValid)
+      clearIcon.classList.toggle("hide", !isValid)
     }
   }
+
   const clearInput = () => {
     input.value = ""
     isEmailValid(input.value)

@@ -5,18 +5,12 @@ export function ModalAuthPass({ checkPass, setPassToCheck }) {
   const clearIcon = document.querySelector(".clear-icon")
 
   const isPassValid = (value) => {
-    if (value !== "") {
-      if (input && validError) {
-        input.classList.add("isInvalid")
-        validError[1].classList.remove("hide")
-        clearIconError.classList.remove("hide")
-        clearIcon.classList.add("hide")
-      }
-    } else {
-      input.classList.remove("isInvalid")
-      validError[1].classList.add("hide")
-      clearIconError.classList.add("hide")
-      clearIcon.classList.remove("hide")
+    const isValid = value === ""
+    if (input && validError) {
+      input.classList.toggle("isInvalid", !isValid)
+      validError[1].classList.toggle("hide", isValid)
+      clearIconError.classList.toggle("hide", isValid)
+      clearIcon.classList.toggle("hide", !isValid)
     }
   }
 
