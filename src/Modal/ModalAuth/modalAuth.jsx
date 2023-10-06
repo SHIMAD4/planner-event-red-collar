@@ -11,29 +11,6 @@ export default function ModalAuth({ onClose, isOpen }) {
   const [passToCheck, setPassToCheck] = useState("")
   const [hide, setHide] = useState(false)
 
-  const EMAIL_REGEXP =
-    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu
-
-  const input = document.querySelector(".modal-auth__input")
-  const validError = document.querySelector(".valid-error")
-  const clearIconError = document.querySelector(".clear-icon-alt")
-  const clearIcon = document.querySelector(".clear-icon")
-
-  const isEmailValid = (value) => {
-    if (!EMAIL_REGEXP.test(value) && value !== "") {
-      if (input && validError && clearIcon) {
-        input.classList.add("isInvalid")
-        validError.classList.remove("hide")
-        clearIconError.classList.remove("hide")
-        clearIcon.classList.add("hide")
-      }
-    } else {
-      input.classList.remove("isInvalid")
-      validError.classList.add("hide")
-      clearIconError.classList.add("hide")
-      clearIcon.classList.remove("hide")
-    }
-  }
   const checkEmail = (e) => {
     e.preventDefault()
     api.check
@@ -68,28 +45,15 @@ export default function ModalAuth({ onClose, isOpen }) {
         }
       })
   }
-  const clearInput = () => {
-    input.value = ""
-    isEmailValid(input.value)
-  }
 
   return (
     <>
       <Modal onClose={onClose} isOpen={isOpen} title="Вход">
         <div className="modal-auth__form-block">
           <form action="#" className="modal-auth__form">
-            <ModalAuthLogin
-              clearInput={clearInput}
-              checkEmail={checkEmail}
-              hide={hide}
-              setEmailToCheck={setEmailToCheck}
-              isEmailValid={isEmailValid}
-            />
+            <ModalAuthLogin checkEmail={checkEmail} hide={hide} setEmailToCheck={setEmailToCheck} />
             {emailInDB ? (
-              <ModalAuthPass
-                setPassToCheck={(e) => setPassToCheck(e)}
-                checkPass={(e) => checkPass(e)}
-              />
+              <ModalAuthPass setPassToCheck={(e) => setPassToCheck(e)} checkPass={(e) => checkPass(e)} />
             ) : null}
           </form>
         </div>
