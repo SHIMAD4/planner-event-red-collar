@@ -13,6 +13,9 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
   const [modalOpen, setModalOpen] = useState(true)
   const [isPasswordVisible, setPasswordVisible] = useState(false)
 
+  const info =
+    "В пароле используйте от 8 до 32 символов: строчные и прописные латинские буквы (A-z), цифры (0-9) и спец символы ( . , : ; ? ! * + % - < > @ [ ] { } /  _ {} $ # )"
+
   const PASS_REGEXP = /^[A-Za-z0-9.,:;?!*+%\-<>@[\]{}_{}$#]{8,32}$/
   const isPasswordValid = PASS_REGEXP.test(pass)
 
@@ -85,9 +88,6 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
       }
     }
   }
-
-  const info =
-    "В пароле используйте от 8 до 32 символов: строчные и прописные латинские буквы (A-z), цифры (0-9) и спец символы ( . , : ; ? ! * + % - < > @ [ ] { } /  _ {} $ # )"
 
   return modalOpen ? (
     <Modal onClose={onClose} isOpen={isOpen} title="Регистрация">

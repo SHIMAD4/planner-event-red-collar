@@ -13,6 +13,7 @@ export default function ModalAuth({ onClose, isOpen }) {
   const [hide, setHide] = useState(false)
   const [registerUser, setRegisterUser] = useState(false)
   const [modalOpen, setModalOpen] = useState(true)
+  const bc = new BroadcastChannel("token_channel")
 
   const input = document.querySelector(".modal-auth__input")
   const validError = document.querySelector(".valid-error")
@@ -52,6 +53,7 @@ export default function ModalAuth({ onClose, isOpen }) {
         console.log("user: ", res.data.user)
         console.log("token: ", res.data.jwt)
         localStorage.setItem("access_token", res.data.jwt)
+        bc.postMessage("Token")
         setModalOpen(false)
       })
       .catch((err) => {

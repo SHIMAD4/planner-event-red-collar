@@ -82,6 +82,30 @@
             color: #EFEFEF;
         }
     }
+    .fc-createEvent-button {
+        background-color: #0D0C0C;
+        color: #EFEFEF;
+        border-radius: 12px;
+        font-size: 30px;
+        width: 86px;
+        height: 60px;
+        &:hover {
+            background-color: #F51B1B;
+            color: #FFFFFF;
+        }
+        &:disabled {
+            background-color: #B3B3BC;
+            color: #EFEFEF;
+        }
+    }
+    .fc-avatar-button {
+        margin-left: 33px;
+        display: none;
+        img {
+            width: 80px;
+            height: 80px;
+        }
+    }
 }
 
 

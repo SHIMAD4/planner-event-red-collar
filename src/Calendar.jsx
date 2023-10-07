@@ -5,18 +5,35 @@ import { useCallback, useEffect, useState } from "react"
 import ModalAuth from "./Modal/ModalAuth/modalAuth"
 import ModalEvent from "./Modal/ModalEvent/modalEvent"
 import { api } from "./shared/api"
+import avatarIcon from "./shared/icons/avatar.png"
 import "./shared/scss/Calendar.scss"
 
 export default function Calendar() {
   const [events, setEvents] = useState([])
   const [selectedEvent, setSelectedEvent] = useState(null)
-  const [loaded, setLoaded] = useState(false)
   const [auth, setAuth] = useState(false)
+  const [authToken, setAuthToken] = useState(false)
+
+  const bc = new BroadcastChannel("token_channel")
+  bc.onmessage = () => {
+    setAuthToken(localStorage.getItem("access_token") ? true : false)
+  }
+
+  const createAvatar = useCallback(() => {
+    const avatarButton = document.querySelector(".fc-avatar-button")
+    if (avatarButton) {
+      const img = document.createElement("img")
+      img.src = avatarIcon
+      avatarButton.appendChild(img)
+      avatarButton.childNodes[0].remove()
+    }
+    if (authToken) avatarButton.style.display = "flex"
+  }, [authToken])
 
   const headerToolbar = {
     start: "",
     center: "",
-    end: "title prev next authButton",
+    end: `title prev next ${authToken ? "createEvent avatar" : "authButton avatar"}`,
   }
   const authButton = {
     text: "Войти",
@@ -24,6 +41,13 @@ export default function Calendar() {
       setAuth(true)
     },
   }
+  const createEvent = {
+    text: "+",
+    click: function () {
+      console.log("Добавление события")
+    },
+  }
+  const avatar = {}
 
   const getEvents = useCallback(() => {
     api.event
@@ -41,23 +65,44 @@ export default function Calendar() {
   }, [])
 
   useEffect(() => {
-    if (loaded) return
     getEvents()
-    setLoaded(true)
-  }, [getEvents, loaded])
+    setTimeout(() => {
+      createAvatar()
+    }, 500)
+    setAuthToken(localStorage.getItem("access_token") ? true : false)
+  }, [getEvents, createAvatar])
 
   const handleEventClick = (eventInfo) => {
     setSelectedEvent(eventInfo.event)
   }
 
-  return (
+  return authToken ? (
     <>
       <FullCalendar
         height={851}
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         headerToolbar={headerToolbar}
-        customButtons={{ authButton }}
+        customButtons={{ createEvent, avatar }}
+        titleFormat={{ month: "long" }}
+        locale="ru"
+        firstDay={1}
+        selectable={true}
+        events={events}
+        eventContent={renderEventContent}
+        eventClick={handleEventClick}
+      />
+      {selectedEvent && <ModalEvent event={selectedEvent} onClose={() => setSelectedEvent(null)} isOpen={true} />}
+      {auth && <ModalAuth onClose={() => setAuth(false)} isOpen={true} />}
+    </>
+  ) : (
+    <>
+      <FullCalendar
+        height={851}
+        plugins={[dayGridPlugin, interactionPlugin]}
+        initialView="dayGridMonth"
+        headerToolbar={headerToolbar}
+        customButtons={{ authButton, createEvent, avatar }}
         titleFormat={{ month: "long" }}
         locale="ru"
         firstDay={1}
