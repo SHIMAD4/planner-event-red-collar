@@ -12,6 +12,7 @@ export default function ModalAuth({ onClose, isOpen }) {
   const [passToCheck, setPassToCheck] = useState("")
   const [hide, setHide] = useState(false)
   const [registerUser, setRegisterUser] = useState(false)
+  const [firstModalOpen, setFirstModalOpen] = useState(true)
 
   const checkEmail = (e) => {
     e.preventDefault()
@@ -25,7 +26,6 @@ export default function ModalAuth({ onClose, isOpen }) {
       })
       .catch((err) => {
         if (err.response.status === 404) {
-          console.log("Нет в базе")
           setRegisterUser(true)
         }
       })
@@ -41,6 +41,8 @@ export default function ModalAuth({ onClose, isOpen }) {
       .then((res) => {
         console.log("user: ", res.data.user)
         console.log("token: ", res.data.jwt)
+        localStorage.setItem("access_token", res.data.jwt)
+        setFirstModalOpen(false)
       })
       .catch((err) => {
         if (err.response.status === 400) {
@@ -53,7 +55,7 @@ export default function ModalAuth({ onClose, isOpen }) {
     <>
       {registerUser ? (
         <ModalAuthRegister onClose={onClose} isOpen={isOpen} />
-      ) : (
+      ) : firstModalOpen ? (
         <Modal onClose={onClose} isOpen={isOpen} title="Вход">
           <div className="modal-auth__form-block">
             <form action="#" className="modal-auth__form">
@@ -64,7 +66,7 @@ export default function ModalAuth({ onClose, isOpen }) {
             </form>
           </div>
         </Modal>
-      )}
+      ) : null}
     </>
   )
 }

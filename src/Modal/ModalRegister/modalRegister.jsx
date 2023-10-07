@@ -23,7 +23,7 @@ export default function ModalAuthRegister({ onClose, isOpen }) {
               autoComplete="true"
               required
             />
-            <label htmlFor="username">Email</label>
+            <label htmlFor="username">Имя</label>
           </div>
           <div className="modal-register__input-block">
             <input

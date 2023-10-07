@@ -1,7 +1,7 @@
 import { baseRequestURL } from "./init"
 
 const event = {
-  list: () => baseRequestURL.get("events?populate=*&"),
+  list: (data) => baseRequestURL.get("events?populate=*&", data),
 }
 
 const user = {

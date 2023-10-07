@@ -27,7 +27,7 @@ export default function Calendar() {
 
   const getEvents = useCallback(() => {
     api.event
-      .list()
+      .list({ flag: false })
       .then((res) => res.data.data)
       .then((data) => {
         if (!data) return null
@@ -70,13 +70,7 @@ export default function Calendar() {
         dateClick={handleDateClick}
         eventClick={handleEventClick}
       />
-      {selectedEvent && (
-        <ModalEvent
-          event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-          isOpen={true}
-        />
-      )}
+      {selectedEvent && <ModalEvent event={selectedEvent} onClose={() => setSelectedEvent(null)} isOpen={true} />}
       {auth && <ModalAuth onClose={() => setAuth(false)} isOpen={true} />}
     </>
   )
