@@ -12,6 +12,7 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
   const [passRepeat, setPassRepeat] = useState("")
   const [modalOpen, setModalOpen] = useState(true)
   const [isPasswordVisible, setPasswordVisible] = useState(false)
+  const bc = new BroadcastChannel("token_channel")
 
   const info =
     "В пароле используйте от 8 до 32 символов: строчные и прописные латинские буквы (A-z), цифры (0-9) и спец символы ( . , : ; ? ! * + % - < > @ [ ] { } /  _ {} $ # )"
@@ -69,9 +70,10 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
     }
 
     if (isPasswordValid && pass !== "" && pass === passRepeat) {
-      api.user
-        .register({ username, email, password: passRepeat })
-        .then((res) => localStorage.setItem("access_token", res.data.jwt))
+      api.user.register({ username, email, password: passRepeat }).then((res) => {
+        localStorage.setItem("access_token", res.data.jwt)
+        bc.postMessage("Token")
+      })
       setModalOpen(false)
     }
   }
