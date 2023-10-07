@@ -40,8 +40,8 @@ export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
           required
         />
         <label htmlFor="email">Email</label>
-        <img className="clear-icon" src={clear} alt="" onClick={() => clearInput()} />
-        <img className="clear-icon-alt hide" src={clearError} alt="" onClick={() => clearInput()} />
+        <img className="icon clear-icon" src={clear} alt="" onClick={() => clearInput()} />
+        <img className="icon clear-icon-alt hide" src={clearError} alt="" onClick={() => clearInput()} />
         <p className="valid-error hide">Некорректный e-mail</p>
       </div>
       <button
@@ -49,7 +49,7 @@ export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
         className={hide ? "modal-auth__button hide" : "modal-auth__button"}
         onClick={(e) => {
           checkEmail(e)
-          isEmailValid(input.value)
+          if (input && input.value !== "") isEmailValid(input.value)
         }}>
         Далее
       </button>

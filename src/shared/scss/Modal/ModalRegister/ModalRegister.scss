@@ -52,18 +52,50 @@
             .modal-register__input.isInvalid {
                 border: 1px solid #F51B1B !important;
             }
+            .modal-register__input.isValid {
+                border: 1px solid #23AE00 !important;
+            }
             .valid-error {
-                position: fixed;
-                top: 255px;
-                left: 180px;
                 font-size: 14px;
                 font-family: 'TT Commons', sans-serif;
                 color: #F51B1B;
             }
-            .clear-icon-alt {
+            .valid-error-symbols {
                 position: fixed;
-                top: 205px;
-                right: 185px;
+                top: 410px;
+                left: 180px;
+            }
+            .valid-error-equality {
+                position: fixed;
+                top: 520px;
+                left: 180px;
+            }
+            .valid-error-required.valid-error-required-1 {
+                position: fixed;
+                top: 300px;
+                left: 180px;
+            }
+            .valid-error-required.valid-error-required-2 {
+                position: fixed;
+                top: 410px;
+                left: 180px;
+            }
+            .valid-error-required.valid-error-required-3 {
+                position: fixed;
+                top: 520px;
+                left: 180px;
+            }
+            .icon1 {
+                position: fixed;
+                top: 361px;
+                right: 195px;
+                cursor: pointer;
+                z-index: 9999;
+            }
+            .icon2 {
+                position: fixed;
+                top: 470px;
+                right: 195px;
                 cursor: pointer;
                 z-index: 9999;
             }
@@ -107,49 +139,79 @@
     }
 }
 
-// @media screen and (min-width: 1280px) {
-//     .modal-auth__form-block {
-//         .modal-auth__form {
-//             .modal-auth__input-block {
-//                 .valid-error {
-//                     position: fixed;
-//                     top: 240px;
-//                     left: 180px;
-//                     font-size: 14px;
-//                     font-family: 'TT Commons', sans-serif;
-//                     color: #F51B1B;
-//                 }
-//                 .clear-icon {
-//                     position: fixed;
-//                     top: 190px;
-//                     right: 185px;
-//                     cursor: pointer;
-//                     z-index: 9999;
-//                 }
-//             }
-//         }
-//     }
-// }
-// @media screen and (min-width: 1440px) {
-//     .modal-auth__form-block {
-//         .modal-auth__form {
-//             .modal-auth__input-block {
-//                 .valid-error {
-//                     position: fixed;
-//                     top: 255px;
-//                     left: 180px;
-//                     font-size: 14px;
-//                     font-family: 'TT Commons', sans-serif;
-//                     color: #F51B1B;
-//                 }
-//                 .clear-icon {
-//                     position: fixed;
-//                     top: 205px;
-//                     right: 185px;
-//                     cursor: pointer;
-//                     z-index: 9999;
-//                 }
-//             }
-//         }
-//     }
-// }
+@media screen and (min-width: 1280px) {
+    .modal-register__form-block {
+        .modal-register__form {
+            .modal-register__input-block {
+                .valid-error1 {
+                    position: fixed;
+                    top: 395px;
+                    left: 180px;
+                    font-size: 14px;
+                    font-family: 'TT Commons', sans-serif;
+                    color: #F51B1B;
+                }
+                .valid-error2 {
+                    position: fixed;
+                    top: 505px;
+                    left: 180px;
+                    font-size: 14px;
+                    font-family: 'TT Commons', sans-serif;
+                    color: #F51B1B;
+                }
+                .icon1 {
+                    position: fixed;
+                    top: 346px;
+                    right: 195px;
+                    cursor: pointer;
+                    z-index: 9999;
+                }
+                .icon2 {
+                    position: fixed;
+                    top: 455px;
+                    right: 195px;
+                    cursor: pointer;
+                    z-index: 9999;
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 1440px) {
+    .modal-register__form-block {
+        .modal-register__form {
+            .modal-register__input-block {
+                .valid-error1 {
+                    position: fixed;
+                    top: 410px;
+                    left: 180px;
+                    font-size: 14px;
+                    font-family: 'TT Commons', sans-serif;
+                    color: #F51B1B;
+                }
+                .valid-error2 {
+                    position: fixed;
+                    top: 520px;
+                    left: 180px;
+                    font-size: 14px;
+                    font-family: 'TT Commons', sans-serif;
+                    color: #F51B1B;
+                }
+                .icon1 {
+                    position: fixed;
+                    top: 362px;
+                    right: 195px;
+                    cursor: pointer;
+                    z-index: 9999;
+                }
+                .icon2 {
+                    position: fixed;
+                    top: 470px;
+                    right: 195px;
+                    cursor: pointer;
+                    z-index: 9999;
+                }
+            }
+        }
+    }
+}

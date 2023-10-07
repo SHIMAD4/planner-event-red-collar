@@ -12,7 +12,10 @@ export default function ModalAuth({ onClose, isOpen }) {
   const [passToCheck, setPassToCheck] = useState("")
   const [hide, setHide] = useState(false)
   const [registerUser, setRegisterUser] = useState(false)
-  const [firstModalOpen, setFirstModalOpen] = useState(true)
+  const [modalOpen, setModalOpen] = useState(true)
+
+  const input = document.querySelector(".modal-auth__input")
+  const validError = document.querySelector(".valid-error")
 
   const checkEmail = (e) => {
     e.preventDefault()
@@ -26,7 +29,14 @@ export default function ModalAuth({ onClose, isOpen }) {
       })
       .catch((err) => {
         if (err.response.status === 404) {
-          setRegisterUser(true)
+          if (emailToCheck !== "") {
+            setRegisterUser(true)
+          } else {
+            if (input) {
+              input.classList.add("isInvalid")
+              validError.classList.remove("hide")
+            }
+          }
         }
       })
   }
@@ -42,7 +52,7 @@ export default function ModalAuth({ onClose, isOpen }) {
         console.log("user: ", res.data.user)
         console.log("token: ", res.data.jwt)
         localStorage.setItem("access_token", res.data.jwt)
-        setFirstModalOpen(false)
+        setModalOpen(false)
       })
       .catch((err) => {
         if (err.response.status === 400) {
@@ -54,8 +64,8 @@ export default function ModalAuth({ onClose, isOpen }) {
   return (
     <>
       {registerUser ? (
-        <ModalAuthRegister onClose={onClose} isOpen={isOpen} />
-      ) : firstModalOpen ? (
+        <ModalAuthRegister onClose={onClose} isOpen={isOpen} email={emailToCheck} />
+      ) : modalOpen ? (
         <Modal onClose={onClose} isOpen={isOpen} title="Вход">
           <div className="modal-auth__form-block">
             <form action="#" className="modal-auth__form">

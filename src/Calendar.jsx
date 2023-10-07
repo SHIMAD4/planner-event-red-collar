@@ -46,9 +46,6 @@ export default function Calendar() {
     setLoaded(true)
   }, [getEvents, loaded])
 
-  const handleDateClick = (arg) => {
-    console.log(arg)
-  }
   const handleEventClick = (eventInfo) => {
     setSelectedEvent(eventInfo.event)
   }
@@ -67,7 +64,6 @@ export default function Calendar() {
         selectable={true}
         events={events}
         eventContent={renderEventContent}
-        dateClick={handleDateClick}
         eventClick={handleEventClick}
       />
       {selectedEvent && <ModalEvent event={selectedEvent} onClose={() => setSelectedEvent(null)} isOpen={true} />}
