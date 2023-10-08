@@ -1,0 +1,45 @@
+.modal__body {
+    overflow: hidden;
+}
+.modal-error__block {
+    min-width: 670px;
+    min-height: 310px;
+    .modal-error__title {
+        display: block;
+        width: 516px;
+        font-size: 64px;
+        font-family: 'Redcollar', sans-serif;
+        font-weight: 500;
+        margin-bottom: 24px;
+    }
+    .modal-error__subtitle {
+        color: #F51B1B;
+        font-size: 18px;
+        font-family: 'Redcollar', sans-serif;
+        font-weight: 500;
+        margin-bottom: 102px;
+    }
+    .modal-error__image {
+        position: fixed;
+        bottom: 40px;
+        left: 490px;
+    }
+    .modal-error__button {
+        background-color: #0D0C0C;
+            color: #EFEFEF;
+            width: 141px;
+            height: 60px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-family: 'Redcollar', sans-serif;
+            cursor: pointer;
+            &:hover {
+                background-color: #F51B1B;
+                color: #FFFFFF;
+            }
+            &:disabled {
+                background-color: #EFEFEF;
+                color: #B3B3BC;
+            }
+    }
+}

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { api } from "../../shared/api"
 import "../../shared/scss/Modal/ModalAuth/ModalAuth.scss"
 import Modal from "../Modal"
+import ModalError from "../ModalError/modalError"
 import ModalAuthRegister from "../ModalRegister/modalRegister"
 import { ModalAuthLogin } from "./modalAuthLogin"
 import { ModalAuthPass } from "./modalAuthPass"
@@ -13,6 +14,8 @@ export default function ModalAuth({ onClose, isOpen }) {
   const [hide, setHide] = useState(false)
   const [registerUser, setRegisterUser] = useState(false)
   const [modalOpen, setModalOpen] = useState(true)
+  const [modalError, setModalError] = useState(false)
+
   const bc = new BroadcastChannel("token_channel")
 
   const input = document.querySelector(".modal-auth__input")
@@ -57,8 +60,9 @@ export default function ModalAuth({ onClose, isOpen }) {
         setModalOpen(false)
       })
       .catch((err) => {
-        if (err.response.status === 400) {
-          console.log("Неправильный пароль")
+        if (err.response.status > 499 && err.response.status < 600) {
+          console.log("Ошибка сервера")
+          setModalError(true)
         }
       })
   }
@@ -78,6 +82,8 @@ export default function ModalAuth({ onClose, isOpen }) {
             </form>
           </div>
         </Modal>
+      ) : modalError ? (
+        <ModalError onClose={onClose} isOpen={isOpen} />
       ) : null}
     </>
   )

@@ -5,12 +5,14 @@ import eyeOpen from "../../shared/icons/eye-icon-open.svg"
 import infoIcon from "../../shared/icons/info-icon.svg"
 import "../../shared/scss/Modal/ModalRegister/ModalRegister.scss"
 import Modal from "../Modal"
+import ModalError from "../ModalError/modalError"
 
 export default function ModalAuthRegister({ onClose, isOpen, email }) {
   const [username, setUsername] = useState("")
   const [pass, setPass] = useState("")
   const [passRepeat, setPassRepeat] = useState("")
   const [modalOpen, setModalOpen] = useState(true)
+  const [modalError, setModalError] = useState(false)
   const [isPasswordVisible, setPasswordVisible] = useState(false)
   const bc = new BroadcastChannel("token_channel")
 
@@ -70,10 +72,18 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
     }
 
     if (isPasswordValid && pass !== "" && pass === passRepeat) {
-      api.user.register({ username, email, password: passRepeat }).then((res) => {
-        localStorage.setItem("access_token", res.data.jwt)
-        bc.postMessage("Token")
-      })
+      api.user
+        .register({ username, email, password: passRepeat })
+        .then((res) => {
+          localStorage.setItem("access_token", res.data.jwt)
+          bc.postMessage("Token")
+        })
+        .catch((err) => {
+          if (err.response.status > 299 || err.response.status < 200) {
+            console.log("Ошибка сервера")
+            setModalError(true)
+          }
+        })
       setModalOpen(false)
     }
   }
@@ -150,5 +160,7 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
         </form>
       </div>
     </Modal>
+  ) : modalError ? (
+    <ModalError onClose={onClose} isOpen={isOpen} />
   ) : null
 }
