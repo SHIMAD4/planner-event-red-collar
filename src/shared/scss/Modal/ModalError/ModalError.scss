@@ -26,20 +26,20 @@
     }
     .modal-error__button {
         background-color: #0D0C0C;
-            color: #EFEFEF;
-            width: 141px;
-            height: 60px;
-            border-radius: 12px;
-            font-size: 18px;
-            font-family: 'Redcollar', sans-serif;
-            cursor: pointer;
-            &:hover {
-                background-color: #F51B1B;
-                color: #FFFFFF;
-            }
-            &:disabled {
-                background-color: #EFEFEF;
-                color: #B3B3BC;
-            }
+        color: #EFEFEF;
+        width: 141px;
+        height: 60px;
+        border-radius: 12px;
+        font-size: 18px;
+        font-family: 'Redcollar', sans-serif;
+        cursor: pointer;
+        &:hover {
+            background-color: #F51B1B;
+            color: #FFFFFF;
+        }
+        &:disabled {
+            background-color: #EFEFEF;
+            color: #B3B3BC;
+        }
     }
 }
