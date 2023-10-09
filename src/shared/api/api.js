@@ -2,6 +2,7 @@ import { baseRequestURL } from "./init"
 
 const event = {
   list: (data) => baseRequestURL.get("events?populate=*&", data),
+  join: (id, data) => baseRequestURL.post(`/events/${id}/join`, data),
 }
 
 const user = {
