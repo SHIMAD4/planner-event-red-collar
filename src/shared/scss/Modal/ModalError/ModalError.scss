@@ -1,6 +1,13 @@
 .modal__body {
     overflow: hidden;
 }
+#modal-error {
+    .modal__body {
+        background-image: url('../../../icons/pigeon.png');
+        background-repeat: no-repeat;
+        background-position: 500px 170px;
+    }
+}
 .modal-error__block {
     min-width: 670px;
     min-height: 310px;
