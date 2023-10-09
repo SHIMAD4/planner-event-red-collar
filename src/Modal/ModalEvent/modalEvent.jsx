@@ -4,6 +4,7 @@ import "../../shared/scss/Modal/ModalEvent/ModalEvent.scss"
 import Modal from "../Modal"
 import ModalAuth from "../ModalAuth/modalAuth"
 import ModalError from "../ModalError/modalError"
+import ModalHappy from "../ModalHappy/modalHappy"
 import ModalEventGallery from "./modalEventGallery"
 import ModalEventInfo from "./modalEventInfo"
 import ModalEventParticipants from "./modalEventParticipants"
@@ -27,7 +28,7 @@ export default function ModalEvent({ event, onClose, isOpen }) {
 
   const joinToEvent = () => {
     api.event
-      .join({ flag: true })
+      .join(+event.id, { flag: true })
       .then(() => setHappyModal(true))
       .catch((err) => {
         if (err.response.status > 299 || err.response.status < 200) {
@@ -68,6 +69,16 @@ export default function ModalEvent({ event, onClose, isOpen }) {
           )}
         </Modal>
       )}
+      {happyModal ? (
+        <ModalHappy
+          onClose={() => {
+            setHappyModal(false)
+            setFirstModalOpen(true)
+          }}
+          isOpen={isOpen}
+          event={event}
+        />
+      ) : null}
       {errorModal ? (
         <ModalError
           onClose={() => {

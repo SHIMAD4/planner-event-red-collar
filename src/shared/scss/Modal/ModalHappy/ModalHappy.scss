@@ -1,0 +1,76 @@
+.modal__body {
+    overflow: hidden;
+}
+#modal-happy {
+    .modal__body {
+        background-image: url('../../../icons/hand.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-x: -60px;
+    }
+}
+.modal-happy__block {
+    min-width: 670px;
+    min-height: 310px;
+    .modal-happy__title {
+        display: block;
+        width: 516px;
+        font-size: 64px;
+        font-family: 'Redcollar', sans-serif;
+        font-weight: 500;
+        margin-bottom: 24px;
+    }
+    .modal-happy__subtitle {
+        font-size: 18px;
+        font-family: 'Redcollar', sans-serif;
+        font-weight: 500;
+    }
+    .modal-happy__event-title {
+        color: #F51B1B;
+        font-size: 18px;
+        font-family: 'Redcollar', sans-serif;
+        font-weight: 500;
+        margin-bottom: 102px;
+    }
+    .modal-happy__list {
+        gap: 16px;
+        margin-bottom: 8px;
+        .modal-happy__item {
+            display: flex;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .modal-happy__item + .modal-happy__item:before{
+            content: "";
+            display: inline-block;
+            margin-right: 16px;
+            background-color: #B3B3BC;
+            width: 1px;
+            height: 18px;
+        }
+    }
+    .modal-happy__address {
+        font-size: 20px;
+        font-weight: 400;
+        font-family: 'TT Commons', sans-serif;
+        margin-bottom: 40px;
+    }
+    .modal-happy__button {
+        background-color: #0D0C0C;
+        color: #EFEFEF;
+        width: 141px;
+        height: 60px;
+        border-radius: 12px;
+        font-size: 18px;
+        font-family: 'Redcollar', sans-serif;
+        cursor: pointer;
+        &:hover {
+            background-color: #F51B1B;
+            color: #FFFFFF;
+        }
+        &:disabled {
+            background-color: #EFEFEF;
+            color: #B3B3BC;
+        }
+    }
+}

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import closeIcon from "../shared/icons/close.svg"
 import "../shared/scss/Modal/Modal.scss"
 
-export default function Modal({ onClose, isOpen, children, title }) {
+export default function Modal({ onClose, isOpen, children, title, id }) {
   const [activeTrap, setActiveTrap] = useState(false)
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function Modal({ onClose, isOpen, children, title }) {
     <>
       {activeTrap ? (
         <FocusTrap focusTrapOptions={{ onDeactivate: unmountTrap }}>
-          <div role="dialog" aria-modal="true" aria-labelledby="modal__title" className="modal">
+          <div role="dialog" aria-modal="true" aria-labelledby="modal__title" className="modal" id={id}>
             <div className="modal__bg" onClick={(e) => onClose(e)}></div>
             <div className="modal__body">
               <h1 id="modal__title" className="modal__title">
