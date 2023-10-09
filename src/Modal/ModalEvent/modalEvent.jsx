@@ -56,14 +56,27 @@ export default function ModalEvent({ event, onClose, isOpen }) {
             </p>
           ) : (
             <div className="modal-event__button">
-              <button className="modal-event__button--join" onClick={(e) => joinToEvent(e)}>
+              <button
+                className="modal-event__button--join"
+                onClick={(e) => {
+                  joinToEvent(e)
+                  closeFirstModal()
+                }}>
                 Присоединиться к событию
               </button>
-              {errorModal ? <ModalError onClose={onClose} isOpen={isOpen} /> : null}
             </div>
           )}
         </Modal>
       )}
+      {errorModal ? (
+        <ModalError
+          onClose={() => {
+            setErrorModal(false)
+            setFirstModalOpen(true)
+          }}
+          isOpen={isOpen}
+        />
+      ) : null}
       {openAuth && (
         <ModalAuth
           onClose={() => {
