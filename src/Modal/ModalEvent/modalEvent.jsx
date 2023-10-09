@@ -27,7 +27,7 @@ export default function ModalEvent({ event, onClose, isOpen }) {
 
   const joinToEvent = () => {
     api.event
-      .join(+event.id, { flag: true })
+      .join({ flag: true })
       .then(() => setHappyModal(true))
       .catch((err) => {
         if (err.response.status > 299 || err.response.status < 200) {
@@ -56,7 +56,9 @@ export default function ModalEvent({ event, onClose, isOpen }) {
             </p>
           ) : (
             <div className="modal-event__button">
-              <button onClick={(e) => joinToEvent(e)}>Присоединиться к событию</button>
+              <button className="modal-event__button--join" onClick={(e) => joinToEvent(e)}>
+                Присоединиться к событию
+              </button>
               {errorModal ? <ModalError onClose={onClose} isOpen={isOpen} /> : null}
             </div>
           )}
