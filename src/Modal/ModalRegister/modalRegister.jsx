@@ -1,7 +1,6 @@
 import { useState } from "react"
+import { Input } from "../../Input/Input"
 import { api } from "../../shared/api"
-import eyeClose from "../../shared/icons/eye-icon-close.svg"
-import eyeOpen from "../../shared/icons/eye-icon-open.svg"
 import infoIcon from "../../shared/icons/info-icon.svg"
 import "../../shared/scss/Modal/ModalRegister/ModalRegister.scss"
 import Modal from "../Modal"
@@ -13,7 +12,6 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
   const [passRepeat, setPassRepeat] = useState("")
   const [modalOpen, setModalOpen] = useState(true)
   const [modalError, setModalError] = useState(false)
-  const [isPasswordVisible, setPasswordVisible] = useState(false)
   const bc = new BroadcastChannel("token_channel")
 
   const info =
@@ -88,19 +86,6 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
     }
   }
 
-  const changePassView = () => {
-    setPasswordVisible(!isPasswordVisible)
-    const inputs = document.querySelectorAll(".modal-register__input")
-
-    for (let i = 1; i < inputs.length; i++) {
-      if (!isPasswordVisible) {
-        inputs[i].type = `text`
-      } else {
-        inputs[i].type = `password`
-      }
-    }
-  }
-
   return modalOpen ? (
     <Modal onClose={onClose} isOpen={isOpen} title="Регистрация">
       <div className="modal-register__form-block">
@@ -109,43 +94,32 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
           <p>{info}</p>
         </div>
         <form action="#" className="modal-register__form" onSubmit={(e) => handleSubmit(e)}>
-          <div className="modal-register__input-block">
-            <input
-              className="modal-register__input"
-              type="text"
-              id="username"
-              name="username"
-              autoComplete="true"
-            />
-            <label htmlFor="username">Имя</label>
-            <p className="valid-error valid-error-required valid-error-required-1 hide">Обязательное поле</p>
-          </div>
-          <div className="modal-register__input-block">
-            <input className="modal-register__input" type="password" id="pass" name="pass" autoComplete="true" />
-            <label htmlFor="pass">Пароль</label>
-            <img
-              className="icon1 eye-close"
-              src={isPasswordVisible ? eyeOpen : eyeClose}
-              alt=""
-              onClick={(e) => changePassView(e)}
-            />
-            <p className="valid-error valid-error-symbols hide">
-              Используйте латинские буквы, цифры и спец символы
-            </p>
-            <p className="valid-error valid-error-required valid-error-required-2 hide">Обязательное поле</p>
-          </div>
-          <div className="modal-register__input-block">
-            <input className="modal-register__input" type="password" id="pass2" name="pass2" autoComplete="true" />
-            <label htmlFor="pass2">Повторить пароль</label>
-            <img
-              className="icon2 eye-close"
-              src={isPasswordVisible ? eyeOpen : eyeClose}
-              alt=""
-              onClick={(e) => changePassView(e)}
-            />
-            <p className="valid-error valid-error-equality hide">Пароли не совпадают</p>
-            <p className="valid-error valid-error-required valid-error-required-3 hide">Обязательное поле</p>
-          </div>
+          <Input
+            className="modal-register__input"
+            title="Имя"
+            type="text"
+            id="username"
+            errorRequired="Обязательное поле"
+            number={1}
+          />
+          <Input
+            className="modal-register__input"
+            title="Пароль"
+            type="password"
+            id="password"
+            errorSymbols="Используйте латинские буквы, цифры и спец символы"
+            errorRequired="Обязательное поле"
+            number={2}
+          />
+          <Input
+            className="modal-register__input"
+            title="Повторить пароль"
+            type="password"
+            id="password2"
+            errorEquality="Пароли не совпадают"
+            errorRequired="Обязательное поле"
+            number={3}
+          />
           <button
             type="submit"
             className="modal-register__button"

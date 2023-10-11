@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import Dropzone from "react-dropzone"
 import Select from "react-select"
+import { Input } from "../../Input/Input"
 import { api } from "../../shared/api"
 import avatar from "../../shared/icons/avatar.png"
 import closeIcon from "../../shared/icons/delete-icon.svg"
@@ -92,8 +93,20 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
           }}>
           <div className="modal-create-event__form--inner">
             <div className="modal-create-event__input-block--left">
-              <InputComponent id="title" title="Название" type="text" func={setSelectedTitle} />
-              <InputComponent id="description" title="Описание" type="text" func={setSelectedDescription} />
+              <Input
+                className="modal-create-event__input"
+                id="title"
+                title="Название"
+                type="text"
+                func={setSelectedTitle}
+              />
+              <Input
+                className="modal-create-event__input"
+                id="description"
+                title="Описание"
+                type="text"
+                func={setSelectedDescription}
+              />
               <ParticipantsComponent setSelectedUsers={setSelectedUsers} />
               <Dropzone onDrop={(acceptedFiles) => setPhotos((prev) => [...prev, ...acceptedFiles])}>
                 {({ getRootProps, getInputProps }) => (
@@ -109,8 +122,20 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                 <DatePicker className="inputDate" selected={startDate} onChange={(date) => setStartDate(date)} />
                 <DatePicker className="inputDate" selected={endDate} onChange={(date) => setEndDate(date)} />
               </div>
-              <InputComponent id="dateTime" title="Время" type="text" func={setSelectedTime} />
-              <InputComponent id="location" title="Место проведения" type="text" func={setSelectedLocation} />
+              <Input
+                className="modal-create-event__input"
+                id="dateTime"
+                title="Время"
+                type="text"
+                func={setSelectedTime}
+              />
+              <Input
+                className="modal-create-event__input"
+                id="location"
+                title="Место проведения"
+                type="text"
+                func={setSelectedLocation}
+              />
               <div className="modal-create-event__info">
                 <img className="modal-create-event__avatar" src={avatar} alt="" />
                 <div className="">
@@ -149,28 +174,6 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
         </form>
       </div>
     </Modal>
-  )
-}
-
-function InputComponent({ id, title, type, func }) {
-  const handleChange = (event) => {
-    const value = event.target.value
-    func(value)
-  }
-
-  return (
-    <div className="modal-create-event__input-block">
-      <input
-        className="modal-create-event__input"
-        type={type}
-        id={id}
-        name={id}
-        autoComplete="true"
-        onChange={handleChange}
-      />
-      <label htmlFor={id}>{title}</label>
-      <p className="valid-error valid-error-required valid-error-required-1 hide">Обязательное поле</p>
-    </div>
   )
 }
 

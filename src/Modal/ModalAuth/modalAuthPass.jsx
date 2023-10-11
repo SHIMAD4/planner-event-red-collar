@@ -1,3 +1,5 @@
+import { Input } from "../../Input/Input"
+
 export function ModalAuthPass({ checkPass, setPassToCheck }) {
   const input = document.querySelector(".modal-auth__input")
   const validError = document.querySelectorAll(".valid-error")
@@ -16,21 +18,17 @@ export function ModalAuthPass({ checkPass, setPassToCheck }) {
 
   return (
     <>
-      <div className="modal-auth__input-block">
-        <input
-          className="modal-auth__input"
-          type="password"
-          id="password"
-          name="password"
-          autoComplete="true"
-          onChange={(e) => {
-            setPassToCheck(e.target.value)
-          }}
-          required
-        />
-        <label htmlFor="password">Пароль</label>
-        <p className="valid-error hide">Неправильный пароль</p>
-      </div>
+      <Input
+        className="modal-auth__input"
+        title="Пароль"
+        type="password"
+        id="password"
+        onChange={(e) => {
+          setPassToCheck(e.target.value)
+        }}
+        required
+        error="Неправильный пароль"
+      />
       <button
         type="submit"
         className="modal-auth__button"

@@ -1,5 +1,4 @@
-import clearError from "../../shared/icons/clear-alt.svg"
-import clear from "../../shared/icons/clear.svg"
+import { Input } from "../../Input/Input"
 
 export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
   const input = document.querySelector(".modal-auth__input")
@@ -20,29 +19,20 @@ export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
     }
   }
 
-  const clearInput = () => {
-    input.value = ""
-    isEmailValid(input.value)
-  }
-
   return (
     <>
       <div className={hide ? "modal-auth__input-block hide" : "modal-auth__input-block"}>
-        <input
+        <Input
           className="modal-auth__input"
+          title="Email"
           type="text"
           id="email"
-          name="email"
-          autoComplete="true"
           onChange={(e) => {
             setEmailToCheck(e.target.value)
           }}
           required
+          error="Некорректный e-mail"
         />
-        <label htmlFor="email">Email</label>
-        <img className="icon clear-icon" src={clear} alt="" onClick={() => clearInput()} />
-        <img className="icon clear-icon-alt hide" src={clearError} alt="" onClick={() => clearInput()} />
-        <p className="valid-error hide">Некорректный e-mail</p>
       </div>
       <button
         type="submit"
