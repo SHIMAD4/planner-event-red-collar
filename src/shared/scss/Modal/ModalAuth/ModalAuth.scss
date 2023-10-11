@@ -1,3 +1,5 @@
+@use '../../variables.scss';
+
 .modal-auth__form-block {
     display: flex;
     justify-content: center;
@@ -10,7 +12,7 @@
             margin-bottom: 48px;
             label {
                 position: absolute;
-                color: #B3B3BC;
+                color: variables.$grey-dark;
                 font-size: 14px;
                 font-family: 'TT Commons', sans-serif;
                 font-weight: 400;
@@ -21,15 +23,15 @@
             .modal-auth__input {
                 width: 346px;
                 height: 60px;
-                border: 1px solid #0D0C0C !important;
+                border: 1px solid variables.$black !important;
                 padding: 16px 16px 0px 16px; 
-                border-radius: 12px;
+                border-radius: variables.$rounded;
             }
             .modal-auth__input:focus + label {
                 animation-play-state: running;
             }
             .modal-auth__input.isInvalid {
-                border: 1px solid #F51B1B !important;
+                border: 1px solid variables.$red !important;
             }
             .valid-error {
                 position: fixed;
@@ -37,7 +39,7 @@
                 left: 180px;
                 font-size: 14px;
                 font-family: 'TT Commons', sans-serif;
-                color: #F51B1B;
+                color: variables.$red;
             }
             .icon {
                 position: fixed;
@@ -48,21 +50,21 @@
             }
         }
         .modal-auth__button {
-            background-color: #0D0C0C;
-            color: #EFEFEF;
+            background-color: variables.$black;
+            color: variables.$grey-light;
             width: 346px;
             height: 60px;
-            border-radius: 12px;
+            border-radius: variables.$rounded;
             font-size: 18px;
             font-family: 'Redcollar', sans-serif;
             cursor: pointer;
             &:hover {
-                background-color: #F51B1B;
-                color: #FFFFFF;
+                background-color: variables.$red;
+                color: variables.$white;
             }
             &:disabled {
-                background-color: #EFEFEF;
-                color: #B3B3BC;
+                background-color: variables.$grey-light;
+                color: variables.$grey-dark;
             }
         }
     }
@@ -96,7 +98,7 @@
                     left: 180px;
                     font-size: 14px;
                     font-family: 'TT Commons', sans-serif;
-                    color: #F51B1B;
+                    color: variables.$red;
                 }
                 .clear-icon {
                     position: fixed;
@@ -119,7 +121,7 @@
                     left: 180px;
                     font-size: 14px;
                     font-family: 'TT Commons', sans-serif;
-                    color: #F51B1B;
+                    color: variables.$red;
                 }
                 .clear-icon {
                     position: fixed;

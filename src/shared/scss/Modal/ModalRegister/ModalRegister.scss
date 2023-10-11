@@ -1,3 +1,5 @@
+@use '../../variables.scss';
+
 .modal-register__form-block {
     display: flex;
     justify-content: center;
@@ -11,7 +13,7 @@
         width: 520px;
         background-color: #FAFAFA;
         padding: 8px 12px;
-        border-radius: 12px;
+        border-radius: variables.$rounded;
         img {
             width: 24px;
             height: 24px;
@@ -31,7 +33,7 @@
             margin-bottom: 48px;
             label {
                 position: absolute;
-                color: #B3B3BC;
+                color: variables.$grey-dark;
                 font-size: 14px;
                 font-family: 'TT Commons', sans-serif;
                 font-weight: 400;
@@ -42,15 +44,15 @@
             .modal-register__input {
                 width: 346px;
                 height: 60px;
-                border: 1px solid #0D0C0C !important;
+                border: 1px solid variables.$black !important;
                 padding: 16px 16px 0px 16px; 
-                border-radius: 12px;
+                border-radius: variables.$rounded;
             }
             .modal-register__input:focus + label {
                 animation-play-state: running;
             }
             .modal-register__input.isInvalid {
-                border: 1px solid #F51B1B !important;
+                border: 1px solid variables.$red !important;
             }
             .modal-register__input.isValid {
                 border: 1px solid #23AE00 !important;
@@ -58,7 +60,7 @@
             .valid-error {
                 font-size: 14px;
                 font-family: 'TT Commons', sans-serif;
-                color: #F51B1B;
+                color: variables.$red;
             }
             .valid-error-symbols {
                 position: fixed;
@@ -101,21 +103,21 @@
             }
         }
         .modal-register__button {
-            background-color: #0D0C0C;
-            color: #EFEFEF;
+            background-color: variables.$black;
+            color: variables.$grey-light;
             width: 346px;
             height: 60px;
-            border-radius: 12px;
+            border-radius: variables.$rounded;
             font-size: 18px;
             font-family: 'Redcollar', sans-serif;
             cursor: pointer;
             &:hover {
-                background-color: #F51B1B;
-                color: #FFFFFF;
+                background-color: variables.$red;
+                color: variables.$white;
             }
             &:disabled {
-                background-color: #EFEFEF;
-                color:  #B3B3BC;
+                background-color: variables.$grey-light;
+                color:  variables.$grey-dark;
             }
         }
     }
@@ -149,7 +151,7 @@
                     left: 180px;
                     font-size: 14px;
                     font-family: 'TT Commons', sans-serif;
-                    color: #F51B1B;
+                    color: variables.$red;
                 }
                 .valid-error2 {
                     position: fixed;
@@ -157,7 +159,7 @@
                     left: 180px;
                     font-size: 14px;
                     font-family: 'TT Commons', sans-serif;
-                    color: #F51B1B;
+                    color: variables.$red;
                 }
                 .icon1 {
                     position: fixed;
@@ -187,7 +189,7 @@
                     left: 180px;
                     font-size: 14px;
                     font-family: 'TT Commons', sans-serif;
-                    color: #F51B1B;
+                    color: variables.$red;
                 }
                 .valid-error2 {
                     position: fixed;
@@ -195,7 +197,7 @@
                     left: 180px;
                     font-size: 14px;
                     font-family: 'TT Commons', sans-serif;
-                    color: #F51B1B;
+                    color: variables.$red;
                 }
                 .icon1 {
                     position: fixed;

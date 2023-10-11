@@ -1,3 +1,5 @@
+@use '../../variables.scss';
+
 .modal__body {
     overflow: hidden;
 }
@@ -20,7 +22,7 @@
         margin-bottom: 24px;
     }
     .modal-error__subtitle {
-        color: #F51B1B;
+        color: variables.$red;
         font-size: 18px;
         font-family: 'Redcollar', sans-serif;
         font-weight: 500;
@@ -32,21 +34,21 @@
         left: 490px;
     }
     .modal-error__button {
-        background-color: #0D0C0C;
-        color: #EFEFEF;
+        background-color: variables.$black;
+        color: variables.$grey-light;
         width: 141px;
         height: 60px;
-        border-radius: 12px;
+        border-radius: variables.$rounded;
         font-size: 18px;
         font-family: 'Redcollar', sans-serif;
         cursor: pointer;
         &:hover {
-            background-color: #F51B1B;
-            color: #FFFFFF;
+            background-color: variables.$red;
+            color: variables.$white;
         }
         &:disabled {
-            background-color: #EFEFEF;
-            color: #B3B3BC;
+            background-color: variables.$grey-light;
+            color: variables.$grey-dark;
         }
     }
 }

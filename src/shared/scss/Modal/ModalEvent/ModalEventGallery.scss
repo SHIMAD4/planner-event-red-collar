@@ -1,3 +1,5 @@
+@use '../../variables.scss';
+
 .modal__gallery__header {
     display: flex;
     justify-content: space-between;
@@ -14,7 +16,7 @@
         .prev, .next {
             width: 60px;
             height: 42px;
-            background-color: #EFEFEF !important;
+            background-color: variables.$grey-light !important;
             border-radius: 8px;
             display: flex;
             justify-content: center;
@@ -32,7 +34,7 @@
             }
         }
         .swiper-button-disabled {
-            background-color: #EFEFEF;
+            background-color: variables.$grey-light;
             img {
                 filter: opacity(.2);
             }
@@ -55,12 +57,12 @@
             width: 32px;
             height: 4px;
             display: block;
-            background-color: #EFEFEF;
+            background-color: variables.$grey-light;
             margin-right: 12px;
             border-radius: 4px;
             cursor: pointer;
             &-active {
-                background-color: #F51B1B;
+                background-color: variables.$red;
             }
             &:last-child {
                 margin-right: 0px;

@@ -1,3 +1,5 @@
+@use '../../variables.scss';
+
 .modal__event-info__block {
     margin-bottom: 40px;
     .modal__event-info {
@@ -18,7 +20,7 @@
     }
     &.past {
         aside {
-            color: #B3B3BC;
+            color: variables.$grey-dark;
             background-color: #FAFAFA;
         }
     }
