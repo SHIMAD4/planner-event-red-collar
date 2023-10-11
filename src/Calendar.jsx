@@ -3,6 +3,7 @@ import interactionPlugin from "@fullcalendar/interaction"
 import FullCalendar from "@fullcalendar/react"
 import { useCallback, useEffect, useState } from "react"
 import ModalAuth from "./Modal/ModalAuth/modalAuth"
+import ModalCreateEvent from "./Modal/ModalCreateEvent/modalCreateEvent"
 import ModalEvent from "./Modal/ModalEvent/modalEvent"
 import { api } from "./shared/api"
 import avatarIcon from "./shared/icons/avatar.png"
@@ -13,6 +14,7 @@ export default function Calendar() {
   const [selectedEvent, setSelectedEvent] = useState(null)
   const [auth, setAuth] = useState(false)
   const [authToken, setAuthToken] = useState(false)
+  const [createEvent, setCreateEvent] = useState(false)
 
   const bc = new BroadcastChannel("token_channel")
   bc.onmessage = () => {
@@ -20,7 +22,7 @@ export default function Calendar() {
   }
 
   const createAvatar = useCallback(() => {
-    const avatarButton = document.querySelector(".fc-avatar-button")
+    const avatarButton = document.querySelector(".fc-avatarButton-button")
     if (avatarButton) {
       const img = document.createElement("img")
       img.src = avatarIcon
@@ -33,7 +35,7 @@ export default function Calendar() {
   const headerToolbar = {
     start: "",
     center: "",
-    end: `title prev next ${authToken ? "createEvent avatar" : "authButton avatar"}`,
+    end: `title prev next ${authToken ? "createEventButton avatarButton" : "authButton avatarButton"}`,
   }
   const authButton = {
     text: "Войти",
@@ -41,13 +43,13 @@ export default function Calendar() {
       setAuth(true)
     },
   }
-  const createEvent = {
+  const createEventButton = {
     text: "+",
     click: function () {
-      console.log("Добавление события")
+      setCreateEvent(true)
     },
   }
-  const avatar = {}
+  const avatarButton = {}
 
   const getEvents = useCallback(() => {
     api.event
@@ -68,7 +70,7 @@ export default function Calendar() {
     getEvents()
     setTimeout(() => {
       createAvatar()
-    }, 500)
+    }, 0)
     setAuthToken(localStorage.getItem("access_token") ? true : false)
   }, [getEvents, createAvatar])
 
@@ -83,7 +85,7 @@ export default function Calendar() {
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         headerToolbar={headerToolbar}
-        customButtons={{ createEvent, avatar }}
+        customButtons={{ createEventButton, avatarButton }}
         titleFormat={{ month: "long" }}
         locale="ru"
         firstDay={1}
@@ -94,6 +96,7 @@ export default function Calendar() {
       />
       {selectedEvent && <ModalEvent event={selectedEvent} onClose={() => setSelectedEvent(null)} isOpen={true} />}
       {auth && <ModalAuth onClose={() => setAuth(false)} isOpen={true} />}
+      {createEvent && <ModalCreateEvent onClose={() => setCreateEvent(false)} isOpen={true} />}
     </>
   ) : (
     <>
@@ -102,7 +105,7 @@ export default function Calendar() {
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         headerToolbar={headerToolbar}
-        customButtons={{ authButton, createEvent, avatar }}
+        customButtons={{ authButton, createEventButton, avatarButton }}
         titleFormat={{ month: "long" }}
         locale="ru"
         firstDay={1}

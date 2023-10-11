@@ -28,7 +28,7 @@ export default function ModalEvent({ event, onClose, isOpen }) {
 
   const joinToEvent = () => {
     api.event
-      .join({ flag: true })
+      .join(+event.id, {}, { flag: true })
       .then(() => setHappyModal(true))
       .catch((err) => {
         if (err.response.status > 299 || err.response.status < 200) {

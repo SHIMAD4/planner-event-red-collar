@@ -47,14 +47,16 @@ export default function ModalAuth({ onClose, isOpen }) {
   const checkPass = (e) => {
     e.preventDefault()
     api.user
-      .login({
-        flag: false,
-        identifier: `${emailToCheck}`,
-        password: `${passToCheck}`,
-      })
+      .login(
+        {
+          identifier: `${emailToCheck}`,
+          password: `${passToCheck}`,
+        },
+        {
+          flag: false,
+        }
+      )
       .then((res) => {
-        console.log("user: ", res.data.user)
-        console.log("token: ", res.data.jwt)
         localStorage.setItem("access_token", res.data.jwt)
         bc.postMessage("Token")
         setModalOpen(false)

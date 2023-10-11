@@ -9,9 +9,12 @@ const baseRequestURL = axios.create({
 
 baseRequestURL.interceptors.request.use(
   (config) => {
-    config.flag === false
-      ? config
-      : (config.headers.Authorization = `Bearer ${localStorage.getItem("access_token")}`)
+    if (config.flag === true) {
+      config.headers.Authorization = `Bearer ${localStorage.getItem("access_token")}`
+    } else {
+      return config
+    }
+    delete config.flag
     return config
   },
   (error) => Promise.reject(error)

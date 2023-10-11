@@ -73,7 +73,7 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
 
     if (isPasswordValid && pass !== "" && pass === passRepeat) {
       api.user
-        .register({ username, email, password: passRepeat })
+        .register({ username, email, password: passRepeat }, { flag: false })
         .then((res) => {
           localStorage.setItem("access_token", res.data.jwt)
           bc.postMessage("Token")
