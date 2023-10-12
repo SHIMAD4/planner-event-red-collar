@@ -20,6 +20,24 @@ export default function ModalAuth({ onClose, isOpen }) {
 
   const input = document.querySelector(".modal-auth__input")
   const validError = document.querySelector(".valid-error")
+  const clearIconError = document.querySelector(".clear-icon-alt")
+  const clearIcon = document.querySelector(".clear-icon")
+
+  const EMAIL_REGEXP =
+    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu
+
+  const isEmailValid = (value) => {
+    const isValid = EMAIL_REGEXP.test(value) || value === ""
+    if (input && validError && isValid) {
+      input.classList.toggle("isInvalid", !isValid)
+      validError.classList.toggle("hide", isValid)
+      clearIconError.classList.toggle("hide", isValid)
+      clearIcon.classList.toggle("hide", !isValid)
+      return true
+    } else {
+      return false
+    }
+  }
 
   const checkEmail = (e) => {
     e.preventDefault()
@@ -33,7 +51,8 @@ export default function ModalAuth({ onClose, isOpen }) {
       })
       .catch((err) => {
         if (err.response.status === 404) {
-          if (emailToCheck !== "") {
+          console.log(isEmailValid(input.value))
+          if (emailToCheck !== "" && isEmailValid(input.value)) {
             setRegisterUser(true)
           } else {
             if (input) {
@@ -44,6 +63,7 @@ export default function ModalAuth({ onClose, isOpen }) {
         }
       })
   }
+
   const checkPass = (e) => {
     e.preventDefault()
     api.user

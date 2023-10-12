@@ -37,14 +37,6 @@
                 .modal-auth__input.isInvalid {
                     border: 1px solid variables.$red !important;
                 }
-                .valid-error {
-                    position: fixed;
-                    top: 255px;
-                    left: 180px;
-                    font-size: 14px;
-                    font-family: 'TT Commons', sans-serif;
-                    color: variables.$red;
-                }
             }
             .modal-auth__button {
                 background-color: variables.$black;
@@ -84,14 +76,6 @@
     .modal-auth__form-block {
         .modal-auth__form {
             .modal-auth__input-block {
-                .valid-error {
-                    position: fixed;
-                    top: 240px;
-                    left: 180px;
-                    font-size: 14px;
-                    font-family: 'TT Commons', sans-serif;
-                    color: variables.$red;
-                }
                 .clear-icon {
                     position: fixed;
                     top: 190px;
@@ -107,14 +91,6 @@
     .modal-auth__form-block {
         .modal-auth__form {
             .modal-auth__input-block {
-                .valid-error {
-                    position: fixed;
-                    top: 255px;
-                    left: 180px;
-                    font-size: 14px;
-                    font-family: 'TT Commons', sans-serif;
-                    color: variables.$red;
-                }
                 .clear-icon {
                     position: fixed;
                     top: 175px;

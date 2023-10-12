@@ -23,7 +23,9 @@ export function Input({
 
   const clearInput = () => {
     setInputValue("")
-    func("")
+    if (func) {
+      func("")
+    }
   }
 
   const togglePassView = (e) => {
