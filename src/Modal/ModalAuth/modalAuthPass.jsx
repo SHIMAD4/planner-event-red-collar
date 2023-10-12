@@ -27,7 +27,7 @@ export function ModalAuthPass({ checkPass, setPassToCheck }) {
           setPassToCheck(e.target.value)
         }}
         required
-        error="Неправильный пароль"
+        errorSymbols="Неправильный пароль"
       />
       <button
         type="submit"

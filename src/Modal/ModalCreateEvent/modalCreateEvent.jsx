@@ -58,27 +58,43 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
     sendPhotos(formData).then((selectedPhotosId) => {
       formattedTime(selectedTime)
 
-      api.event
-        .create(
-          {
-            title: selectedTitle,
-            description: selectedDescription,
-            dateStart: startDate.toISOString(),
-            dateEnd: endDate ? endDate.toISOString() : null,
-            location: selectedLocation,
-            participants: selectedUsersId,
-            photos: selectedPhotosId,
-          },
-          { flag: true }
-        )
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
+      if (selectedTitle.length < 140) {
+        if (selectedDescription.length < 1000) {
+          if (selectedLocation.length < 140) {
+            api.event
+              .create(
+                {
+                  title: selectedTitle,
+                  description: selectedDescription,
+                  dateStart: startDate.toISOString(),
+                  dateEnd: endDate ? endDate.toISOString() : null,
+                  location: selectedLocation,
+                  participants: selectedUsersId,
+                  photos: selectedPhotosId,
+                },
+                { flag: true }
+              )
+              .then((res) => console.log(res))
+              .catch((err) => console.log(err))
+          }
+        }
+      }
     })
   }
 
   const onDelete = (itemToDelete) => {
     const updatedFiles = photos.filter((item) => item !== itemToDelete)
     setPhotos(updatedFiles)
+  }
+
+  const setActiveButton = () => {
+    if (selectedTitle.length < 140) {
+      if (selectedDescription.length < 1000) {
+        if (selectedLocation.length < 140) {
+          document.querySelector(".modal-create-event__button").removeAttribute("disabled")
+        }
+      }
+    }
   }
 
   return (
@@ -99,6 +115,8 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                 title="Название"
                 type="text"
                 func={setSelectedTitle}
+                errorRequired="Обязательное поле"
+                onChange={() => setActiveButton()}
               />
               <Input
                 className="modal-create-event__input"
@@ -106,6 +124,8 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                 title="Описание"
                 type="text"
                 func={setSelectedDescription}
+                errorRequired="Обязательное поле"
+                onChange={() => setActiveButton()}
               />
               <ParticipantsComponent setSelectedUsers={setSelectedUsers} />
               <Dropzone onDrop={(acceptedFiles) => setPhotos((prev) => [...prev, ...acceptedFiles])}>
@@ -119,8 +139,18 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
             </div>
             <div className="modal-create-event__input-block--right">
               <div className="modal-create-event__input-block--datePicker">
-                <DatePicker className="inputDate" selected={startDate} onChange={(date) => setStartDate(date)} />
-                <DatePicker className="inputDate" selected={endDate} onChange={(date) => setEndDate(date)} />
+                <DatePicker
+                  className="inputDate"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  required
+                />
+                <DatePicker
+                  className="inputDate"
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                  required
+                />
               </div>
               <Input
                 className="modal-create-event__input"
@@ -128,6 +158,8 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                 title="Время"
                 type="text"
                 func={setSelectedTime}
+                errorRequired="Обязательное поле"
+                onChange={() => setActiveButton()}
               />
               <Input
                 className="modal-create-event__input"
@@ -135,6 +167,8 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                 title="Место проведения"
                 type="text"
                 func={setSelectedLocation}
+                errorRequired="Обязательное поле"
+                onChange={() => setActiveButton()}
               />
               <div className="modal-create-event__info">
                 <img className="modal-create-event__avatar" src={avatar} alt="" />
@@ -168,7 +202,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
               </div>
             </div>
           </div>
-          <button type="submit" className="modal-create-event__button">
+          <button type="submit" className="modal-create-event__button" disabled>
             Создать
           </button>
         </form>

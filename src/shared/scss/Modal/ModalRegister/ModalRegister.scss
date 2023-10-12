@@ -28,6 +28,10 @@
     }
     .modal-register__form {
         margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
         .modal-register__input-block {
             position: relative;
             margin-bottom: 48px;

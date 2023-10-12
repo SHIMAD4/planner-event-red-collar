@@ -21,19 +21,17 @@ export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
 
   return (
     <>
-      <div className={hide ? "modal-auth__input-block hide" : "modal-auth__input-block"}>
-        <Input
-          className="modal-auth__input"
-          title="Email"
-          type="text"
-          id="email"
-          onChange={(e) => {
-            setEmailToCheck(e.target.value)
-          }}
-          required
-          error="Некорректный e-mail"
-        />
-      </div>
+      <Input
+        className={hide ? "hide modal-auth__input" : "modal-auth__input"}
+        title="Email"
+        type="text"
+        id="email"
+        onChange={(e) => {
+          setEmailToCheck(e.target.value)
+        }}
+        required
+        errorSymbols="Некорректный e-mail"
+      />
       <button
         type="submit"
         className={hide ? "modal-auth__button hide" : "modal-auth__button"}

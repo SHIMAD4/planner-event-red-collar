@@ -19,28 +19,21 @@ export function Input({
   number,
 }) {
   const [isPasswordVisible, setPasswordVisible] = useState(false)
-
-  const input = document.querySelector("input")
+  const [inputValue, setInputValue] = useState("")
 
   const clearInput = () => {
-    input.value = ""
-    func(input.value)
+    setInputValue("")
+    func("")
   }
 
-  const changePassView = () => {
+  const togglePassView = (e) => {
     setPasswordVisible(!isPasswordVisible)
-    const inputs = document.querySelectorAll(".modal-register__input")
+    const input = e.target.parentNode.querySelector("input")
 
-    for (let i = 1; i < inputs.length; i++) {
-      if (!isPasswordVisible) {
-        inputs[i].type = `text`
-        inputs[i].src = eyeOpen
-        console.log(inputs[i].src)
-      } else {
-        inputs[i].type = `password`
-        inputs[i].src = eyeClose
-        console.log(inputs[i].src)
-      }
+    if (!isPasswordVisible) {
+      input.type = `text`
+    } else {
+      input.type = `password`
     }
   }
 
@@ -51,7 +44,9 @@ export function Input({
         type={type}
         id={id}
         name={id}
+        value={inputValue}
         onChange={(e) => {
+          setInputValue(e.target.value)
           onChange ? onChange(e) : null
         }}
         autoComplete="true"
@@ -61,9 +56,9 @@ export function Input({
       {id === "password" || id === "password2" ? (
         <img
           className={id === "password" ? "eye-close1" : id === "password2" ? "eye-close2" : null}
-          src={isPasswordVisible ? eyeClose : eyeOpen}
+          src={isPasswordVisible ? eyeOpen : eyeClose}
           alt=""
-          onClick={() => changePassView()}
+          onClick={(e) => togglePassView(e)}
         />
       ) : (
         <>

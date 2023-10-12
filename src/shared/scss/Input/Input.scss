@@ -5,22 +5,22 @@
     display: inline-block;
     .icon {
         position: absolute;
-        right: 4px;
+        right: 15px;
         top: 14px;
         cursor: pointer;
         z-index: 9999;
     }
     .eye-close1 {
-        position: fixed;
-        top: 330px;
-        right: 195px;
+        position: absolute;
+        right: 15px;
+        top: 14px;
         cursor: pointer;
         z-index: 9999;
     }
     .eye-close2 {
-        position: fixed;
-        top: 440px;
-        right: 195px;
+        position: absolute;
+        right: 15px;
+        top: 14px;
         cursor: pointer;
         z-index: 9999;
     }
