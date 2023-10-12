@@ -1,26 +1,20 @@
 @use '../../variables.scss';
+@use '../../mixins.scss';
 
 .modal__gallery__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include mixins.flex(row, space-between);
     margin-bottom: 24px;
     .modal__gallery__desc {
         font-size: 20px;
     }
     .modal__gallery__buttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row-reverse;
+        @include mixins.flex(row-reverse, center, center,);
         .prev, .next {
             width: 60px;
             height: 42px;
             background-color: variables.$grey-light !important;
             border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            @include mixins.flex();
             cursor: pointer;
             img {
                 width: 24px;
@@ -49,9 +43,7 @@
         border-radius: 24px;
     }
     .swiper-pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include mixins.flex();
         margin-top: 32px;
         &-bullet {
             width: 32px;

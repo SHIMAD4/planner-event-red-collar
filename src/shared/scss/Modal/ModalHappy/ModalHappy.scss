@@ -1,4 +1,5 @@
 @use '../../variables.scss';
+@use '../../mixins.scss';
 
 .modal__body {
     overflow: hidden;
@@ -38,7 +39,7 @@
         gap: 16px;
         margin-bottom: 8px;
         .modal-happy__item {
-            display: flex;
+            @include mixins.flex(row, none, none);
             font-size: 18px;
             font-weight: 500;
         }

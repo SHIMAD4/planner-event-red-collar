@@ -1,3 +1,5 @@
+@use '../../mixins.scss';
+
 .modal__people__desc {
     font-size: 20px;
     margin-bottom: 20px;
@@ -5,16 +7,14 @@
 .modal__people__list {
     margin-bottom: 40px;
     li {
-        display: flex;
-        align-items: center;
+        @include mixins.flex(row, none, center);
         margin-right: 20px;
         .modal__people__avatar {
             margin-right: 12px;
         }
         .modal__people__info {
-            display: flex;
+            @include mixins.flex(column, none, none);
             flex-wrap: wrap;
-            flex-direction: column;
             .modal__people__username:first-child {
                 font-size: 14px;
                 font-weight: medium;
@@ -35,9 +35,7 @@
         height: 43px;
     }
     div:not(.modal__people__info) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include mixins.flex();
         .count {
             min-width: 80px;
             position: relative;
@@ -65,7 +63,7 @@
     .modal__people__list {
         margin-bottom: 40px;
         li {
-            display: flex;
+            @include mixins.flex(row, none, none);
             margin-right: 25px;
             img {
                 margin-right: 10px;
@@ -84,9 +82,7 @@
             height: 43px;
         }
         div:not(.modal__people__info) {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            @include mixins.flex();
         }
     }
 }
@@ -95,7 +91,7 @@
     .modal__people__list {
         margin-bottom: 70px;
         li {
-            display: flex;
+            @include mixins.flex(row, none, none);
             margin-right: 30px;
             img {
                 margin-right: 12px;
@@ -106,9 +102,7 @@
             height: 65px;
         }
         div:not(.modal__people__info) {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            @include mixins.flex();
             .photo2 {
                 position: relative;
                 top: 0;

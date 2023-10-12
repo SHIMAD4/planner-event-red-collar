@@ -1,14 +1,12 @@
 @use '../../variables.scss';
+@use '../../mixins.scss';
 
 .modal {
     button.hide {
         display: none;
     }
     .modal-auth__form-block {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+        @include mixins.flex(column);
         .modal-auth__form {
             margin-top: 40px;
             .modal-auth__input-block {

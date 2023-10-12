@@ -1,12 +1,12 @@
+@use '../mixins.scss';
+
 .modal.active  {
-    display: flex;
+    @include mixins.flex();
 }
 
 .modal  {
     ul {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+        @include mixins.flex(row, none, center);
         list-style-type: none;
     }
     &__bg{
@@ -44,9 +44,7 @@
         font-size: 30px;
     }
     button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include mixins.flex();
         background-color: transparent;
         &:focus {
             border: 1px solid grey !important;

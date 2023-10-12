@@ -1,7 +1,8 @@
 @use '../../variables.scss';
+@use '../../mixins.scss';
 
 .modal.active  {
-    display: flex;
+    @include mixins.flex(row, none, none);
 }
 
 .modal  {
@@ -20,18 +21,14 @@
         }
     }
     button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include mixins.flex();
         background-color: transparent;
         &:focus {
             border: 1px solid grey !important;
         }
     }
     .modal-event__button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include mixins.flex();
         &--join {
             background-color: variables.$black;
             color: variables.$grey-light;
@@ -64,7 +61,7 @@
         &__people {
             margin-bottom: 40px;
             li {
-                display: flex;
+                @include mixins.flex(row, none, none);
                 margin-right: 48px;
                 img {
                     margin-right: 12px;
@@ -79,9 +76,7 @@
                 }
             }
             div:not(.modal__people__info) {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                @include mixins.flex();
             }
         }
         &__gallery__header {
@@ -117,7 +112,7 @@
         &__people {
             margin-bottom: 70px;
             li {
-                display: flex;
+                @include mixins.flex(row, none, none);
                 margin-right: 48px;
                 img {
                     margin-right: 12px;
@@ -128,9 +123,7 @@
                 height: 65px;
             }
             div:not(.modal__people__info) {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                @include mixins.flex();
                 .photo2 {
                     position: relative;
                     top: 0;
