@@ -17,25 +17,15 @@ export function Input({
   onChange,
   required,
   number,
+  isPasswordVisible,
+  togglePasswordVisibility,
 }) {
-  const [isPasswordVisible, setPasswordVisible] = useState(false)
   const [inputValue, setInputValue] = useState("")
 
   const clearInput = () => {
     setInputValue("")
     if (func) {
       func("")
-    }
-  }
-
-  const togglePassView = (e) => {
-    setPasswordVisible(!isPasswordVisible)
-    const input = e.target.parentNode.querySelector("input")
-
-    if (!isPasswordVisible) {
-      input.type = `text`
-    } else {
-      input.type = `password`
     }
   }
 
@@ -58,9 +48,9 @@ export function Input({
       {id === "password" || id === "password2" ? (
         <img
           className={id === "password" ? "eye-close1" : id === "password2" ? "eye-close2" : null}
-          src={isPasswordVisible ? eyeOpen : eyeClose}
+          src={isPasswordVisible ? eyeClose : eyeOpen}
           alt=""
-          onClick={(e) => togglePassView(e)}
+          onClick={() => togglePasswordVisibility()}
         />
       ) : (
         <>

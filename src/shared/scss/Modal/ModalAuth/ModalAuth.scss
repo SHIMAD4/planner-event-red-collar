@@ -69,34 +69,3 @@
         margin-top: -10px;
     }
 }
-
-@media screen and (min-width: 1280px) {
-    .modal-auth__form-block {
-        .modal-auth__form {
-            .modal-auth__input-block {
-                .clear-icon {
-                    position: fixed;
-                    top: 190px;
-                    right: 185px;
-                    cursor: pointer;
-                    z-index: 9999;
-                }
-            }
-        }
-    }
-}
-@media screen and (min-width: 1440px) {
-    .modal-auth__form-block {
-        .modal-auth__form {
-            .modal-auth__input-block {
-                .clear-icon {
-                    position: fixed;
-                    top: 175px;
-                    right: 185px;
-                    cursor: pointer;
-                    z-index: 9999;
-                }
-            }
-        }
-    }
-}

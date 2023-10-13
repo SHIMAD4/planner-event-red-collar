@@ -12,6 +12,8 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
   const [passRepeat, setPassRepeat] = useState("")
   const [modalOpen, setModalOpen] = useState(true)
   const [modalError, setModalError] = useState(false)
+  const [isPasswordVisible, setPasswordVisible] = useState(false)
+
   const bc = new BroadcastChannel("token_channel")
 
   const info =
@@ -86,6 +88,19 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
     }
   }
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!isPasswordVisible)
+
+    const inputs = document.querySelectorAll(".modal-register__input")
+    for (let i = 1; i < inputs.length; i++) {
+      if (inputs[i].type === "password") {
+        inputs[i].type = "text"
+      } else {
+        inputs[i].type = "password"
+      }
+    }
+  }
+
   return modalOpen ? (
     <Modal onClose={onClose} isOpen={isOpen} title="Регистрация">
       <div className="modal-register__form-block">
@@ -110,6 +125,8 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
             errorSymbols="Используйте латинские буквы, цифры и спец символы"
             errorRequired="Обязательное поле"
             number={2}
+            isPasswordVisible={!isPasswordVisible}
+            togglePasswordVisibility={togglePasswordVisibility}
           />
           <Input
             className="modal-register__input"
@@ -119,6 +136,8 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
             errorEquality="Пароли не совпадают"
             errorRequired="Обязательное поле"
             number={3}
+            isPasswordVisible={!isPasswordVisible}
+            togglePasswordVisibility={togglePasswordVisibility}
           />
           <button
             type="submit"

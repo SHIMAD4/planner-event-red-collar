@@ -1,6 +1,9 @@
+import { useState } from "react"
 import { Input } from "../../Input/Input"
 
 export function ModalAuthPass({ checkPass, setPassToCheck }) {
+  const [isPasswordVisible, setPasswordVisible] = useState(false)
+
   const input = document.querySelector(".modal-auth__input")
   const validError = document.querySelectorAll(".valid-error")
   const clearIconError = document.querySelector(".clear-icon-alt")
@@ -16,6 +19,19 @@ export function ModalAuthPass({ checkPass, setPassToCheck }) {
     }
   }
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!isPasswordVisible)
+
+    const inputs = document.querySelectorAll(".modal-auth__input")
+    for (let i = 1; i < inputs.length; i++) {
+      if (inputs[i].type === "password") {
+        inputs[i].type = "text"
+      } else {
+        inputs[i].type = "password"
+      }
+    }
+  }
+
   return (
     <>
       <Input
@@ -28,6 +44,8 @@ export function ModalAuthPass({ checkPass, setPassToCheck }) {
         }}
         required
         errorSymbols="Неправильный пароль"
+        isPasswordVisible={!isPasswordVisible}
+        togglePasswordVisibility={togglePasswordVisibility}
       />
       <button
         type="submit"
