@@ -29,7 +29,9 @@ export default function Calendar() {
       img.src = avatarIcon
       avatarButton.appendChild(img)
       for (let i = 1; i < avatarButton.childNodes.length; i++) {
-        avatarButton.childNodes[i + 1].remove()
+        if (avatarButton.childNodes[i + 1]) {
+          avatarButton.childNodes[i + 1].remove()
+        }
       }
     }
     if (authToken) avatarButton.style.display = "flex"
@@ -53,6 +55,10 @@ export default function Calendar() {
     },
   }
   const avatarButton = {}
+
+  function byField(fieldName) {
+    return (a, b) => (a[fieldName] > b[fieldName] ? 1 : -1)
+  }
 
   const getEvents = useCallback(() => {
     api.event
@@ -114,6 +120,7 @@ export default function Calendar() {
         events={events}
         eventContent={renderEventContent}
         eventClick={handleEventClick}
+        eventOrder="dateStart"
       />
       {selectedEvent && <ModalEvent event={selectedEvent} onClose={() => setSelectedEvent(null)} isOpen={true} />}
       {auth && <ModalAuth onClose={() => setAuth(false)} isOpen={true} />}
@@ -134,6 +141,7 @@ export default function Calendar() {
         events={events}
         eventContent={renderEventContent}
         eventClick={handleEventClick}
+        eventOrder="dateStart"
       />
       {selectedEvent && <ModalEvent event={selectedEvent} onClose={() => setSelectedEvent(null)} isOpen={true} />}
       {auth && <ModalAuth onClose={() => setAuth(false)} isOpen={true} />}
