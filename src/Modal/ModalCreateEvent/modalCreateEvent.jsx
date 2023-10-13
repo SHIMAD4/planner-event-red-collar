@@ -19,6 +19,8 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
   const [photos, setPhotos] = useState([])
   const [occupancy, setOccupancy] = useState(false)
   const [event, setEvent] = useState({})
+  const [myEmail, setMyEmail] = useState({})
+
   const [firstModalOpen, setFirstModalOpen] = useState(true)
   const [modalErrorOpen, setModalErrorOpen] = useState(false)
   const [modalHappyOpen, setModalHappyOpen] = useState(false)
@@ -35,6 +37,17 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
 
   const selectedUsersId = selectedUsers.map((user) => user.id)
   setDefaultLocale("ru")
+
+  const getMe = () => {
+    api.user.me({ flag: true }).then((res) => {
+      setMyEmail(res.data)
+      console.log(res.data)
+    })
+  }
+
+  useState(() => {
+    getMe()
+  })
 
   const sendPhotos = async (array) => {
     if (array.getAll("files").length !== 0) {
@@ -90,6 +103,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                         location: selectedLocation,
                         participants: selectedUsersId ?? null,
                         photos: selectedPhotosId ?? null,
+                        createdBy: myEmail,
                       },
                       { flag: true }
                     )

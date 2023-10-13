@@ -15,6 +15,7 @@ export default function Calendar() {
   const [auth, setAuth] = useState(false)
   const [authToken, setAuthToken] = useState(false)
   const [createEvent, setCreateEvent] = useState(false)
+  const [myEmail, setMyEmail] = useState(false)
 
   const bc = new BroadcastChannel("token_channel")
   bc.onmessage = () => {
@@ -60,17 +61,35 @@ export default function Calendar() {
         data.forEach((elem) => {
           elem.start = elem.dateStart.split("T")[0]
           if (new Date(elem.start) < new Date()) elem.className = "past"
+          elem.participants.forEach((user) => {
+            if (myEmail) {
+              if (myEmail === user.email) {
+                elem.className = "joined"
+              }
+              if (myEmail === elem.createdBy) {
+                elem.className = "created-by"
+              }
+            }
+          })
         })
+
         setEvents(data)
       })
       .catch((err) => console.log(err.response.data.error))
-  }, [])
+  }, [myEmail])
+
+  const getMe = () => {
+    api.user.me({ flag: true }).then((res) => {
+      setMyEmail(res.data.email)
+    })
+  }
 
   useEffect(() => {
     getEvents()
     setTimeout(() => {
       createAvatar()
     }, 0)
+    getMe()
     setAuthToken(localStorage.getItem("access_token") ? true : false)
   }, [getEvents, createAvatar])
 
