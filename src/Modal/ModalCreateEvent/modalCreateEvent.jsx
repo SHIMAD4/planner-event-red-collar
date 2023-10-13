@@ -27,23 +27,9 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
   const [selectedLocation, setSelectedLocation] = useState("")
   const [selectedTime, setSelectedTime] = useState("")
 
-  const modal = document.querySelector("#modal-create-event")
   const selectedUsersId = selectedUsers.map((user) => user.id)
 
   useEffect(() => {
-    if (modal) {
-      const modalCloseIcon = modal.querySelector(".modal__close-icon")
-      const modalCloseBg = modal.querySelector(".modal__bg")
-
-      modalCloseIcon.addEventListener("click", () => {
-        setFirstModalOpen(false)
-        setOccupancy(true)
-      })
-      modalCloseBg.addEventListener("click", () => {
-        setFirstModalOpen(false)
-        setOccupancy(true)
-      })
-    }
     api.user
       .me({ flag: true })
       .then((res) => setUsername(res.data.username))
@@ -113,6 +99,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
   }
 
   const setActiveButton = () => {
+    setActiveQuestion()
     if (selectedTitle.length < 140) {
       if (selectedDescription.length < 1000) {
         if (selectedLocation.length < 140) {
@@ -122,17 +109,26 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
     }
   }
 
+  const setActiveQuestion = () => {
+    const modal = document.querySelector("#modal-create-event")
+
+    if (modal) {
+      const modalCloseIcon = modal.querySelector(".modal__close-icon")
+      const modalCloseBg = modal.querySelector(".modal__bg")
+
+      modalCloseIcon.addEventListener("click", () => {
+        setFirstModalOpen(false)
+        setOccupancy(true)
+      })
+      modalCloseBg.addEventListener("click", () => {
+        setFirstModalOpen(false)
+        setOccupancy(true)
+      })
+    }
+  }
+
   return (
     <>
-      {occupancy ? (
-        <ModalQuestion
-          onClose={(e) => {
-            setFirstModalOpen(e)
-            setOccupancy(false)
-          }}
-          isOpen={isOpen}
-        />
-      ) : null}
       {firstModalOpen && (
         <Modal onClose={onClose} isOpen={isOpen} id="modal-create-event" title="Создание события">
           <div className="modal-create-event__block">
@@ -245,6 +241,15 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
           </div>
         </Modal>
       )}
+      {occupancy ? (
+        <ModalQuestion
+          onClose={(e) => {
+            setFirstModalOpen(e)
+            setOccupancy(false)
+          }}
+          isOpen={isOpen}
+        />
+      ) : null}
     </>
   )
 }
