@@ -39,6 +39,9 @@ export function Input({
         value={inputValue}
         onChange={(e) => {
           setInputValue(e.target.value)
+          if (func) {
+            func(e.target.value)
+          }
           onChange ? onChange(e) : null
         }}
         autoComplete="true"

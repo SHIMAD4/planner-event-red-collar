@@ -98,12 +98,18 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
     setPhotos(updatedFiles)
   }
 
+  const convertPhotosSize = (photos) => {
+    return photos.every((photo) => photo.size / 1000 / 1000 < 5)
+  }
+
   const setActiveButton = () => {
     setActiveQuestion()
-    if (selectedTitle.length < 140) {
-      if (selectedDescription.length < 1000) {
-        if (selectedLocation.length < 140) {
-          document.querySelector(".modal-create-event__button").removeAttribute("disabled")
+    if (selectedTitle.length < 140 && selectedTitle.length !== 0) {
+      if (selectedDescription.length < 1000 && selectedDescription.length !== 0) {
+        if (selectedLocation.length < 140 && selectedLocation.length !== 0) {
+          if (convertPhotosSize(photos)) {
+            document.querySelector(".modal-create-event__button").removeAttribute("disabled")
+          }
         }
       }
     }

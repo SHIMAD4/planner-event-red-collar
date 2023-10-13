@@ -7,7 +7,7 @@
         margin-top: 40px;
         @include mixins.flex(column);
         .modal-create-event__form--inner {
-            @include mixins.flex();
+            @include mixins.flex(row, center, none);
             margin-bottom: 64px;
             .modal-create-event__input-block--left {
                 #description {
@@ -339,7 +339,7 @@
         }
     }
 }
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1920px) {
     .modal-create-event__form-block {
         .modal-create-event__form {
             .modal-create-event__input-block {
