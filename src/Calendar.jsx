@@ -28,7 +28,9 @@ export default function Calendar() {
       const img = document.createElement("img")
       img.src = avatarIcon
       avatarButton.appendChild(img)
-      avatarButton.childNodes[0].remove()
+      for (let i = 1; i < avatarButton.childNodes.length; i++) {
+        avatarButton.childNodes[i + 1].remove()
+      }
     }
     if (authToken) avatarButton.style.display = "flex"
   }, [authToken])
