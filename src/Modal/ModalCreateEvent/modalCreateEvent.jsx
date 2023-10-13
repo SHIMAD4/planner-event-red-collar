@@ -1,21 +1,20 @@
 import ru from "date-fns/locale/ru"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
-import Dropzone from "react-dropzone"
-import Select from "react-select"
 import { Input } from "../../Input/Input"
 import { api } from "../../shared/api"
-import avatar from "../../shared/icons/avatar.png"
-import closeIcon from "../../shared/icons/delete-icon.svg"
 import "../../shared/scss/Modal/ModalCreateEvent/ModalCreateEvent.scss"
 import Modal from "../Modal"
 import ModalError from "../ModalError/modalError"
 import ModalQuestion from "../ModalQuestion/modalQuestion"
+import DropZone from "./modalCreateEventDropzone"
+import UserInfo from "./modalCreateEventInfo"
+import ParticipantsComponent from "./modalCreateEventParticipants"
+
 registerLocale("ru", ru)
 
 export default function ModalCreateEvent({ onClose, isOpen }) {
-  const [username, setUsername] = useState("")
   const [photos, setPhotos] = useState([])
   const [occupancy, setOccupancy] = useState(false)
   const [firstModalOpen, setFirstModalOpen] = useState(true)
@@ -33,13 +32,6 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
 
   const selectedUsersId = selectedUsers.map((user) => user.id)
   setDefaultLocale("ru")
-
-  useEffect(() => {
-    api.user
-      .me({ flag: true })
-      .then((res) => setUsername(res.data.username))
-      .catch((err) => console.log(err))
-  })
 
   const sendPhotos = async (array) => {
     if (array.getAll("files").length !== 0) {
@@ -123,11 +115,6 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
     })
   }
 
-  const onDelete = (itemToDelete) => {
-    const updatedFiles = photos.filter((item) => item !== itemToDelete)
-    setPhotos(updatedFiles)
-  }
-
   const convertPhotosSize = (photos) => {
     if (photos.length !== 0) {
       return photos.every((photo) => photo.size / 1000 / 1000 < 5)
@@ -157,14 +144,9 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
       {firstModalOpen && (
         <Modal onClose={onClose} isOpen={isOpen} id="modal-create-event" title="Создание события">
           <div className="modal-create-event__block">
-            <form
-              action="#"
-              className="modal-create-event__form"
-              onSubmit={(e) => {
-                createEvent(e)
-              }}>
+            <form action="#" className="modal-create-event__form" onSubmit={(e) => createEvent(e)}>
               <div className="modal-create-event__form--inner">
-                <div className="modal-create-event__input-block--left">
+                <div className="modal-create-event__form__row">
                   <Input
                     className="modal-create-event__input"
                     id="title"
@@ -180,32 +162,6 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                       }
                     }}
                   />
-                  <Input
-                    className="modal-create-event__input"
-                    id="description"
-                    title="Описание"
-                    type="text"
-                    func={setSelectedDescription}
-                    errorRequired="Обязательное поле"
-                    number={2}
-                    onChange={(e) => {
-                      setActiveQuestion()
-                      if (e.target.value !== "") {
-                        document.querySelector(".modal-create-event__button").removeAttribute("disabled")
-                      }
-                    }}
-                  />
-                  <ParticipantsComponent setSelectedUsers={setSelectedUsers} />
-                  <Dropzone onDrop={(acceptedFiles) => setPhotos((prev) => [...prev, ...acceptedFiles])}>
-                    {({ getRootProps, getInputProps }) => (
-                      <div className="dropzone" {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        <p>Выберите фото или перетащите сюда</p>
-                      </div>
-                    )}
-                  </Dropzone>
-                </div>
-                <div className="modal-create-event__input-block--right">
                   <div className="modal-create-event__input-block--datePicker">
                     <DatePicker
                       className="inputDate"
@@ -222,14 +178,16 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                       required
                     />
                   </div>
+                </div>
+                <div className="modal-create-event__form__row">
                   <Input
                     className="modal-create-event__input"
-                    id="dateTime"
-                    title="Время"
+                    id="description"
+                    title="Описание"
                     type="text"
-                    func={setSelectedTime}
+                    func={setSelectedDescription}
                     errorRequired="Обязательное поле"
-                    number={3}
+                    number={2}
                     onChange={(e) => {
                       setActiveQuestion()
                       if (e.target.value !== "") {
@@ -237,52 +195,44 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                       }
                     }}
                   />
-                  <Input
-                    className="modal-create-event__input"
-                    id="location"
-                    title="Место проведения"
-                    type="text"
-                    func={setSelectedLocation}
-                    errorRequired="Обязательное поле"
-                    number={4}
-                    onChange={(e) => {
-                      setActiveQuestion()
-                      if (e.target.value !== "") {
-                        document.querySelector(".modal-create-event__button").removeAttribute("disabled")
-                      }
-                    }}
-                  />
-                  <div className="modal-create-event__info">
-                    <img className="modal-create-event__avatar" src={avatar} alt="avatar" />
-                    <div className="">
-                      <p className="modal-create-event__username">{username}</p>
-                      <p className="modal-create-event__role">Организатор</p>
-                    </div>
-                  </div>
-                  <div className="photo-block">
-                    {photos.map((item, index) => {
-                      return (
-                        <div className="" key={index}>
-                          <img
-                            className="photo"
-                            src={URL.createObjectURL(item)}
-                            alt={item.name}
-                            width={134}
-                            height={81}
-                          />
-                          <button
-                            className="photo__delete-icon"
-                            onClick={() => onDelete(item)}
-                            aria-label="Закрыть"
-                            role="button"
-                            type="button">
-                            <img src={closeIcon} alt="close" />
-                          </button>
-                        </div>
-                      )
-                    })}
+                  <div className="">
+                    <Input
+                      className="time modal-create-event__input"
+                      id="dateTime"
+                      title="Время"
+                      type="text"
+                      func={setSelectedTime}
+                      errorRequired="Обязательное поле"
+                      number={3}
+                      onChange={(e) => {
+                        setActiveQuestion()
+                        if (e.target.value !== "") {
+                          document.querySelector(".modal-create-event__button").removeAttribute("disabled")
+                        }
+                      }}
+                    />
+                    <Input
+                      className="location modal-create-event__input"
+                      id="location"
+                      title="Место проведения"
+                      type="text"
+                      func={setSelectedLocation}
+                      errorRequired="Обязательное поле"
+                      number={4}
+                      onChange={(e) => {
+                        setActiveQuestion()
+                        if (e.target.value !== "") {
+                          document.querySelector(".modal-create-event__button").removeAttribute("disabled")
+                        }
+                      }}
+                    />
                   </div>
                 </div>
+                <div className="modal-create-event__form__row">
+                  <ParticipantsComponent setSelectedUsers={setSelectedUsers} />
+                  <UserInfo />
+                </div>
+                <DropZone photos={photos} setPhotos={setPhotos} />
               </div>
               <button type="submit" className="modal-create-event__button" disabled>
                 Создать
@@ -302,50 +252,5 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
       ) : null}
       {modalErrorOpen && <ModalError onClose={onClose} isOpen={isOpen} />}
     </>
-  )
-}
-
-function ParticipantsComponent({ setSelectedUsers }) {
-  const [users, setUsers] = useState([])
-
-  useEffect(() => {
-    getUsers()
-  }, [])
-
-  const getUsers = () => {
-    api.user
-      .all({ flag: false })
-      .then((res) => {
-        setUsers(res.data)
-      })
-      .catch((err) => console.log(err))
-  }
-
-  const selectOptions = users.map((user) => ({
-    value: user.username,
-    id: user.id,
-    label: (
-      <div className="modal-create-event__select__option">
-        <img
-          className="modal-create-event__select__option-avatar"
-          src={avatar}
-          alt={user.username}
-          width={40}
-          height={40}
-        />
-        <p className="modal-create-event__select__option-username">{user.username}</p>
-      </div>
-    ),
-  }))
-
-  return (
-    <Select
-      className="modal-create-event__select-container"
-      classNamePrefix="modal-create-event__select"
-      options={selectOptions}
-      isMulti
-      placeholder="Начните вводить имя"
-      onChange={(selectedUsers) => setSelectedUsers(selectedUsers)}
-    />
   )
 }

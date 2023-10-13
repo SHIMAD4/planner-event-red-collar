@@ -65,7 +65,6 @@ export default function Calendar() {
       })
       .catch((err) => console.log(err.response.data.error))
   }, [])
-  // bc.close()
 
   useEffect(() => {
     getEvents()
