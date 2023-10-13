@@ -1,5 +1,6 @@
+import ru from "date-fns/locale/ru"
 import { useEffect, useState } from "react"
-import DatePicker from "react-datepicker"
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import Dropzone from "react-dropzone"
 import Select from "react-select"
@@ -11,6 +12,7 @@ import "../../shared/scss/Modal/ModalCreateEvent/ModalCreateEvent.scss"
 import Modal from "../Modal"
 import ModalError from "../ModalError/modalError"
 import ModalQuestion from "../ModalQuestion/modalQuestion"
+registerLocale("ru", ru)
 
 export default function ModalCreateEvent({ onClose, isOpen }) {
   const [username, setUsername] = useState("")
@@ -30,6 +32,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
   const [selectedTime, setSelectedTime] = useState("")
 
   const selectedUsersId = selectedUsers.map((user) => user.id)
+  setDefaultLocale("ru")
 
   useEffect(() => {
     api.user
@@ -208,12 +211,14 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                       className="inputDate"
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
+                      locale="ru"
                       required
                     />
                     <DatePicker
                       className="inputDate"
                       selected={endDate}
                       onChange={(date) => setEndDate(date)}
+                      locale="ru"
                       required
                     />
                   </div>
