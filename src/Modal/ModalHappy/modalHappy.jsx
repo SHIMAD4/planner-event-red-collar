@@ -2,7 +2,15 @@ import "../../shared/scss/Modal/ModalHappy/ModalHappy.scss"
 import Modal from "../Modal"
 
 export default function ModalHappy({ onClose, isOpen, event }) {
-  const start = new Date(event.extendedProps.dateStart)
+  let start = ""
+  let location = ""
+  if (event.extendedProps) {
+    start = new Date(event.extendedProps.dateStart)
+    location = event.extendedProps.location
+  } else {
+    start = new Date(event.dateStart)
+    location = event.location
+  }
   const weekday = start.toLocaleString("ru-RU", { weekday: "long" })
   const date = start.toLocaleDateString()
   const time = start.toLocaleTimeString([], {
@@ -20,7 +28,7 @@ export default function ModalHappy({ onClose, isOpen, event }) {
           <li className="modal-happy__item">{date}</li>
           <li className="modal-happy__item">{time}</li>
         </ul>
-        <p className="modal-happy__address">{event.extendedProps.location}</p>
+        <p className="modal-happy__address">{location}</p>
         <button
           className="modal-happy__button"
           onClick={() => {

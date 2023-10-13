@@ -7,6 +7,7 @@ import { api } from "../../shared/api"
 import "../../shared/scss/Modal/ModalCreateEvent/ModalCreateEvent.scss"
 import Modal from "../Modal"
 import ModalError from "../ModalError/modalError"
+import ModalHappy from "../ModalHappy/modalHappy"
 import ModalQuestion from "../ModalQuestion/modalQuestion"
 import DropZone from "./modalCreateEventDropzone"
 import UserInfo from "./modalCreateEventInfo"
@@ -17,8 +18,10 @@ registerLocale("ru", ru)
 export default function ModalCreateEvent({ onClose, isOpen }) {
   const [photos, setPhotos] = useState([])
   const [occupancy, setOccupancy] = useState(false)
+  const [event, setEvent] = useState({})
   const [firstModalOpen, setFirstModalOpen] = useState(true)
   const [modalErrorOpen, setModalErrorOpen] = useState(false)
+  const [modalHappyOpen, setModalHappyOpen] = useState(false)
 
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
@@ -92,12 +95,14 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                     )
                     .then((res) => {
                       console.log(res)
-                      onClose()
+                      setEvent(res.data.data)
+                      setFirstModalOpen(false)
+                      setModalHappyOpen(true)
                     })
-                    .catch((err) => console.log(err))
-                } else {
-                  firstModalOpen(false)
-                  setModalErrorOpen(true)
+                    .catch((err) => {
+                      console.log(err)
+                      setModalErrorOpen(true)
+                    })
                 }
               }
             } else {
@@ -251,6 +256,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
         />
       ) : null}
       {modalErrorOpen && <ModalError onClose={onClose} isOpen={isOpen} />}
+      {modalHappyOpen && <ModalHappy onClose={onClose} isOpen={isOpen} event={event} />}
     </>
   )
 }

@@ -21,7 +21,7 @@
                         height: 153px;
                     }
                     input {
-                        width: 580px !important;
+                        width: 540px !important;
                     }
                     .modal-create-event__input-block {
                         position: relative;
@@ -69,10 +69,11 @@
                         }
                     }
                     .modal-create-event__select-container {
-                        width: 580px;
+                        width: 540px;
                         border: 1px solid variables.$grey-dark !important;
                         border-radius: variables.$rounded;
                         padding: 12px 16px;
+                        margin-right: 30px;
                         .modal-create-event__select__multi-value {
                             @include mixins.flex(row, none, center);
                             background-color: variables.$grey-light;
@@ -260,29 +261,30 @@
                         }
                     }
                     &:nth-child(3n) {
-                        width: 730px;
-                        margin-right: 150px;
+                        width: 630px;
+                        margin-right: 250px;
                     }
                 }
                 .dropzone-block {
                     @include mixins.flex();
+                    height: 190px;
                     .dropzone {
                         @include mixins.flex();
-                        width: 580px;
+                        width: 540px;
                         height: 170px;
                         border: 1px dashed variables.$grey-dark !important;
                         color: variables.$grey-dark;
                         border-radius: variables.$rounded;
                         font-family: 'TT Commons', sans-serif;
                         font-size: 20px;
-                        margin-right: 20px;
+                        margin-right: 55px;
                     }
                     .photo-block {
                         @include mixins.flex();
                         flex-wrap: wrap;
                         gap: 9px;
                         width: 279px;
-                        height: 172px;
+                        height: 170px;
                         img {
                             margin-bottom: -15px;
                         }
