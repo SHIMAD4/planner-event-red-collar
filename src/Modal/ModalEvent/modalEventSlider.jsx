@@ -27,7 +27,7 @@ const ModalEventSlider = forwardRef((props, ref) => {
         return (
           <SwiperSlide key={key}>
             <li>
-              <img className="slide-photo" src={item.src} alt="" />
+              <img className="slide-photo" src={item.src} alt="photo" />
             </li>
           </SwiperSlide>
         )

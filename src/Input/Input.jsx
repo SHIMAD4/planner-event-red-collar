@@ -52,13 +52,18 @@ export function Input({
         <img
           className={id === "password" ? "eye-close1" : id === "password2" ? "eye-close2" : null}
           src={isPasswordVisible ? eyeClose : eyeOpen}
-          alt=""
+          alt="eye close icon"
           onClick={() => togglePasswordVisibility()}
         />
       ) : (
         <>
-          <img className="icon clear-icon" src={clear} alt="" onClick={() => clearInput()} />
-          <img className="icon clear-icon-alt hide" src={clearError} alt="" onClick={() => clearInput()} />
+          <img className="icon clear-icon" src={clear} alt="clear-icon" onClick={() => clearInput()} />
+          <img
+            className="icon clear-icon-alt hide"
+            src={clearError}
+            alt="clear-icon"
+            onClick={() => clearInput()}
+          />
         </>
       )}
       {errorSymbols ? (

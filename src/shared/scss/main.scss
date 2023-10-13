@@ -3,8 +3,16 @@
     font-family: "Redcollar";
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: local("Roboto"),
          url("/fonts/Redcollar.woff2") format("woff2")
+}
+@font-face {
+    font-family: "TT Commons";
+    font-style: normal;
+    font-display: swap;
+    src: local("Roboto"),
+         url("/fonts/TTCommons.otf") format("otf")
 }
 
 * {

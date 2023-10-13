@@ -16,7 +16,7 @@ export default function ModalEventParticipants({ event }) {
       <ul className="modal__people__list" role="list">
         {organizer && (
           <li key={self.crypto.randomUUID()}>
-            <img className="modal__people__avatar" src={avatar} alt="" />
+            <img className="modal__people__avatar" src={avatar} alt="avatar" />
             <div className="modal__people__info">
               <p className="modal__people__username">{organizer.username}</p>
               <p className="modal__people__role">Организатор</p>
@@ -25,7 +25,7 @@ export default function ModalEventParticipants({ event }) {
         )}
         {otherParticipants.slice(0, 4).map((item) => (
           <li key={self.crypto.randomUUID()}>
-            <img className="modal__people__avatar" src={avatar} alt="" />
+            <img className="modal__people__avatar" src={avatar} alt="avatar" />
             <div className="modal__people__info">
               <p className="modal__people__username">{item.username}</p>
             </div>
@@ -33,9 +33,9 @@ export default function ModalEventParticipants({ event }) {
         ))}
         {participantsCount > 4 && (
           <div key={self.crypto.randomUUID()}>
-            <img className="photo1" src={avatar} alt="" />
-            <img className="photo2" src={avatar} alt="" />
-            <img className="photo3" src={avatar} alt="" />
+            <img className="photo1" src={avatar} alt="avatar" />
+            <img className="photo2" src={avatar} alt="avatar" />
+            <img className="photo3" src={avatar} alt="avatar" />
             <p className="count">Еще +{participantsCount - 4}</p>
           </div>
         )}

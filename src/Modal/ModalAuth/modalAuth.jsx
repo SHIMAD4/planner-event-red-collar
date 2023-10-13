@@ -79,6 +79,7 @@ export default function ModalAuth({ onClose, isOpen }) {
       .then((res) => {
         localStorage.setItem("access_token", res.data.jwt)
         bc.postMessage("Token")
+        bc.close()
         setModalOpen(false)
       })
       .catch((err) => {

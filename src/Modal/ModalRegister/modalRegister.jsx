@@ -77,6 +77,7 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
         .then((res) => {
           localStorage.setItem("access_token", res.data.jwt)
           bc.postMessage("Token")
+          bc.close()
         })
         .catch((err) => {
           if (err.response.status > 299 || err.response.status < 200) {
@@ -105,7 +106,7 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
     <Modal onClose={onClose} isOpen={isOpen} title="Регистрация">
       <div className="modal-register__form-block">
         <div className="info-block">
-          <img src={infoIcon} alt="" />
+          <img src={infoIcon} alt="infoIcon" />
           <p>{info}</p>
         </div>
         <form action="#" className="modal-register__form" onSubmit={(e) => handleSubmit(e)}>

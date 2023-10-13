@@ -34,15 +34,11 @@ export default function ModalEventGallery({ event }) {
             <h2 className="modal__gallery__desc">Галерея</h2>
             {event.extendedProps.photos.length >= 4 ? (
               <div className="modal__gallery__buttons">
-                <button
-                  className={pastPrev ? "next swiper-button-disabled" : "next"}
-                  onClick={handlePrev}>
-                  <img src={arrow} alt="" />
+                <button className={pastPrev ? "next swiper-button-disabled" : "next"} onClick={handlePrev}>
+                  <img src={arrow} alt="arrow" />
                 </button>
-                <button
-                  className={pastNext ? "prev swiper-button-disabled" : "prev"}
-                  onClick={handleNext}>
-                  <img src={arrow} alt="" />
+                <button className={pastNext ? "prev swiper-button-disabled" : "prev"} onClick={handleNext}>
+                  <img src={arrow} alt="arrow" />
                 </button>
               </div>
             ) : null}
