@@ -9,6 +9,7 @@ import avatar from "../../shared/icons/avatar.png"
 import closeIcon from "../../shared/icons/delete-icon.svg"
 import "../../shared/scss/Modal/ModalCreateEvent/ModalCreateEvent.scss"
 import Modal from "../Modal"
+import ModalError from "../ModalError/modalError"
 import ModalQuestion from "../ModalQuestion/modalQuestion"
 
 export default function ModalCreateEvent({ onClose, isOpen }) {
@@ -16,6 +17,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
   const [photos, setPhotos] = useState([])
   const [occupancy, setOccupancy] = useState(false)
   const [firstModalOpen, setFirstModalOpen] = useState(true)
+  const [modalErrorOpen, setModalErrorOpen] = useState(false)
 
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
@@ -37,7 +39,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
   })
 
   const sendPhotos = async (array) => {
-    if (array.length === 0) {
+    if (array.getAll("files").length !== 0) {
       return await api.uploads
         .post(array, { flag: true })
         .then((res) => {
@@ -52,8 +54,10 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
   }
 
   const formattedTime = (selectedTime) => {
-    const time = selectedTime.split(":")
-    startDate.setHours(time[0], time[1], 0)
+    if (selectedTime) {
+      const time = selectedTime.split(":")
+      startDate.setHours(time[0], time[1], 0)
+    }
   }
 
   const createEvent = (e) => {
@@ -66,29 +70,52 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
 
     sendPhotos(formData).then((selectedPhotosId) => {
       formattedTime(selectedTime)
+      const errorRequired = document.querySelectorAll(".valid-error-required")
 
-      if (selectedTitle.length < 140) {
-        if (selectedDescription.length < 1000) {
-          if (selectedLocation.length < 140) {
-            if (startDate < endDate) {
-              api.event
-                .create(
-                  {
-                    title: selectedTitle,
-                    description: selectedDescription,
-                    dateStart: startDate.toISOString(),
-                    dateEnd: endDate ? endDate.toISOString() : null,
-                    location: selectedLocation,
-                    participants: selectedUsersId ?? null,
-                    photos: selectedPhotosId ?? null,
-                  },
-                  { flag: true }
-                )
-                .then((res) => console.log(res))
-                .catch((err) => console.log(err))
+      if (selectedTitle.length < 140 && selectedTitle !== "") {
+        errorRequired[0].classList.add("hide")
+        if (selectedDescription.length < 1000 && selectedDescription !== "") {
+          errorRequired[1].classList.add("hide")
+          if (selectedTime.length < 140 && selectedTime !== "") {
+            errorRequired[2].classList.add("hide")
+            if (selectedLocation.length < 140 && selectedLocation !== "") {
+              errorRequired[3].classList.add("hide")
+              if (startDate < endDate) {
+                if (convertPhotosSize(photos)) {
+                  api.event
+                    .create(
+                      {
+                        title: selectedTitle,
+                        description: selectedDescription,
+                        dateStart: startDate.toISOString(),
+                        dateEnd: endDate ? endDate.toISOString() : null,
+                        location: selectedLocation,
+                        participants: selectedUsersId ?? null,
+                        photos: selectedPhotosId ?? null,
+                      },
+                      { flag: true }
+                    )
+                    .then((res) => {
+                      console.log(res)
+                      onClose()
+                    })
+                    .catch((err) => console.log(err))
+                } else {
+                  firstModalOpen(false)
+                  setModalErrorOpen(true)
+                }
+              }
+            } else {
+              errorRequired[3].classList.remove("hide")
             }
+          } else {
+            errorRequired[2].classList.remove("hide")
           }
+        } else {
+          errorRequired[1].classList.remove("hide")
         }
+      } else {
+        errorRequired[0].classList.remove("hide")
       }
     })
   }
@@ -99,20 +126,9 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
   }
 
   const convertPhotosSize = (photos) => {
-    return photos.every((photo) => photo.size / 1000 / 1000 < 5)
-  }
-
-  const setActiveButton = () => {
-    setActiveQuestion()
-    if (selectedTitle.length < 140 && selectedTitle.length !== 0) {
-      if (selectedDescription.length < 1000 && selectedDescription.length !== 0) {
-        if (selectedLocation.length < 140 && selectedLocation.length !== 0) {
-          if (convertPhotosSize(photos)) {
-            document.querySelector(".modal-create-event__button").removeAttribute("disabled")
-          }
-        }
-      }
-    }
+    if (photos.length !== 0) {
+      return photos.every((photo) => photo.size / 1000 / 1000 < 5)
+    } else return true
   }
 
   const setActiveQuestion = () => {
@@ -143,7 +159,6 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
               className="modal-create-event__form"
               onSubmit={(e) => {
                 createEvent(e)
-                onClose()
               }}>
               <div className="modal-create-event__form--inner">
                 <div className="modal-create-event__input-block--left">
@@ -154,7 +169,13 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                     type="text"
                     func={setSelectedTitle}
                     errorRequired="Обязательное поле"
-                    onChange={() => setActiveButton()}
+                    number={1}
+                    onChange={(e) => {
+                      setActiveQuestion()
+                      if (e.target.value !== "") {
+                        document.querySelector(".modal-create-event__button").removeAttribute("disabled")
+                      }
+                    }}
                   />
                   <Input
                     className="modal-create-event__input"
@@ -163,7 +184,13 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                     type="text"
                     func={setSelectedDescription}
                     errorRequired="Обязательное поле"
-                    onChange={() => setActiveButton()}
+                    number={2}
+                    onChange={(e) => {
+                      setActiveQuestion()
+                      if (e.target.value !== "") {
+                        document.querySelector(".modal-create-event__button").removeAttribute("disabled")
+                      }
+                    }}
                   />
                   <ParticipantsComponent setSelectedUsers={setSelectedUsers} />
                   <Dropzone onDrop={(acceptedFiles) => setPhotos((prev) => [...prev, ...acceptedFiles])}>
@@ -197,7 +224,13 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                     type="text"
                     func={setSelectedTime}
                     errorRequired="Обязательное поле"
-                    onChange={() => setActiveButton()}
+                    number={3}
+                    onChange={(e) => {
+                      setActiveQuestion()
+                      if (e.target.value !== "") {
+                        document.querySelector(".modal-create-event__button").removeAttribute("disabled")
+                      }
+                    }}
                   />
                   <Input
                     className="modal-create-event__input"
@@ -206,7 +239,13 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                     type="text"
                     func={setSelectedLocation}
                     errorRequired="Обязательное поле"
-                    onChange={() => setActiveButton()}
+                    number={4}
+                    onChange={(e) => {
+                      setActiveQuestion()
+                      if (e.target.value !== "") {
+                        document.querySelector(".modal-create-event__button").removeAttribute("disabled")
+                      }
+                    }}
                   />
                   <div className="modal-create-event__info">
                     <img className="modal-create-event__avatar" src={avatar} alt="" />
@@ -256,6 +295,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
           isOpen={isOpen}
         />
       ) : null}
+      {modalErrorOpen && <ModalError onClose={onClose} isOpen={isOpen} />}
     </>
   )
 }

@@ -16,6 +16,13 @@
                 input {
                     width: 580px !important;
                 }
+                .modal-create-event__input-block {
+                    .valid-error-required.valid-error-required-2 {
+                        position: absolute;
+                        top: 155px;
+                        left: 0;
+                    }
+                }
             }
             .modal-create-event__input-block--right {
                 width: 348px;
@@ -85,40 +92,6 @@
                 }
                 .modal-create-event__input.isValid {
                     border: 1px solid #23AE00 !important;
-                }
-                .valid-error {
-                    font-size: 14px;
-                    font-family: 'TT Commons', sans-serif;
-                    color: variables.$red;
-                }
-                .valid-error-required.valid-error-required-1 {
-                    position: fixed;
-                    top: 300px;
-                    left: 180px;
-                }
-                .valid-error-required.valid-error-required-2 {
-                    position: fixed;
-                    top: 410px;
-                    left: 180px;
-                }
-                .valid-error-required.valid-error-required-3 {
-                    position: fixed;
-                    top: 520px;
-                    left: 180px;
-                }
-                .icon1 {
-                    position: fixed;
-                    top: 361px;
-                    right: 195px;
-                    cursor: pointer;
-                    z-index: 9999;
-                }
-                .icon2 {
-                    position: fixed;
-                    top: 470px;
-                    right: 195px;
-                    cursor: pointer;
-                    z-index: 9999;
                 }
             }
         }
