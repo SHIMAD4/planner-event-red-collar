@@ -8,15 +8,15 @@
     .modal-create-event__block {
         @include mixins.flex(column);
         .modal-create-event__form {
-            margin-top: 40px;
+            margin-top: 50px;
             @include mixins.flex(column);
             .modal-create-event__form--inner {
                 @include mixins.flex(column);
-                margin-bottom: 64px;
+                margin-bottom: 24px;
                 .modal-create-event__form__row {
                     @include mixins.flex(row, space-between, center);
                     width: 880px;
-                    margin-bottom: 32px;
+                    margin-bottom: 12px;
                     #description {
                         height: 153px;
                     }
@@ -346,77 +346,16 @@
     }
 }
 
-@media screen and (min-width: 1280px) {
-    .modal-create-event__form-block {
-        .modal-create-event__form {
-            .modal-create-event__input-block {
-                .valid-error1 {
-                    position: fixed;
-                    top: 395px;
-                    left: 180px;
-                    font-size: 14px;
-                    font-family: 'TT Commons', sans-serif;
-                    color: variables.$red;
-                }
-                .valid-error2 {
-                    position: fixed;
-                    top: 505px;
-                    left: 180px;
-                    font-size: 14px;
-                    font-family: 'TT Commons', sans-serif;
-                    color: variables.$red;
-                }
-                .icon1 {
-                    position: fixed;
-                    top: 346px;
-                    right: 195px;
-                    cursor: pointer;
-                    z-index: 9999;
-                }
-                .icon2 {
-                    position: fixed;
-                    top: 455px;
-                    right: 195px;
-                    cursor: pointer;
-                    z-index: 9999;
-                }
-            }
-        }
-    }
-}
 @media screen and (min-width: 1920px) {
-    .modal-create-event__form-block {
-        .modal-create-event__form {
-            .modal-create-event__input-block {
-                .valid-error1 {
-                    position: fixed;
-                    top: 410px;
-                    left: 180px;
-                    font-size: 14px;
-                    font-family: 'TT Commons', sans-serif;
-                    color: variables.$red;
-                }
-                .valid-error2 {
-                    position: fixed;
-                    top: 520px;
-                    left: 180px;
-                    font-size: 14px;
-                    font-family: 'TT Commons', sans-serif;
-                    color: variables.$red;
-                }
-                .icon1 {
-                    position: fixed;
-                    top: 362px;
-                    right: 195px;
-                    cursor: pointer;
-                    z-index: 9999;
-                }
-                .icon2 {
-                    position: fixed;
-                    top: 470px;
-                    right: 195px;
-                    cursor: pointer;
-                    z-index: 9999;
+    .modal {
+        .modal-create-event__block {
+            .modal-create-event__form {
+                margin-top: 40px;
+                .modal-create-event__form--inner {
+                    margin-bottom: 64px;
+                    .modal-create-event__form__row {
+                        margin-bottom: 32px;
+                    }
                 }
             }
         }
