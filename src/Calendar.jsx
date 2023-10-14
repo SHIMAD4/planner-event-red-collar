@@ -42,6 +42,7 @@ export default function Calendar() {
     center: "",
     end: `title prev next ${authToken ? "createEventButton avatarButton" : "authButton avatarButton"}`,
   }
+
   const authButton = {
     text: "Войти",
     click: function () {
@@ -55,10 +56,6 @@ export default function Calendar() {
     },
   }
   const avatarButton = {}
-
-  function byField(fieldName) {
-    return (a, b) => (a[fieldName] > b[fieldName] ? 1 : -1)
-  }
 
   const getEvents = useCallback(() => {
     api.event

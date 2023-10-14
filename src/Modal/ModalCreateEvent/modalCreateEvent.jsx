@@ -262,7 +262,8 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
       )}
       {occupancy ? (
         <ModalQuestion
-          onClose={(e) => {
+          onClose={onClose}
+          answer={(e) => {
             setFirstModalOpen(e)
             setOccupancy(false)
           }}
