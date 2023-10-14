@@ -4,6 +4,8 @@
 /* Стили для общей таблицы */
 .fc {
     margin: 0px 50px 30px 50px;
+    height: 800px !important;
+    margin-bottom: 0px;
 
     /* Стили для тулбара таблицы */
     .fc-toolbar-chunk:nth-child(3) {
@@ -133,11 +135,11 @@
         border-radius: 24px !important;
         border: 1px solid variables.$grey-dark !important;
         border-collapse: collapse;
-        height: 602px !important;
+        height: 632px !important;
     }
     .fc-scrollgrid-sync-table {
-        width: 100% !important;
-        height: 600px !important;
+        width: calc(100% + 16px) !important;
+        height: 630px !important;
     }
 
     // Хедер таблицы
@@ -200,7 +202,7 @@
     }
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1440px) {
     .header {
         &__logo {
             &__title {
@@ -216,6 +218,13 @@
             .fc-toolbar-title {
                 font-size: 24px;
             }
+        }
+        .fc-daygrid-body {
+            width: 1322px !important;
+        }
+        .fc-scrollgrid-sync-table {
+            width: calc(100% + 17px) !important;
+            height: 630px !important;
         }
         .fc-daygrid-event-harness {
             p {
@@ -242,16 +251,24 @@
                 font-size: 26px;
             }
         }
+        .fc-daygrid-body {
+            width: 1820px !important;
+        }
         .fc-scroller-harness-liquid {
+            overflow-x: hidden !important;
             border-radius: 24px !important;
             border: 1px solid variables.$grey-dark !important;
             border-collapse: collapse;
-            height: 636px !important;
+            height: 710px !important;
         }
-        .fc-scrollgrid-sync-table .fc-daygrid-day {
-            border-right: 1px solid variables.$grey-dark !important;
-            width: 150px;
-            height: 105px !important;
+        .fc-scrollgrid-sync-table {
+            width: 100% !important;
+            height: 630px !important;
+            .fc-daygrid-day {
+                border-right: 1px solid variables.$grey-dark !important;
+                width: 150px;
+                height: 118px !important;
+            }
         }
         .fc-daygrid-event-harness {
             p {
