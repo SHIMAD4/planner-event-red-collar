@@ -4,7 +4,7 @@ import Modal from '../Modal'
 export default function ModalHappy({ onClose, isOpen, event }) {
     let start = ''
     let location = ''
-    if (event.extendedProps) {
+    if (event.hasOwnProperty('extendedProps')) {
         start = new Date(event.extendedProps.dateStart)
         location = event.extendedProps.location
     } else {

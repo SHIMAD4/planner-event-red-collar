@@ -114,14 +114,17 @@
                 margin-bottom: 3px;
             }
         }
-        .fc-h-event.created-by .fc-event-main  {
-            background-color: variables.$red;
+        .fc-h-event.created-by .fc-event-main {
+            background-color: variables.$red !important;
             border-radius: 8px;
             p::before {
                 display: inline-block;
                 content: url('../icons/star.svg');
                 margin-right: 5px;
             }
+        }
+        .fc-h-event {
+            background-color: white !important;
         }
     }
     .fc-daygrid-day-events {
@@ -158,7 +161,7 @@
     .fc-scrollgrid-sync-table .fc-daygrid-day {
         border-right: 1px solid variables.$grey-dark !important;
         width: 150px;
-        height: 90px !important;
+        height: 96px !important;
     }
 
     // Для числа в каждом дне

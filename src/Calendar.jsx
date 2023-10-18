@@ -71,8 +71,10 @@ export default function Calendar() {
                             if (myEmail === user.email) {
                                 elem.className = 'joined'
                             }
-                            if (myEmail === elem.createdBy) {
-                                elem.className = 'created-by'
+                            if (elem.owner !== null) {
+                                if (myEmail === elem.owner.email) {
+                                    elem.className = 'created-by'
+                                }
                             }
                         }
                     })
