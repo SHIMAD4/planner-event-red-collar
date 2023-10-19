@@ -4,10 +4,12 @@ import '../../shared/scss/Modal/ModalEvent/ModalEventParticipants.scss'
 export default function ModalEventParticipants({ event }) {
     const participants = event.extendedProps.participants
     const participantsCount = participants.length
+    let organizer = undefined
 
     if (participants.length === 0) return null
 
-    const organizer = participants.find((item) => +event.id === item.id)
+    if (event.extendedProps.owner !== null) organizer = event.extendedProps.owner.username
+
     const otherParticipants = participants.filter((item) => +event.id !== item.id)
 
     return (
@@ -18,7 +20,7 @@ export default function ModalEventParticipants({ event }) {
                     <li key={self.crypto.randomUUID()}>
                         <img className="modal__people__avatar" src={avatar} alt="avatar" />
                         <div className="modal__people__info">
-                            <p className="modal__people__username">{organizer.username}</p>
+                            <p className="modal__people__username">{organizer}</p>
                             <p className="modal__people__role">Организатор</p>
                         </div>
                     </li>
