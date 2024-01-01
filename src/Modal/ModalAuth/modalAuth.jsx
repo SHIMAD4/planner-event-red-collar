@@ -44,7 +44,7 @@ export default function ModalAuth({ onClose, isOpen }) {
         api.check
             .email(emailToCheck, { flag: false })
             .then((res) => {
-                if (res.status === 204) {
+                if (res.status !== 404) {
                     setEmailInDB(true)
                     setHide(true)
                 }

@@ -3,9 +3,9 @@
 
 /* Стили для общей таблицы */
 .fc {
-    margin: 0px 50px 30px 50px;
+    margin: 0 50px 30px 50px;
     height: 800px !important;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 
     /* Стили для тулбара таблицы */
     .fc-toolbar-chunk:nth-child(3) {
@@ -101,7 +101,7 @@
                 background-color: variables.$grey-light;
                 color: variables.$grey-dark;
             }
-        } 
+        }
         .fc-h-event.joined .fc-event-main  {
             p::before {
                 display: inline-block;
@@ -236,7 +236,7 @@
             .fc-h-event .fc-event-main {
                 font-size: 18px;
             }
-        }   
+        }
     }
 }
 
@@ -278,6 +278,6 @@
                 max-width: 230px;
                 font-size: 20px;
             }
-        }   
+        }
     }
 }

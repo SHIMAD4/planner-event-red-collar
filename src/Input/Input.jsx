@@ -45,7 +45,7 @@ export function Input({
                     onChange ? onChange(e) : null
                 }}
                 autoComplete="true"
-                required={required ? true : false}
+                required={!!required}
             />
             <label htmlFor={id}>{title}</label>
             {id === 'password' || id === 'password2' ? (

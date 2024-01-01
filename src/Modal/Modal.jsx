@@ -32,9 +32,7 @@ export default function Modal({ onClose, isOpen, children, title, id }) {
             </div>
           </div>
         </FocusTrap>
-      ) : (
-        false
-      )}
+      ) : false}
     </>
   )
 }

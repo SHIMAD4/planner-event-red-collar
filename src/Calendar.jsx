@@ -19,7 +19,7 @@ export default function Calendar() {
 
     const bc = new BroadcastChannel('token_channel')
     bc.onmessage = () => {
-        setAuthToken(localStorage.getItem('access_token') ? true : false)
+        setAuthToken(!!localStorage.getItem('access_token'))
     }
 
     const createAvatar = useCallback(() => {
@@ -97,7 +97,7 @@ export default function Calendar() {
             createAvatar()
         }, 0)
         getMe()
-        setAuthToken(localStorage.getItem('access_token') ? true : false)
+        setAuthToken(!!localStorage.getItem('access_token'))
     }, [getEvents, createAvatar])
 
     const handleEventClick = (eventInfo) => {

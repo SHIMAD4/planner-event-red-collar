@@ -1,3 +1,5 @@
+@use './variables.scss';
+
 /* Общие стили документа*/
 @font-face {
     font-family: "Redcollar";
@@ -23,5 +25,12 @@
     outline: none;
 }
 body {
+    background-color: variables.$white;
     font-family: 'Redcollar', sans-serif;
+    height: 100%;
+}
+
+.btn {
+    margin-top: 100px;
+    cursor: pointer;
 }

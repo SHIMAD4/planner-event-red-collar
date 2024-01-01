@@ -12,7 +12,7 @@ export default function modalEventInfo({ event }) {
     const description = event.extendedProps.description
     const location = event.extendedProps.location
 
-    let isPast = event.classNames[0] === 'past' ? true : false
+    let isPast = event.classNames[0] === 'past'
     return (
         <div className={isPast ? 'modal__event-info__block past' : 'modal__event-info__block'}>
             <aside className="modal__event-info">
