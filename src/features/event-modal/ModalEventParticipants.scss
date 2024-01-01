@@ -1,0 +1,120 @@
+@use '../../shared/styles/mixins';
+
+.modal__people__desc {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.modal__people__list {
+    margin-bottom: 40px;
+    li {
+        @include mixins.flex(row, none, center);
+        margin-right: 20px;
+        .modal__people__avatar {
+            margin-right: 12px;
+        }
+        .modal__people__info {
+            @include mixins.flex(column, none, none);
+            flex-wrap: wrap;
+            .modal__people__username:first-child {
+                font-size: 14px;
+                font-weight: medium;
+            }
+            .modal__people__role:last-child {
+                color: #6C27A3;
+                background-color: #EFDAFC;
+                border-radius: 8px;
+                padding: 2px 4px;
+            }
+        }
+        :last-child {
+            margin-right: 0;
+        }
+    }
+    img {
+        width: 43px;
+        height: 43px;
+    }
+    div:not(.modal__people__info) {
+        @include mixins.flex();
+        .count {
+            min-width: 80px;
+            position: relative;
+            right: 65px;
+        }
+        .photo2 {
+            position: relative;
+            top: 0;
+            right: 35px;
+            z-index: -1;
+        }
+        .photo3 {
+            position: relative;
+            top: 0;
+            right: 70px;
+            z-index: -2;
+        }
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .modal__people__desc {
+        font-size: 20px;
+    }
+    .modal__people__list {
+        margin-bottom: 40px;
+        li {
+            @include mixins.flex(row, none, none);
+            margin-right: 25px;
+            img {
+                margin-right: 10px;
+            }
+            .modal__people__info {
+                .modal__people__username:first-child {
+                    font-size: 16px;
+                }
+            }
+            :last-child {
+                margin-right: 0;
+            }
+        }
+        img {
+            width: 43px;
+            height: 43px;
+        }
+        div:not(.modal__people__info) {
+            @include mixins.flex();
+        }
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .modal__people__list {
+        margin-bottom: 70px;
+        li {
+            @include mixins.flex(row, none, none);
+            margin-right: 30px;
+            img {
+                margin-right: 12px;
+            }
+        }
+        img {
+            width: 65px;
+            height: 65px;
+        }
+        div:not(.modal__people__info) {
+            @include mixins.flex();
+            .photo2 {
+                position: relative;
+                top: 0;
+                right: 45px;
+                z-index: -1;
+            }
+            .photo3 {
+                position: relative;
+                top: 0;
+                right: 90px;
+                z-index: -2;
+            }
+        }
+    }
+}

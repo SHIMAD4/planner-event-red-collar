@@ -1,0 +1,144 @@
+@use '../../shared/styles/variables';
+@use '../../shared/styles/mixins';
+
+.modal-register__form-block {
+    @include mixins.flex(column);
+    .info-block {
+        @include mixins.flex();
+        flex-direction: row;
+        width: 520px;
+        background-color: #FAFAFA;
+        padding: 8px 12px;
+        border-radius: variables.$rounded;
+        img {
+            width: 24px;
+            height: 24px;
+            margin-right: 7px;
+        }
+        p {
+            font-size: 14px;
+            font-family: 'TT Commons', sans-serif;
+            font-weight: 400;
+            line-height: 120%;
+        }
+    }
+    .modal-register__form {
+        margin-top: 40px;
+        @include mixins.flex(column);
+        .modal-register__input-block {
+            position: relative;
+            margin-bottom: 48px;
+            label {
+                position: absolute;
+                color: variables.$grey-dark;
+                font-size: 14px;
+                font-family: 'TT Commons', sans-serif;
+                font-weight: 400;
+                top: 20px;
+                left: 16px;
+                animation: labelMove .2s linear forwards paused;
+            }
+            .modal-register__input {
+                width: 346px;
+                height: 60px;
+                border: 1px solid variables.$black !important;
+                padding: 16px 16px 0px 16px;
+                border-radius: variables.$rounded;
+            }
+            .modal-register__input:focus + label {
+                animation-play-state: running;
+            }
+            .modal-register__input.isInvalid {
+                border: 1px solid variables.$red !important;
+            }
+            .modal-register__input.isValid {
+                border: 1px solid #23AE00 !important;
+            }
+        }
+        .modal-register__button {
+            background-color: variables.$black;
+            color: variables.$grey-light;
+            width: 346px;
+            height: 60px;
+            border-radius: variables.$rounded;
+            font-size: 18px;
+            font-family: 'Redcollar', sans-serif;
+            cursor: pointer;
+            &:hover {
+                background-color: variables.$red;
+                color: variables.$white;
+            }
+            &:disabled {
+                background-color: variables.$grey-light;
+                color:  variables.$grey-dark;
+            }
+        }
+    }
+}
+
+.hide {
+    display: none;
+}
+.modal {
+    button.hide {
+        display: none;
+    }
+}
+
+@keyframes labelMove {
+    100% {
+        margin-top: 0px;
+    }
+    100% {
+        margin-top: -10px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .modal-register__form-block {
+        .modal-register__form {
+            .modal-register__input-block {
+                .valid-error1 {
+                    position: fixed;
+                    top: 395px;
+                    left: 180px;
+                    font-size: 14px;
+                    font-family: 'TT Commons', sans-serif;
+                    color: variables.$red;
+                }
+                .valid-error2 {
+                    position: fixed;
+                    top: 505px;
+                    left: 180px;
+                    font-size: 14px;
+                    font-family: 'TT Commons', sans-serif;
+                    color: variables.$red;
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 1920px) {
+    .modal-register__form-block {
+        .modal-register__form {
+            .modal-register__input-block {
+                .valid-error1 {
+                    position: fixed;
+                    top: 410px;
+                    left: 180px;
+                    font-size: 14px;
+                    font-family: 'TT Commons', sans-serif;
+                    color: variables.$red;
+                }
+                .valid-error2 {
+                    position: fixed;
+                    top: 520px;
+                    left: 180px;
+                    font-size: 14px;
+                    font-family: 'TT Commons', sans-serif;
+                    color: variables.$red;
+                }
+            }
+        }
+    }
+}

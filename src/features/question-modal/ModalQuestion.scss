@@ -1,0 +1,34 @@
+@use '../../shared/styles/variables';
+@use '../../shared/styles/mixins';
+
+
+#modal-question {
+    .modal__body {
+        .modal__title {
+            display: block;
+            width: 600px;
+        }
+        .modal-question__buttons {
+            @include mixins.flex();
+            .modal-question__button--first,
+            .modal-question__button--second {
+                width: 100px;
+                height: 60px;
+                font-family: 'Redcollar', sans-serif;
+                font-size: 18px;
+                border: 2px solid variables.$black !important;
+                border-radius: variables.$rounded;
+                margin-top: 90px;
+                cursor: pointer;
+            }
+
+            .modal-question__button--first {
+                margin-right: 24px;
+            }
+            .modal-question__button--second {
+                background-color: variables.$black;
+                color: variables.$white;
+            }
+        }
+    }
+}

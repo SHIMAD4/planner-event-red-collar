@@ -1,0 +1,36 @@
+@use 'variables';
+
+/* Общие стили документа*/
+@font-face {
+    font-family: "Redcollar";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local("Roboto"),
+         url("/fonts/Redcollar.woff2") format("woff2")
+}
+@font-face {
+    font-family: "TT Commons";
+    font-style: normal;
+    font-display: swap;
+    src: local("Roboto"),
+         url("/fonts/TTCommons.otf") format("otf")
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none !important;
+    outline: none;
+}
+body {
+    background-color: variables.$white;
+    font-family: 'Redcollar', sans-serif;
+    height: 100%;
+}
+
+.btn {
+    margin-top: 100px;
+    cursor: pointer;
+}
