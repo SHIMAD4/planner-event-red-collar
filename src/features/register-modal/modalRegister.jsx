@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Index } from '../../shared/ui/atoms/input/index.tsx'
+import { Input } from '../../shared/ui'
 import { api } from '../../shared/api/index.js'
 import { Icons } from '../../shared/ui'
 import './ModalRegister.scss'
@@ -110,7 +110,7 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
                     <p>{info}</p>
                 </div>
                 <form action="#" className="modal-register__form" onSubmit={(e) => handleSubmit(e)}>
-                    <Index
+                    <Input
                         className="modal-register__input"
                         title="Имя"
                         type="text"
@@ -118,7 +118,7 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
                         errorRequired="Обязательное поле"
                         number={1}
                     />
-                    <Index
+                    <Input
                         className="modal-register__input"
                         title="Пароль"
                         type="password"
@@ -129,7 +129,7 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
                         isPasswordVisible={!isPasswordVisible}
                         togglePasswordVisibility={togglePasswordVisibility}
                     />
-                    <Index
+                    <Input
                         className="modal-register__input"
                         title="Повторить пароль"
                         type="password"

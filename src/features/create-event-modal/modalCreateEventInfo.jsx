@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api } from '../../shared/api/index.js'
-import avatar from '../../shared/ui/atoms/icons/avatar.png'
+import avatar from '../../../public/images/avatar.png'
 
 export default function UserInfo() {
     const [username, setUsername] = useState('')

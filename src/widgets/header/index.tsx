@@ -1,5 +1,5 @@
-import { Icons } from '../icons'
-export default function Index() {
+import { Icons } from '../../shared/ui'
+export const Header = () => {
     return (
         <>
             <header className="header">

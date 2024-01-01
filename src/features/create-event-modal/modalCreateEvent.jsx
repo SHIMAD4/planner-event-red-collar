@@ -2,7 +2,7 @@ import ru from 'date-fns/locale/ru'
 import { useState } from 'react'
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { Index } from '../../shared/ui/atoms/input/index.tsx'
+import { Input } from '../../shared/ui'
 import { api } from '../../shared/api/index.js'
 import './ModalCreateEvent.scss'
 import Modal from '../modal/Modal.jsx'
@@ -169,7 +169,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                             onSubmit={(e) => createEvent(e)}>
                             <div className="modal-create-event__form--inner">
                                 <div className="modal-create-event__form__row">
-                                    <Index
+                                    <Input
                                         className="modal-create-event__input"
                                         id="title"
                                         title="Название"
@@ -204,7 +204,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                                     </div>
                                 </div>
                                 <div className="modal-create-event__form__row">
-                                    <Index
+                                    <Input
                                         className="modal-create-event__input"
                                         id="description"
                                         title="Описание"
@@ -222,7 +222,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                                         }}
                                     />
                                     <div className="">
-                                        <Index
+                                        <Input
                                             className="time modal-create-event__input"
                                             id="dateTime"
                                             title="Время"
@@ -239,7 +239,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                                                 }
                                             }}
                                         />
-                                        <Index
+                                        <Input
                                             className="location modal-create-event__input"
                                             id="location"
                                             title="Место проведения"

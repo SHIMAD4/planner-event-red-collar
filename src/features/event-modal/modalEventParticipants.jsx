@@ -1,4 +1,4 @@
-import avatar from '../../shared/ui/atoms/icons/avatar.png'
+import avatar from '../../../public/images/avatar.png'
 import './ModalEventParticipants.scss'
 
 export default function ModalEventParticipants({ event }) {

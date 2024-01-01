@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Index } from '../../shared/ui/atoms/input/index.tsx'
+import { Input } from '../../shared/ui'
 
 export function ModalAuthPass({ checkPass, setPassToCheck }) {
     const [isPasswordVisible, setPasswordVisible] = useState(false)
@@ -34,7 +34,7 @@ export function ModalAuthPass({ checkPass, setPassToCheck }) {
 
     return (
         <>
-            <Index
+            <Input
                 className="modal-auth__input"
                 title="Пароль"
                 type="password"

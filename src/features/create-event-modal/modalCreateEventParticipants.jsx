@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { api } from '../../shared/api/index.js'
-import avatar from '../../shared/ui/atoms/icons/avatar.png'
+import avatar from '../../../public/images/avatar.png'
 
 export default function ParticipantsComponent({ setSelectedUsers }) {
     const [users, setUsers] = useState([])

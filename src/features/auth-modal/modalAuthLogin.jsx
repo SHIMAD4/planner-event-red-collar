@@ -1,9 +1,9 @@
-import { Index } from '../../shared/ui/atoms/input/index.tsx'
+import { Input } from '../../shared/ui'
 
 export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
     return (
         <>
-            <Index
+            <Input
                 className={hide ? 'hide modal-auth__input' : 'modal-auth__input'}
                 title="Email"
                 type="text"

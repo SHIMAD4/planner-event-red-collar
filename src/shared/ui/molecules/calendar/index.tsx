@@ -6,7 +6,7 @@ import ModalAuth from '../../../../features/auth-modal/modalAuth.jsx'
 import ModalCreateEvent from '../../../../features/create-event-modal/modalCreateEvent.jsx'
 import ModalEvent from '../../../../features/event-modal/modalEvent.jsx'
 import { api } from '../../../api'
-import avatarIcon from '../../atoms/icons/avatar.png'
+import avatarIcon from '../../../../../public/images/avatar.png'
 import './styles.scss'
 
 export const Calendar = () => {

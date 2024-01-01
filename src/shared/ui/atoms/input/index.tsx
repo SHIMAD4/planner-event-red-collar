@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Icons } from '../index'
 import './styles.scss'
 
-export function Index({
+export const Input = ({
     className,
     type,
     id,
@@ -16,7 +16,7 @@ export function Index({
     number,
     isPasswordVisible,
     togglePasswordVisibility,
-}) {
+}) => {
     const [inputValue, setInputValue] = useState('')
 
     const clearInput = () => {
