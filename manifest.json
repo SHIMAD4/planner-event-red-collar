@@ -1,5 +1,62 @@
 {
-  "short_name": "Planner",
   "name": "Planner event red collar",
-  "start_url": "/"
+  "short_name": "Planner",
+  "description": "The Event Planner is needed to sign up for events, event information, and reject the signup.",
+  "theme_color": "#ffffff",
+  "background_color": "#000000",
+  "display": "standalone",
+  "orientation": "landscape",
+  "start_url": ".",
+  "icons": [
+    {
+      "src": "/public/images/icons/launchericon-48-48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/public/images/icons/launchericon-72-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/public/images/icons/launchericon-96-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/public/images/icons/launchericon-144-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/public/images/icons/launchericon-192-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/public/images/icons/launchericon-512-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/public/images/icons/screenshot1.png",
+      "type": "image/png",
+      "sizes": "1518x825",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/public/images/icons/screenshot1.png",
+      "type": "image/png",
+      "sizes": "1518x825",
+      "form_factor": "narrow"
+    }
+  ]
 }
