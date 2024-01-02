@@ -5,7 +5,7 @@ export type InputProps = {
     type?: string;
     id?: string;
     title?: string;
-    func?: (value: string) => void;
+    func?: (s: string) => string;
     errorSymbols?: string;
     errorEquality?: string;
     errorRequired?: string;

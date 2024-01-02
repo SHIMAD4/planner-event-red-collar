@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { api } from '@/shared/api';
+import { api } from '../../shared/api';
 import './ModalEvent.scss';
 import ModalAuth from '../auth-modal/modalAuth.jsx';
 import ModalError from '../error-modal/modalError.jsx';

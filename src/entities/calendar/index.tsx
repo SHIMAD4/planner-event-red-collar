@@ -10,11 +10,11 @@ import {
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
-import { api } from '@/shared/api';
 import avatarIcon from '../../../public/images/avatar.png';
 import ModalAuth from '../../features/auth-modal/modalAuth.jsx';
 import ModalCreateEvent from '../../features/create-event-modal/modalCreateEvent.jsx';
 import ModalEvent from '../../features/event-modal/modalEvent.jsx';
+import { api } from '../../shared/api';
 import './styles.scss';
 
 export const Calendar = () => {

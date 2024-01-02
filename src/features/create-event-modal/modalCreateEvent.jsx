@@ -2,8 +2,8 @@ import { useState } from 'react';
 import ru from 'date-fns/locale/ru';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { api } from '@/shared/api';
-import { Input } from '@/shared/ui';
+import { api } from '../../shared/api';
+import { Input } from '../../shared/ui';
 import './ModalCreateEvent.scss';
 import ModalError from '../error-modal/modalError.jsx';
 import ModalHappy from '../happy-modal/modalHappy.jsx';
@@ -41,7 +41,6 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
     const getMe = () => {
         api.user.me({ flag: true }).then((res) => {
             setMyEmail(res.data);
-            console.log(res.data);
         });
     };
 
@@ -51,7 +50,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
 
     const sendPhotos = async (array) => {
         if (array.getAll('files').length !== 0) {
-            return await api.uploads
+            return api.uploads
                 .post(array, { flag: true })
                 .then((res) => {
                     const selectedPhotosId = res.data.map((photo) => photo.id);
@@ -107,8 +106,7 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                                         { flag: true },
                                     )
                                     .then((res) => {
-                                        console.log(res);
-                                        setEvent(res.data.data);
+                                        setEvent(res.data);
                                         setFirstModalOpen(false);
                                         setModalHappyOpen(true);
                                     })

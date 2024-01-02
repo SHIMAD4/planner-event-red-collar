@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import '../shared/styles/main.scss';
-import { Header } from '@/widgets/header';
-import { Calendar } from '@/entities/calendar';
+import { Calendar } from '../entities/calendar';
+import { Header } from '../widgets/header';
 
 const App = () => (
     <>

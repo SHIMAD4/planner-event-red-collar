@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { api } from '@/shared/api';
-import { Input, Icons } from '@/shared/ui';
+import { api } from '../../shared/api';
+import { Input, Icons } from '../../shared/ui';
 
 import './ModalRegister.scss';
 import ModalError from '../error-modal/modalError.jsx';

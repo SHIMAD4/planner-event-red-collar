@@ -1,4 +1,4 @@
-import { Input } from '@/shared/ui';
+import { Input } from '../../shared/ui';
 
 export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
     return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import FocusTrap from 'focus-trap-react';
-import { Icons } from '@/shared/ui';
+import { Icons } from '../../shared/ui';
 import './Modal.scss';
 
 export default function Modal({ onClose, isOpen, children, title, id }) {

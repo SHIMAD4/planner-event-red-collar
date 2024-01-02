@@ -205,6 +205,17 @@
     }
 }
 
+@media (prefers-color-scheme: dark) {
+    .fc {
+        .fc-toolbar-chunk:nth-child(3) {
+            .fc-createEventButton-button, .fc-authButton-button {
+                background-color: variables.$white;
+                color: variables.$black;
+            }
+        }
+    }
+}
+
 @media screen and (min-width: 1440px) {
     .header {
         &__logo {

@@ -61,6 +61,19 @@
     display: none;
 }
 
+@media (prefers-color-scheme: dark) {
+    .modal {
+        .modal-auth__form-block {
+            .modal-auth__form {
+                .modal-auth__button {
+                    background-color: variables.$white;
+                    color: variables.$black;
+                }
+            }
+        }
+    }
+}
+
 @keyframes labelMove {
     100% {
         margin-top: 0px;

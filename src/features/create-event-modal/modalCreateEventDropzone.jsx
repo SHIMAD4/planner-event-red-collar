@@ -1,5 +1,5 @@
 import Dropzone from 'react-dropzone';
-import { Icons } from '@/shared/ui';
+import { Icons } from '../../shared/ui';
 
 export default function DropZone({ photos, setPhotos }) {
     const onDelete = (itemToDelete) => {

@@ -22,9 +22,7 @@ export const Input: FC<InputProps> = ({
 
     const clearInput = () => {
         setInputValue('');
-        if (func) {
-            func('');
-        }
+        func?.('');
     };
 
     return (
@@ -38,7 +36,7 @@ export const Input: FC<InputProps> = ({
                 onChange={(e) => {
                     setInputValue(e.target.value);
                     if (func) {
-                        func('');
+                        func(e.target.value);
                     }
                     if (onChange) {
                         onChange(e);

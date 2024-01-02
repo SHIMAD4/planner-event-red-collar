@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import { Icons } from '@/shared/ui';
+import { Icons } from '../../shared/ui';
 import './ModalEventGallery.scss';
 import ModalEventSlider from './modalEventSlider.jsx';
 

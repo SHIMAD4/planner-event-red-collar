@@ -1,4 +1,5 @@
 @use '../../shared/styles/mixins';
+@use '../../shared/styles/variables';
 
 .modal.active  {
     @include mixins.flex();
@@ -48,6 +49,17 @@
         background-color: transparent;
         &:focus {
             border: 1px solid grey !important;
+        }
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .modal {
+        &__bg{
+            background-color: #a8a8a8;
+        }
+        &__body {
+            background-color: variables.$black;
         }
     }
 }

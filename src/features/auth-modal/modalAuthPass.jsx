@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Input } from '@/shared/ui';
+import { Input } from '../../shared/ui';
 
 export function ModalAuthPass({ checkPass, setPassToCheck }) {
     const [isPasswordVisible, setPasswordVisible] = useState(false);

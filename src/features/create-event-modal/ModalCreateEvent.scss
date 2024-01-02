@@ -110,6 +110,7 @@
                             }
                         }
                         .modal-create-event__select__menu {
+                            border: 2px solid white !important;
                             width: 344px;
                             height: 240px;
                             border-radius: variables.$rounded;
@@ -117,7 +118,7 @@
                             .modal-create-event__select__menu-list {
                                 .modal-create-event__select__option {
                                     @include mixins.flex(row, none, center);
-                                    margin: 8px 8px 0px 8px;
+                                    margin: 8px 8px 0 8px;
                                     border-radius: variables.$rounded;
                                     .modal-create-event__select__option-avatar {
                                         margin-right: 12px;
@@ -129,6 +130,7 @@
                                     }
                                     &:hover {
                                         background-color: #FAFAFA !important;
+                                        color: black;
                                     }
                                     &:active {
                                         background-color: #FAFAFA !important;
@@ -138,10 +140,7 @@
                                     }
                                 }
                                 &::-webkit-scrollbar {
-                                    width: 7px;
-                                    height: 40px;
-                                    background-color: #FAFAFA;
-                                    margin: 10px 8px !important;
+                                    display: none;
                                 }
                                 &::-webkit-scrollbar-thumb {
                                     background-color: variables.$grey-dark;
@@ -163,11 +162,10 @@
                         .inputDate {
                             width: 159px !important;
                             height: 60px;
-                            padding: 0px 16px;
+                            padding: 0 16px;
                             border: 1px solid variables.$grey-dark !important;
                             border-radius: variables.$rounded;
                             margin-right: 8px;
-                            // margin-bottom: 32px;
                         }
                         .react-datepicker__tab-loop {
                             position: fixed;
@@ -346,6 +344,14 @@
     }
 }
 
+@media (prefers-color-scheme: dark) {
+    .modal-create-event__select-container {
+        border: 1px solid variables.$grey-dark !important;
+        .modal-create-event__select__menu {
+            background-color: black;
+        }
+    }
+}
 @media screen and (min-width: 1920px) {
     .modal {
         .modal-create-event__block {
