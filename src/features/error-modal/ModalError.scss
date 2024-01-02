@@ -1,0 +1,54 @@
+@use '../../shared/styles/variables';
+
+.modal__body {
+    overflow: hidden;
+}
+#modal-error {
+    .modal__body {
+        background-image: url('../../../public/images/pigeon.png');
+        background-repeat: no-repeat;
+        background-position: 500px 170px;
+    }
+}
+.modal-error__block {
+    min-width: 670px;
+    min-height: 310px;
+    .modal-error__title {
+        display: block;
+        width: 516px;
+        font-size: 64px;
+        font-family: 'Redcollar', sans-serif;
+        font-weight: 500;
+        margin-bottom: 24px;
+    }
+    .modal-error__subtitle {
+        color: variables.$red;
+        font-size: 18px;
+        font-family: 'Redcollar', sans-serif;
+        font-weight: 500;
+        margin-bottom: 102px;
+    }
+    .modal-error__image {
+        position: fixed;
+        bottom: 40px;
+        left: 490px;
+    }
+    .modal-error__button {
+        background-color: variables.$black;
+        color: variables.$grey-light;
+        width: 141px;
+        height: 60px;
+        border-radius: variables.$rounded;
+        font-size: 18px;
+        font-family: 'Redcollar', sans-serif;
+        cursor: pointer;
+        &:hover {
+            background-color: variables.$red;
+            color: variables.$white;
+        }
+        &:disabled {
+            background-color: variables.$grey-light;
+            color: variables.$grey-dark;
+        }
+    }
+}

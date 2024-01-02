@@ -1,0 +1,57 @@
+@use '../../../styles/variables';
+
+.block {
+    position: relative;
+    display: inline-block;
+    .icon {
+        position: absolute;
+        right: 15px;
+        top: 18px;
+        cursor: pointer;
+        z-index: 9998;
+    }
+    .eye-close1 {
+        position: absolute;
+        right: 15px;
+        top: 18px;
+        cursor: pointer;
+        z-index: 9998;
+    }
+    .eye-close2 {
+        position: absolute;
+        right: 15px;
+        top: 18px;
+        cursor: pointer;
+        z-index: 9998;
+    }
+    .valid-error {
+        font-size: 14px;
+        font-family: 'TT Commons', sans-serif;
+        color: variables.$red;
+    }
+    .valid-error-symbols {
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+    .valid-error-equality {
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+    .valid-error-required.valid-error-required-1 {
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+    .valid-error-required.valid-error-required-2 {
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+    .valid-error-required.valid-error-required-3 {
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+}

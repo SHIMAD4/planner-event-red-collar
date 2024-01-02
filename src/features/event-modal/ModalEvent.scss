@@ -1,0 +1,145 @@
+@use '../../shared/styles/variables';
+@use '../../shared/styles/mixins';
+
+.modal.active  {
+    @include mixins.flex(row, none, none);
+}
+
+.modal  {
+    &__auth {
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+        a {
+            color: variables.$red;
+            text-decoration: none;
+        }
+    }
+    a {
+        &:focus {
+            border: 1px solid grey !important;
+        }
+    }
+    button {
+        @include mixins.flex();
+        background-color: transparent;
+        &:focus {
+            border: 1px solid grey !important;
+        }
+    }
+    .modal-event__button {
+        @include mixins.flex();
+        &--join {
+            background-color: variables.$black;
+            color: variables.$grey-light;
+            width: 343px;
+            height: 60px;
+            border-radius: variables.$rounded;
+            font-size: 18px;
+            font-family: 'Redcollar', sans-serif;
+            cursor: pointer;
+            &:hover {
+                background-color: variables.$red;
+                color: variables.$white;
+            }
+            &:disabled {
+                background-color: variables.$grey-light;
+                color: variables.$grey-dark;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .modal  {
+        &__desc {
+            font-size: 20px;
+        }
+        &__people__desc {
+            font-size: 20px;
+        }
+        &__people {
+            margin-bottom: 40px;
+            li {
+                @include mixins.flex(row, none, none);
+                margin-right: 48px;
+                img {
+                    margin-right: 12px;
+                }
+                .modal__people__info {
+                    .modal__people__username:first-child {
+                        font-size: 16px;
+                    }
+                }
+                :last-child {
+                    margin-right: 0;
+                }
+            }
+            div:not(.modal__people__info) {
+                @include mixins.flex();
+            }
+        }
+        &__gallery__header {
+            .modal__gallery__desc {
+                font-size: 20px;
+            }
+        }
+        &__gallery__list {
+            margin-bottom: 24px;
+            .slide-photo {
+                width: 250px;
+                height: 150px;
+            }
+        }
+        &__auth {
+            font-size: 16px;
+        }
+    }
+}
+@media screen and (min-width: 1920px) {
+    .modal  {
+        &__desc {
+            font-size: 22px;
+        }
+        &__gallery__list {
+            margin-bottom: 50px;
+            .slide-photo {
+                width: 250px;
+                height: 160px;
+            }
+        }
+        &__people {
+            margin-bottom: 70px;
+            li {
+                @include mixins.flex(row, none, none);
+                margin-right: 48px;
+                img {
+                    margin-right: 12px;
+                }
+            }
+            img {
+                width: 65px;
+                height: 65px;
+            }
+            div:not(.modal__people__info) {
+                @include mixins.flex();
+                .photo2 {
+                    position: relative;
+                    top: 0;
+                    right: 45px;
+                    z-index: -1;
+                }
+                .photo3 {
+                    position: relative;
+                    top: 0;
+                    right: 90px;
+                    z-index: -2;
+                }
+            }
+        }
+        &__auth {
+            margin-top: 60px;
+            font-size: 22px;
+        }
+    }
+}
