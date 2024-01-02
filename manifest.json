@@ -30,7 +30,7 @@
       "src": "/public/images/icons/launchericon-144-144.png",
       "sizes": "144x144",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any"
     },
     {
       "src": "/public/images/icons/launchericon-192-192.png",
