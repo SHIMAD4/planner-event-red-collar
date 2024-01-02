@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react'
-import { api } from '../../shared/api/index.js'
-import avatar from '../../../public/images/avatar.png'
+import { useEffect, useState } from 'react';
+import { api } from '@/shared/api';
+import avatar from '../../../public/images/avatar.png';
 
 export default function UserInfo() {
-    const [username, setUsername] = useState('')
+    const [username, setUsername] = useState('');
 
     useEffect(() => {
         api.user
             .me({ flag: true })
             .then((res) => setUsername(res.data.username))
-            .catch((err) => console.log(err))
-    })
+            .catch((error) => console.log(error));
+    });
+
     return (
         <div className="modal-create-event__info">
             <img className="modal-create-event__avatar" src={avatar} alt="avatar" />
@@ -19,5 +20,5 @@ export default function UserInfo() {
                 <p className="modal-create-event__role">Организатор</p>
             </div>
         </div>
-    )
+    );
 }

@@ -1,29 +1,33 @@
-import { useCallback, useRef, useState } from 'react'
-import { Icons } from '../../shared/ui'
-import './ModalEventGallery.scss'
-import ModalEventSlider from './modalEventSlider.jsx'
+import { useCallback, useRef, useState } from 'react';
+import { Icons } from '@/shared/ui';
+import './ModalEventGallery.scss';
+import ModalEventSlider from './modalEventSlider.jsx';
 
 export default function ModalEventGallery({ event }) {
-    const sliderRef = useRef(null)
-    const [pastPrev, setPastPrev] = useState(false)
-    const [pastNext, setPastNext] = useState(true)
-    let photos = []
+    const sliderRef = useRef(null);
+    const [pastPrev, setPastPrev] = useState(false);
+    const [pastNext, setPastNext] = useState(true);
+    const photos = [];
 
     const handlePrev = useCallback(() => {
-        if (!sliderRef.current) return
-        sliderRef.current.swiper.slideNext()
-    }, [])
+        if (!sliderRef.current) {
+            return;
+        }
+        sliderRef.current.swiper.slideNext();
+    }, []);
 
     const handleNext = useCallback(() => {
-        if (!sliderRef.current) return
-        sliderRef.current.swiper.slidePrev()
-    }, [])
+        if (!sliderRef.current) {
+            return;
+        }
+        sliderRef.current.swiper.slidePrev();
+    }, []);
 
     if (event.extendedProps.photos) {
         event.extendedProps.photos.forEach((elem) => {
-            elem.src = 'https://planner.rdclr.ru' + elem.url
-            photos.push(elem)
-        })
+            elem.src = `https://planner.rdclr.ru${elem.url}`;
+            photos.push(elem);
+        });
     }
 
     return (
@@ -36,12 +40,14 @@ export default function ModalEventGallery({ event }) {
                             <div className="modal__gallery__buttons">
                                 <button
                                     className={pastPrev ? 'next swiper-button-disabled' : 'next'}
-                                    onClick={handlePrev}>
+                                    onClick={handlePrev}
+                                >
                                     <Icons.Arrow />
                                 </button>
                                 <button
                                     className={pastNext ? 'prev swiper-button-disabled' : 'prev'}
-                                    onClick={handleNext}>
+                                    onClick={handleNext}
+                                >
                                     <Icons.Arrow />
                                 </button>
                             </div>
@@ -51,8 +57,8 @@ export default function ModalEventGallery({ event }) {
                         <ModalEventSlider
                             ref={sliderRef}
                             onSlideChange={(swiper) => {
-                                const lastSlideIndex = swiper.realIndex
-                                lastSlideIndex > 0 ? setPastPrev(true) : setPastNext(true)
+                                const lastSlideIndex = swiper.realIndex;
+                                lastSlideIndex > 0 ? setPastPrev(true) : setPastNext(true);
                             }}
                             photos={photos}
                         />
@@ -60,5 +66,5 @@ export default function ModalEventGallery({ event }) {
                 </>
             ) : null}
         </>
-    )
+    );
 }

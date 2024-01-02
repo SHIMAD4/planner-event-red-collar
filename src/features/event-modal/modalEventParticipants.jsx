@@ -1,16 +1,20 @@
-import avatar from '../../../public/images/avatar.png'
-import './ModalEventParticipants.scss'
+import avatar from '../../../public/images/avatar.png';
+import './ModalEventParticipants.scss';
 
 export default function ModalEventParticipants({ event }) {
-    const participants = event.extendedProps.participants
-    const participantsCount = participants.length
-    let organizer = undefined
+    const { participants } = event.extendedProps;
+    const participantsCount = participants.length;
+    let organizer;
 
-    if (participants.length === 0) return null
+    if (participants.length === 0) {
+        return null;
+    }
 
-    if (event.extendedProps.owner !== null) organizer = event.extendedProps.owner.username
+    if (event.extendedProps.owner !== null) {
+        organizer = event.extendedProps.owner.username;
+    }
 
-    const otherParticipants = participants.filter((item) => +event.id !== item.id)
+    const otherParticipants = participants.filter((item) => +event.id !== item.id);
 
     return (
         <>
@@ -43,5 +47,5 @@ export default function ModalEventParticipants({ event }) {
                 )}
             </ul>
         </>
-    )
+    );
 }

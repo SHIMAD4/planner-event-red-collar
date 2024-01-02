@@ -1,4 +1,4 @@
-import { Input } from '../../shared/ui'
+import { Input } from '@/shared/ui';
 
 export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
     return (
@@ -9,7 +9,7 @@ export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
                 type="text"
                 id="email"
                 onChange={(e) => {
-                    setEmailToCheck(e.target.value)
+                    setEmailToCheck(e.target.value);
                 }}
                 required
                 errorSymbols="Некорректный e-mail"
@@ -18,10 +18,11 @@ export function ModalAuthLogin({ checkEmail, hide, setEmailToCheck }) {
                 type="submit"
                 className={hide ? 'modal-auth__button hide' : 'modal-auth__button'}
                 onClick={(e) => {
-                    checkEmail(e)
-                }}>
+                    checkEmail(e);
+                }}
+            >
                 Далее
             </button>
         </>
-    )
+    );
 }

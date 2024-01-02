@@ -1,41 +1,45 @@
-import { useEffect, useState } from 'react'
-import { api } from '../../shared/api/index.js'
-import './ModalEvent.scss'
-import Modal from '../modal/Modal.jsx'
-import ModalAuth from '../auth-modal/modalAuth.jsx'
-import ModalError from '../error-modal/modalError.jsx'
-import ModalHappy from '../happy-modal/modalHappy.jsx'
-import ModalEventGallery from './modalEventGallery.jsx'
-import ModalEventInfo from './modalEventInfo.jsx'
-import ModalEventParticipants from './modalEventParticipants.jsx'
+import { useEffect, useState } from 'react';
+import { api } from '@/shared/api';
+import './ModalEvent.scss';
+import ModalAuth from '../auth-modal/modalAuth.jsx';
+import ModalError from '../error-modal/modalError.jsx';
+import ModalHappy from '../happy-modal/modalHappy.jsx';
+import Modal from '../modal/Modal.jsx';
+import ModalEventGallery from './modalEventGallery.jsx';
+import ModalEventInfo from './modalEventInfo.jsx';
+import ModalEventParticipants from './modalEventParticipants.jsx';
 
 export default function ModalEvent({ event, onClose, isOpen }) {
-    const [openAuth, setOpenAuth] = useState(false)
-    const [auth, setAuth] = useState(false)
-    const [firstModalOpen, setFirstModalOpen] = useState(true)
-    const [happyModal, setHappyModal] = useState(false)
-    const [errorModal, setErrorModal] = useState(false)
+    const [openAuth, setOpenAuth] = useState(false);
+    const [auth, setAuth] = useState(false);
+    const [firstModalOpen, setFirstModalOpen] = useState(true);
+    const [happyModal, setHappyModal] = useState(false);
+    const [errorModal, setErrorModal] = useState(false);
 
     useEffect(() => {
-        if (localStorage.getItem('access_token')) setAuth(true)
-    }, [])
+        if (localStorage.getItem('access_token')) {
+            setAuth(true);
+        }
+    }, []);
 
-    if (!event) return null
+    if (!event) {
+        return null;
+    }
 
     const closeFirstModal = () => {
-        setFirstModalOpen(false)
-    }
+        setFirstModalOpen(false);
+    };
 
     const joinToEvent = () => {
         api.event
             .join(+event.id, {}, { flag: true })
             .then(() => setHappyModal(true))
-            .catch((err) => {
-                if (err.response.status > 299 || err.response.status < 200) {
-                    setErrorModal(true)
+            .catch((error) => {
+                if (error.response.status > 299 || error.response.status < 200) {
+                    setErrorModal(true);
                 }
-            })
-    }
+            });
+    };
 
     return (
         <>
@@ -48,9 +52,10 @@ export default function ModalEvent({ event, onClose, isOpen }) {
                         <p className="modal__auth">
                             <a
                                 onClick={() => {
-                                    setOpenAuth(true)
-                                    closeFirstModal()
-                                }}>
+                                    setOpenAuth(true);
+                                    closeFirstModal();
+                                }}
+                            >
                                 Войдите
                             </a>
                             , чтобы присоединиться к событию
@@ -60,9 +65,10 @@ export default function ModalEvent({ event, onClose, isOpen }) {
                             <button
                                 className="modal-event__button--join"
                                 onClick={(e) => {
-                                    joinToEvent(e)
-                                    closeFirstModal()
-                                }}>
+                                    joinToEvent(e);
+                                    closeFirstModal();
+                                }}
+                            >
                                 Присоединиться к событию
                             </button>
                         </div>
@@ -72,8 +78,8 @@ export default function ModalEvent({ event, onClose, isOpen }) {
             {happyModal ? (
                 <ModalHappy
                     onClose={() => {
-                        setHappyModal(false)
-                        setFirstModalOpen(true)
+                        setHappyModal(false);
+                        setFirstModalOpen(true);
                     }}
                     isOpen={isOpen}
                     event={event}
@@ -82,8 +88,8 @@ export default function ModalEvent({ event, onClose, isOpen }) {
             {errorModal ? (
                 <ModalError
                     onClose={() => {
-                        setErrorModal(false)
-                        setFirstModalOpen(true)
+                        setErrorModal(false);
+                        setFirstModalOpen(true);
                     }}
                     isOpen={isOpen}
                 />
@@ -91,12 +97,12 @@ export default function ModalEvent({ event, onClose, isOpen }) {
             {openAuth && (
                 <ModalAuth
                     onClose={() => {
-                        setOpenAuth(false)
-                        setFirstModalOpen(true)
+                        setOpenAuth(false);
+                        setFirstModalOpen(true);
                     }}
-                    isOpen={true}
+                    isOpen
                 />
             )}
         </>
-    )
+    );
 }

@@ -1,172 +1,178 @@
-import ru from 'date-fns/locale/ru'
-import { useState } from 'react'
-import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import { Input } from '../../shared/ui'
-import { api } from '../../shared/api/index.js'
-import './ModalCreateEvent.scss'
-import Modal from '../modal/Modal.jsx'
-import ModalError from '../error-modal/modalError.jsx'
-import ModalHappy from '../happy-modal/modalHappy.jsx'
-import ModalQuestion from '../question-modal/modalQuestion.jsx'
-import DropZone from './modalCreateEventDropzone.jsx'
-import UserInfo from './modalCreateEventInfo.jsx'
-import ParticipantsComponent from './modalCreateEventParticipants.jsx'
+import { useState } from 'react';
+import ru from 'date-fns/locale/ru';
+import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { api } from '@/shared/api';
+import { Input } from '@/shared/ui';
+import './ModalCreateEvent.scss';
+import ModalError from '../error-modal/modalError.jsx';
+import ModalHappy from '../happy-modal/modalHappy.jsx';
+import Modal from '../modal/Modal.jsx';
+import ModalQuestion from '../question-modal/modalQuestion.jsx';
+import DropZone from './modalCreateEventDropzone.jsx';
+import UserInfo from './modalCreateEventInfo.jsx';
+import ParticipantsComponent from './modalCreateEventParticipants.jsx';
 
-registerLocale('ru', ru)
+registerLocale('ru', ru);
 
 export default function ModalCreateEvent({ onClose, isOpen }) {
-    const [photos, setPhotos] = useState([])
-    const [occupancy, setOccupancy] = useState(false)
-    const [event, setEvent] = useState({})
-    const [myEmail, setMyEmail] = useState({})
+    const [photos, setPhotos] = useState([]);
+    const [occupancy, setOccupancy] = useState(false);
+    const [event, setEvent] = useState({});
+    const [myEmail, setMyEmail] = useState({});
 
-    const [firstModalOpen, setFirstModalOpen] = useState(true)
-    const [modalErrorOpen, setModalErrorOpen] = useState(false)
-    const [modalHappyOpen, setModalHappyOpen] = useState(false)
+    const [firstModalOpen, setFirstModalOpen] = useState(true);
+    const [modalErrorOpen, setModalErrorOpen] = useState(false);
+    const [modalHappyOpen, setModalHappyOpen] = useState(false);
 
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
-    const [selectedUsers, setSelectedUsers] = useState([])
-    const [selectedPhotos, setSelectedPhotos] = useState([])
-    const [selectedTitle, setSelectedTitle] = useState('')
-    const [selectedDescription, setSelectedDescription] = useState('')
-    const [selectedLocation, setSelectedLocation] = useState('')
-    const [selectedTime, setSelectedTime] = useState('')
+    const [selectedUsers, setSelectedUsers] = useState([]);
+    const [selectedPhotos, setSelectedPhotos] = useState([]);
+    const [selectedTitle, setSelectedTitle] = useState('');
+    const [selectedDescription, setSelectedDescription] = useState('');
+    const [selectedLocation, setSelectedLocation] = useState('');
+    const [selectedTime, setSelectedTime] = useState('');
 
-    const selectedUsersId = selectedUsers.map((user) => user.id)
-    setDefaultLocale('ru')
+    const selectedUsersId = selectedUsers.map((user) => user.id);
+    setDefaultLocale('ru');
 
     const getMe = () => {
         api.user.me({ flag: true }).then((res) => {
-            setMyEmail(res.data)
-            console.log(res.data)
-        })
-    }
+            setMyEmail(res.data);
+            console.log(res.data);
+        });
+    };
 
     useState(() => {
-        getMe()
-    })
+        getMe();
+    });
 
     const sendPhotos = async (array) => {
         if (array.getAll('files').length !== 0) {
             return await api.uploads
                 .post(array, { flag: true })
                 .then((res) => {
-                    const selectedPhotosId = res.data.map((photo) => photo.id)
-                    setSelectedPhotos(selectedPhotosId)
-                    return selectedPhotosId
+                    const selectedPhotosId = res.data.map((photo) => photo.id);
+                    setSelectedPhotos(selectedPhotosId);
+
+                    return selectedPhotosId;
                 })
-                .catch((err) => console.log(err.response.data.error))
-        } else {
-            console.log('Файлов нет')
+                .catch((error) => console.log(error.response.data.error));
         }
-    }
+        console.log('Файлов нет');
+    };
 
     const formattedTime = (selectedTime) => {
         if (selectedTime) {
-            const time = selectedTime.split(':')
-            startDate.setHours(time[0], time[1], 0)
+            const time = selectedTime.split(':');
+            startDate.setHours(time[0], time[1], 0);
         }
-    }
+    };
 
     const createEvent = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        const formData = new FormData()
-        Array.from([...photos]).forEach((file) => {
-            formData.append('files', file)
-        })
+        const formData = new FormData();
+        [...photos].forEach((file) => {
+            formData.append('files', file);
+        });
 
         sendPhotos(formData).then((selectedPhotosId) => {
-            formattedTime(selectedTime)
-            const errorRequired = document.querySelectorAll('.valid-error-required')
+            formattedTime(selectedTime);
+            const errorRequired = document.querySelectorAll('.valid-error-required');
 
             if (selectedTitle.length < 140 && selectedTitle !== '') {
-                errorRequired[0].classList.add('hide')
+                errorRequired[0].classList.add('hide');
                 if (selectedDescription.length < 1000 && selectedDescription !== '') {
-                    errorRequired[1].classList.add('hide')
+                    errorRequired[1].classList.add('hide');
                     if (selectedTime.length < 140 && selectedTime !== '') {
-                        errorRequired[2].classList.add('hide')
+                        errorRequired[2].classList.add('hide');
                         if (selectedLocation.length < 140 && selectedLocation !== '') {
-                            errorRequired[3].classList.add('hide')
-                            if (startDate < endDate) {
-                                if (convertPhotosSize(photos)) {
-                                    api.event
-                                        .create(
-                                            {
-                                                title: selectedTitle,
-                                                description: selectedDescription,
-                                                dateStart: startDate.toISOString(),
-                                                dateEnd: endDate ? endDate.toISOString() : null,
-                                                location: selectedLocation,
-                                                participants: selectedUsersId ?? null,
-                                                photos: selectedPhotosId ?? null,
-                                                createdBy: myEmail,
-                                            },
-                                            { flag: true },
-                                        )
-                                        .then((res) => {
-                                            console.log(res)
-                                            setEvent(res.data.data)
-                                            setFirstModalOpen(false)
-                                            setModalHappyOpen(true)
-                                        })
-                                        .catch((err) => {
-                                            console.log(err)
-                                            setModalErrorOpen(true)
-                                        })
-                                }
+                            errorRequired[3].classList.add('hide');
+                            if (startDate < endDate && convertPhotosSize(photos)) {
+                                api.event
+                                    .create(
+                                        {
+                                            title: selectedTitle,
+                                            description: selectedDescription,
+                                            dateStart: startDate.toISOString(),
+                                            dateEnd: endDate ? endDate.toISOString() : null,
+                                            location: selectedLocation,
+                                            participants: selectedUsersId ?? null,
+                                            photos: selectedPhotosId ?? null,
+                                            createdBy: myEmail,
+                                        },
+                                        { flag: true },
+                                    )
+                                    .then((res) => {
+                                        console.log(res);
+                                        setEvent(res.data.data);
+                                        setFirstModalOpen(false);
+                                        setModalHappyOpen(true);
+                                    })
+                                    .catch((error) => {
+                                        console.log(error);
+                                        setModalErrorOpen(true);
+                                    });
                             }
                         } else {
-                            errorRequired[3].classList.remove('hide')
+                            errorRequired[3].classList.remove('hide');
                         }
                     } else {
-                        errorRequired[2].classList.remove('hide')
+                        errorRequired[2].classList.remove('hide');
                     }
                 } else {
-                    errorRequired[1].classList.remove('hide')
+                    errorRequired[1].classList.remove('hide');
                 }
             } else {
-                errorRequired[0].classList.remove('hide')
+                errorRequired[0].classList.remove('hide');
             }
-        })
-    }
+        });
+    };
 
     const convertPhotosSize = (photos) => {
         if (photos.length !== 0) {
-            return photos.every((photo) => photo.size / 1000 / 1000 < 5)
-        } else return true
-    }
+            return photos.every((photo) => photo.size / 1000 / 1000 < 5);
+        }
+
+        return true;
+    };
 
     const setActiveQuestion = () => {
-        const modal = document.querySelector('#modal-create-event')
+        const modal = document.querySelector('#modal-create-event');
 
         if (modal) {
-            const modalCloseIcon = modal.querySelector('.modal__close-icon')
-            const modalCloseBg = modal.querySelector('.modal__bg')
+            const modalCloseIcon = modal.querySelector('.modal__close-icon');
+            const modalCloseBg = modal.querySelector('.modal__bg');
 
             modalCloseIcon.addEventListener('click', () => {
-                setFirstModalOpen(false)
-                setOccupancy(true)
-            })
+                setFirstModalOpen(false);
+                setOccupancy(true);
+            });
             modalCloseBg.addEventListener('click', () => {
-                setFirstModalOpen(false)
-                setOccupancy(true)
-            })
+                setFirstModalOpen(false);
+                setOccupancy(true);
+            });
         }
-    }
+    };
 
     return (
         <>
             {firstModalOpen && (
-                <Modal onClose={onClose} isOpen={isOpen} id="modal-create-event" title="Создание события">
+                <Modal
+                    onClose={onClose}
+                    isOpen={isOpen}
+                    id="modal-create-event"
+                    title="Создание события"
+                >
                     <div className="modal-create-event__block">
                         <form
                             action="#"
                             className="modal-create-event__form"
-                            onSubmit={(e) => createEvent(e)}>
+                            onSubmit={(e) => createEvent(e)}
+                        >
                             <div className="modal-create-event__form--inner">
                                 <div className="modal-create-event__form__row">
                                     <Input
@@ -178,11 +184,11 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                                         errorRequired="Обязательное поле"
                                         number={1}
                                         onChange={(e) => {
-                                            setActiveQuestion()
+                                            setActiveQuestion();
                                             if (e.target.value !== '') {
                                                 document
                                                     .querySelector('.modal-create-event__button')
-                                                    .removeAttribute('disabled')
+                                                    .removeAttribute('disabled');
                                             }
                                         }}
                                     />
@@ -213,11 +219,11 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                                         errorRequired="Обязательное поле"
                                         number={2}
                                         onChange={(e) => {
-                                            setActiveQuestion()
+                                            setActiveQuestion();
                                             if (e.target.value !== '') {
                                                 document
                                                     .querySelector('.modal-create-event__button')
-                                                    .removeAttribute('disabled')
+                                                    .removeAttribute('disabled');
                                             }
                                         }}
                                     />
@@ -231,11 +237,13 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                                             errorRequired="Обязательное поле"
                                             number={3}
                                             onChange={(e) => {
-                                                setActiveQuestion()
+                                                setActiveQuestion();
                                                 if (e.target.value !== '') {
                                                     document
-                                                        .querySelector('.modal-create-event__button')
-                                                        .removeAttribute('disabled')
+                                                        .querySelector(
+                                                            '.modal-create-event__button',
+                                                        )
+                                                        .removeAttribute('disabled');
                                                 }
                                             }}
                                         />
@@ -248,11 +256,13 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                                             errorRequired="Обязательное поле"
                                             number={4}
                                             onChange={(e) => {
-                                                setActiveQuestion()
+                                                setActiveQuestion();
                                                 if (e.target.value !== '') {
                                                     document
-                                                        .querySelector('.modal-create-event__button')
-                                                        .removeAttribute('disabled')
+                                                        .querySelector(
+                                                            '.modal-create-event__button',
+                                                        )
+                                                        .removeAttribute('disabled');
                                                 }
                                             }}
                                         />
@@ -275,8 +285,8 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
                 <ModalQuestion
                     onClose={onClose}
                     answer={(e) => {
-                        setFirstModalOpen(e)
-                        setOccupancy(false)
+                        setFirstModalOpen(e);
+                        setOccupancy(false);
                     }}
                     isOpen={isOpen}
                 />
@@ -284,5 +294,5 @@ export default function ModalCreateEvent({ onClose, isOpen }) {
             {modalErrorOpen && <ModalError onClose={onClose} isOpen={isOpen} />}
             {modalHappyOpen && <ModalHappy onClose={onClose} isOpen={isOpen} event={event} />}
         </>
-    )
+    );
 }

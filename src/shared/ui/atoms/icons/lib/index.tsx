@@ -1,4 +1,4 @@
-import{ ReactElement } from 'react';
+import { ReactElement } from 'react';
 
 type IconProps<T> = {
     size?: number;
@@ -11,6 +11,6 @@ export type IconType<T> = (props: IconProps<T>) => ReactElement | null;
 
 export const withDefaultProps =
     <T extends any>(Icon: IconType<T>) =>
-        ({ size = 24, fill = 'currentColor', ...props }: IconProps<T>): JSX.Element => (
-            <Icon size={size} fill={fill} {...(props as IconProps<T>)} />
-        );
+    ({ size = 24, fill = 'currentColor', ...props }: IconProps<T>): JSX.Element => (
+        <Icon size={size} fill={fill} {...(props as IconProps<T>)} />
+    );

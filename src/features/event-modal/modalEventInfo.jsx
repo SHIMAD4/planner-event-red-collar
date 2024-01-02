@@ -1,18 +1,19 @@
-import './ModalEventInfo.scss'
+import './ModalEventInfo.scss';
 
 export default function modalEventInfo({ event }) {
-    const start = new Date(event.extendedProps.dateStart)
-    const weekday = start.toLocaleString('ru-RU', { weekday: 'long' })
-    const date = start.toLocaleDateString()
+    const start = new Date(event.extendedProps.dateStart);
+    const weekday = start.toLocaleString('ru-RU', { weekday: 'long' });
+    const date = start.toLocaleDateString();
     const time = start.toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit',
-    })
+    });
 
-    const description = event.extendedProps.description
-    const location = event.extendedProps.location
+    const { description } = event.extendedProps;
+    const { location } = event.extendedProps;
 
-    let isPast = event.classNames[0] === 'past'
+    const isPast = event.classNames[0] === 'past';
+
     return (
         <div className={isPast ? 'modal__event-info__block past' : 'modal__event-info__block'}>
             <aside className="modal__event-info">
@@ -27,5 +28,5 @@ export default function modalEventInfo({ event }) {
             </aside>
             <p className="modal__desc">{description}</p>
         </div>
-    )
+    );
 }

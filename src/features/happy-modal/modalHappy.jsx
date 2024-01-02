@@ -1,22 +1,23 @@
-import './ModalHappy.scss'
-import Modal from '../modal/Modal.jsx'
+import './ModalHappy.scss';
+import Modal from '../modal/Modal.jsx';
 
 export default function ModalHappy({ onClose, isOpen, event }) {
-    let start = ''
-    let location = ''
+    let start = '';
+    let location = '';
     if (event.hasOwnProperty('extendedProps')) {
-        start = new Date(event.extendedProps.dateStart)
-        location = event.extendedProps.location
+        start = new Date(event.extendedProps.dateStart);
+        location = event.extendedProps.location;
     } else {
-        start = new Date(event.dateStart)
-        location = event.location
+        start = new Date(event.dateStart);
+        location = event.location;
     }
-    const weekday = start.toLocaleString('ru-RU', { weekday: 'long' })
-    const date = start.toLocaleDateString()
+    const weekday = start.toLocaleString('ru-RU', { weekday: 'long' });
+    const date = start.toLocaleDateString();
     const time = start.toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit',
-    })
+    });
+
     return (
         <Modal onClose={onClose} isOpen={isOpen} id="modal-happy">
             <div className="modal-happy__block">
@@ -32,11 +33,12 @@ export default function ModalHappy({ onClose, isOpen, event }) {
                 <button
                     className="modal-happy__button"
                     onClick={() => {
-                        onClose()
-                    }}>
+                        onClose();
+                    }}
+                >
                     Отлично
                 </button>
             </div>
         </Modal>
-    )
+    );
 }

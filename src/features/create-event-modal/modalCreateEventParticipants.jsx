@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react'
-import Select from 'react-select'
-import { api } from '../../shared/api/index.js'
-import avatar from '../../../public/images/avatar.png'
+import { useEffect, useState } from 'react';
+import Select from 'react-select';
+import { api } from '@/shared/api';
+import avatar from '../../../public/images/avatar.png';
 
 export default function ParticipantsComponent({ setSelectedUsers }) {
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        getUsers()
-    }, [])
+        getUsers();
+    }, []);
 
     const getUsers = () => {
         api.user
             .all({ flag: false })
             .then((res) => {
-                setUsers(res.data)
+                setUsers(res.data);
             })
-            .catch((err) => console.log(err))
-    }
+            .catch((error) => console.log(error));
+    };
 
     const selectOptions = users.map((user) => ({
         value: user.username,
@@ -34,7 +34,7 @@ export default function ParticipantsComponent({ setSelectedUsers }) {
                 <p className="modal-create-event__select__option-username">{user.username}</p>
             </div>
         ),
-    }))
+    }));
 
     return (
         <Select
@@ -45,5 +45,5 @@ export default function ParticipantsComponent({ setSelectedUsers }) {
             placeholder="Начните вводить имя"
             onChange={(selectedUsers) => setSelectedUsers(selectedUsers)}
         />
-    )
+    );
 }

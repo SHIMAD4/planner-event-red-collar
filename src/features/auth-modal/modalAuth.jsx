@@ -1,71 +1,69 @@
-import { useState } from 'react'
-import { api } from '../../shared/api/index.js'
-import './ModalAuth.scss'
-import Modal from '../modal/Modal.jsx'
-import ModalError from '../error-modal/modalError.jsx'
-import ModalAuthRegister from '../register-modal/modalRegister.jsx'
-import { ModalAuthLogin } from './modalAuthLogin.jsx'
-import { ModalAuthPass } from './modalAuthPass.jsx'
+import { useState } from 'react';
+import { api } from '../../shared/api/index';
+import './ModalAuth.scss';
+import ModalError from '../error-modal/modalError.jsx';
+import Modal from '../modal/Modal.jsx';
+import ModalAuthRegister from '../register-modal/modalRegister.jsx';
+import { ModalAuthLogin } from './modalAuthLogin.jsx';
+import { ModalAuthPass } from './modalAuthPass.jsx';
 
 export default function ModalAuth({ onClose, isOpen }) {
-    const [emailToCheck, setEmailToCheck] = useState('')
-    const [emailInDB, setEmailInDB] = useState(false)
-    const [passToCheck, setPassToCheck] = useState('')
-    const [hide, setHide] = useState(false)
-    const [registerUser, setRegisterUser] = useState(false)
-    const [modalOpen, setModalOpen] = useState(true)
-    const [modalError, setModalError] = useState(false)
+    const [emailToCheck, setEmailToCheck] = useState('');
+    const [emailInDB, setEmailInDB] = useState(false);
+    const [passToCheck, setPassToCheck] = useState('');
+    const [hide, setHide] = useState(false);
+    const [registerUser, setRegisterUser] = useState(false);
+    const [modalOpen, setModalOpen] = useState(true);
+    const [modalError, setModalError] = useState(false);
 
-    const bc = new BroadcastChannel('token_channel')
+    const bc = new BroadcastChannel('token_channel');
 
-    const input = document.querySelector('.modal-auth__input')
-    const validError = document.querySelector('.valid-error')
-    const clearIconError = document.querySelector('.clear-icon-alt')
-    const clearIcon = document.querySelector('.clear-icon')
+    const input = document.querySelector('.modal-auth__input');
+    const validError = document.querySelector('.valid-error');
+    const clearIconError = document.querySelector('.clear-icon-alt');
+    const clearIcon = document.querySelector('.clear-icon');
 
     const EMAIL_REGEXP =
-        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu
+        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
     const isEmailValid = (value) => {
-        const isValid = EMAIL_REGEXP.test(value) || value === ''
+        const isValid = EMAIL_REGEXP.test(value) || value === '';
         if (input && validError && isValid) {
-            input.classList.toggle('isInvalid', !isValid)
-            validError.classList.toggle('hide', isValid)
-            clearIconError.classList.toggle('hide', isValid)
-            clearIcon.classList.toggle('hide', !isValid)
-            return true
-        } else {
-            return false
+            input.classList.toggle('isInvalid', !isValid);
+            validError.classList.toggle('hide', isValid);
+            clearIconError.classList.toggle('hide', isValid);
+            clearIcon.classList.toggle('hide', !isValid);
+
+            return true;
         }
-    }
+
+        return false;
+    };
 
     const checkEmail = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         api.check
             .email(emailToCheck, { flag: false })
             .then((res) => {
                 if (res.status !== 404) {
-                    setEmailInDB(true)
-                    setHide(true)
+                    setEmailInDB(true);
+                    setHide(true);
                 }
             })
-            .catch((err) => {
-                if (err.response.status === 404) {
-                    console.log(isEmailValid(input.value))
+            .catch((error) => {
+                if (error.response.status === 404) {
                     if (emailToCheck !== '' && isEmailValid(input.value)) {
-                        setRegisterUser(true)
-                    } else {
-                        if (input) {
-                            input.classList.add('isInvalid')
-                            validError.classList.remove('hide')
-                        }
+                        setRegisterUser(true);
+                    } else if (input) {
+                        input.classList.add('isInvalid');
+                        validError.classList.remove('hide');
                     }
                 }
-            })
-    }
+            });
+    };
 
     const checkPass = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         api.user
             .login(
                 {
@@ -77,44 +75,39 @@ export default function ModalAuth({ onClose, isOpen }) {
                 },
             )
             .then((res) => {
-                localStorage.setItem('access_token', res.data.jwt)
-                bc.postMessage('Token')
-                bc.close()
-                setModalOpen(false)
+                localStorage.setItem('access_token', res.data.jwt);
+                bc.postMessage('Token', '*');
+                bc.close();
+                setModalOpen(false);
             })
-            .catch((err) => {
-                if (err.response.status > 499 && err.response.status < 600) {
-                    console.log('Ошибка сервера')
-                    setModalError(true)
+            .catch((error) => {
+                if (error.response.status > 499 && error.response.status < 600) {
+                    setModalError(true);
                 }
-            })
-    }
+            });
+    };
 
-    return (
-        <>
-            {registerUser ? (
-                <ModalAuthRegister onClose={onClose} isOpen={isOpen} email={emailToCheck} />
-            ) : modalOpen ? (
-                <Modal onClose={onClose} isOpen={isOpen} title="Вход">
-                    <div className="modal-auth__form-block">
-                        <form action="#" className="modal-auth__form">
-                            <ModalAuthLogin
-                                checkEmail={checkEmail}
-                                hide={hide}
-                                setEmailToCheck={setEmailToCheck}
-                            />
-                            {emailInDB ? (
-                                <ModalAuthPass
-                                    setPassToCheck={(e) => setPassToCheck(e)}
-                                    checkPass={(e) => checkPass(e)}
-                                />
-                            ) : null}
-                        </form>
-                    </div>
-                </Modal>
-            ) : modalError ? (
-                <ModalError onClose={onClose} isOpen={isOpen} />
-            ) : null}
-        </>
-    )
+    return registerUser ? (
+        <ModalAuthRegister onClose={onClose} isOpen={isOpen} email={emailToCheck} />
+    ) : modalOpen ? (
+        <Modal onClose={onClose} isOpen={isOpen} title="Вход">
+            <div className="modal-auth__form-block">
+                <form action="#" className="modal-auth__form">
+                    <ModalAuthLogin
+                        checkEmail={checkEmail}
+                        hide={hide}
+                        setEmailToCheck={setEmailToCheck}
+                    />
+                    {emailInDB ? (
+                        <ModalAuthPass
+                            setPassToCheck={(e) => setPassToCheck(e)}
+                            checkPass={(e) => checkPass(e)}
+                        />
+                    ) : null}
+                </form>
+            </div>
+        </Modal>
+    ) : modalError ? (
+        <ModalError onClose={onClose} isOpen={isOpen} />
+    ) : null;
 }

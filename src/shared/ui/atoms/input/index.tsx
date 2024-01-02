@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { Icons } from '../index'
-import './styles.scss'
+import { FC, useState } from 'react';
+import { Icons } from '../icons';
+import './styles.scss';
+import { InputProps } from './types';
 
-export const Input = ({
+export const Input: FC<InputProps> = ({
     className,
     type,
     id,
@@ -17,17 +18,17 @@ export const Input = ({
     isPasswordVisible,
     togglePasswordVisibility,
 }) => {
-    const [inputValue, setInputValue] = useState('')
+    const [inputValue, setInputValue] = useState('');
 
     const clearInput = () => {
-        setInputValue('')
+        setInputValue('');
         if (func) {
-            func('')
+            func('');
         }
-    }
+    };
 
     return (
-        <div className={className + '-block block'}>
+        <div className={`${className}-block block`}>
             <input
                 className={className}
                 type={type}
@@ -35,18 +36,20 @@ export const Input = ({
                 name={id}
                 value={inputValue}
                 onChange={(e) => {
-                    setInputValue(e.target.value)
+                    setInputValue(e.target.value);
                     if (func) {
-                        func(e.target.value)
+                        func('');
                     }
-                    onChange ? onChange(e) : null
+                    if (onChange) {
+                        onChange(e);
+                    }
                 }}
                 autoComplete="true"
                 required={!!required}
             />
             <label htmlFor={id}>{title}</label>
             {id === 'password' || id === 'password2' ? (
-                <div onClick={() => togglePasswordVisibility()}>
+                <div onClick={() => togglePasswordVisibility?.()}>
                     {id === 'password' ? (
                         isPasswordVisible ? (
                             <Icons.EyeOpen className="eye-close1" />
@@ -61,23 +64,29 @@ export const Input = ({
                             <Icons.EyeClose className="eye-close2" />
                         )
                     ) : null}
-                </div>) : (
+                </div>
+            ) : (
                 <>
                     <Icons.Clear className="icon clear-icon" onClick={() => clearInput()} />
-                    <Icons.ClearError className="icon clear-icon-alt hide" onClick={() => clearInput()} />
+                    <Icons.ClearError
+                        className="icon clear-icon-alt hide"
+                        onClick={() => clearInput()}
+                    />
                 </>
             )}
             {errorSymbols ? (
-                <p className="valid-error valid-error-symbols hide">{errorSymbols ? errorSymbols : ''}</p>
+                <p className="valid-error valid-error-symbols hide">{errorSymbols || ''}</p>
             ) : null}
             {errorEquality ? (
-                <p className="valid-error valid-error-equality hide">{errorEquality ? errorEquality : ''}</p>
+                <p className="valid-error valid-error-equality hide">{errorEquality || ''}</p>
             ) : null}
             {errorRequired ? (
-                <p className={'valid-error valid-error-required valid-error-required-' + number + ' hide'}>
-                    {errorRequired ? errorRequired : ''}
+                <p
+                    className={`valid-error valid-error-required valid-error-required-${number} hide`}
+                >
+                    {errorRequired || ''}
                 </p>
             ) : null}
         </div>
-    )
-}
+    );
+};

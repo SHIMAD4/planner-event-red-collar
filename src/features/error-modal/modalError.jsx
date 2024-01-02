@@ -1,5 +1,5 @@
-import './ModalError.scss'
-import Modal from '../modal/Modal.jsx'
+import './ModalError.scss';
+import Modal from '../modal/Modal.jsx';
 
 export default function ModalError({ onClose, isOpen }) {
     return (
@@ -10,11 +10,12 @@ export default function ModalError({ onClose, isOpen }) {
                 <button
                     className="modal-error__button"
                     onClick={() => {
-                        onClose()
-                    }}>
+                        onClose();
+                    }}
+                >
                     Хорошо
                 </button>
             </div>
         </Modal>
-    )
+    );
 }

@@ -1,106 +1,102 @@
-import { useState } from 'react'
-import { Input } from '../../shared/ui'
-import { api } from '../../shared/api/index.js'
-import { Icons } from '../../shared/ui'
-import './ModalRegister.scss'
-import Modal from '../modal/Modal.jsx'
-import ModalError from '../error-modal/modalError.jsx'
+import { useState } from 'react';
+import { api } from '@/shared/api';
+import { Input, Icons } from '@/shared/ui';
+
+import './ModalRegister.scss';
+import ModalError from '../error-modal/modalError.jsx';
+import Modal from '../modal/Modal.jsx';
 
 export default function ModalAuthRegister({ onClose, isOpen, email }) {
-    const [username, setUsername] = useState('')
-    const [pass, setPass] = useState('')
-    const [passRepeat, setPassRepeat] = useState('')
-    const [modalOpen, setModalOpen] = useState(true)
-    const [modalError, setModalError] = useState(false)
-    const [isPasswordVisible, setPasswordVisible] = useState(false)
+    const [username, setUsername] = useState('');
+    const [pass, setPass] = useState('');
+    const [passRepeat, setPassRepeat] = useState('');
+    const [modalOpen, setModalOpen] = useState(true);
+    const [modalError, setModalError] = useState(false);
+    const [isPasswordVisible, setPasswordVisible] = useState(false);
 
-    const bc = new BroadcastChannel('token_channel')
+    const bc = new BroadcastChannel('token_channel');
 
     const info =
-        'В пароле используйте от 8 до 32 символов: строчные и прописные латинские буквы (A-z), цифры (0-9) и спец символы ( . , : ; ? ! * + % - < > @ [ ] { } /  _ {} $ # )'
+        'В пароле используйте от 8 до 32 символов: строчные и прописные латинские буквы (A-z), цифры (0-9) и спец символы ( . , : ; ? ! * + % - < > @ [ ] { } /  _ {} $ # )';
 
-    const PASS_REGEXP = /^[A-Za-z0-9.,:;?!*+%\-<>@[\]{}_{}$#]{8,32}$/
-    const isPasswordValid = PASS_REGEXP.test(pass)
+    const PASS_REGEXP = /^[\w!#$%*+,.:;<>?@[\]{}\-]{8,32}$/;
+    const isPasswordValid = PASS_REGEXP.test(pass);
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        const validErrorEquality = document.querySelector('.valid-error-equality')
-        const validErrorSymbol = document.querySelector('.valid-error-symbols')
-        const validErrorRequired = document.querySelectorAll('.valid-error-required')
-        const inputs = document.querySelectorAll('.modal-register__input')
+        e.preventDefault();
+        const validErrorEquality = document.querySelector('.valid-error-equality');
+        const validErrorSymbol = document.querySelector('.valid-error-symbols');
+        const validErrorRequired = document.querySelectorAll('.valid-error-required');
+        const inputs = document.querySelectorAll('.modal-register__input');
 
         if (username === '') {
-            validErrorRequired[0].classList.remove('hide')
-            inputs[0].classList.add('isInvalid')
+            validErrorRequired[0].classList.remove('hide');
+            inputs[0].classList.add('isInvalid');
         } else {
-            validErrorRequired[0].classList.add('hide')
-            inputs[0].classList.remove('isInvalid')
+            validErrorRequired[0].classList.add('hide');
+            inputs[0].classList.remove('isInvalid');
         }
 
         if (pass === '') {
-            validErrorRequired[1].classList.remove('hide')
-            validErrorSymbol.classList.add('hide')
-            inputs[1].classList.add('isInvalid')
-            inputs[1].classList.remove('isValid')
+            validErrorRequired[1].classList.remove('hide');
+            validErrorSymbol.classList.add('hide');
+            inputs[1].classList.add('isInvalid');
+            inputs[1].classList.remove('isValid');
         } else if (!isPasswordValid) {
-            validErrorSymbol.classList.remove('hide')
-            validErrorRequired[1].classList.add('hide')
-            inputs[1].classList.remove('isValid')
-            inputs[1].classList.add('isInvalid')
+            validErrorSymbol.classList.remove('hide');
+            validErrorRequired[1].classList.add('hide');
+            inputs[1].classList.remove('isValid');
+            inputs[1].classList.add('isInvalid');
         } else {
-            validErrorRequired[1].classList.add('hide')
-            validErrorSymbol.classList.add('hide')
-            inputs[1].classList.remove('isInvalid')
-            inputs[1].classList.add('isValid')
+            validErrorRequired[1].classList.add('hide');
+            validErrorSymbol.classList.add('hide');
+            inputs[1].classList.remove('isInvalid');
+            inputs[1].classList.add('isValid');
         }
 
         if (passRepeat === '') {
-            validErrorRequired[2].classList.remove('hide')
-            validErrorEquality.classList.add('hide')
-            inputs[2].classList.remove('isValid')
-            inputs[2].classList.add('isInvalid')
+            validErrorRequired[2].classList.remove('hide');
+            validErrorEquality.classList.add('hide');
+            inputs[2].classList.remove('isValid');
+            inputs[2].classList.add('isInvalid');
         } else if (pass !== passRepeat) {
-            validErrorRequired[2].classList.add('hide')
-            validErrorEquality.classList.remove('hide')
-            inputs[2].classList.remove('isValid')
-            inputs[2].classList.add('isInvalid')
+            validErrorRequired[2].classList.add('hide');
+            validErrorEquality.classList.remove('hide');
+            inputs[2].classList.remove('isValid');
+            inputs[2].classList.add('isInvalid');
         } else {
-            validErrorRequired[2].classList.add('hide')
-            validErrorEquality.classList.add('hide')
-            inputs[2].classList.remove('isInvalid')
-            inputs[2].classList.add('isValid')
+            validErrorRequired[2].classList.add('hide');
+            validErrorEquality.classList.add('hide');
+            inputs[2].classList.remove('isInvalid');
+            inputs[2].classList.add('isValid');
         }
 
         if (isPasswordValid && pass !== '' && pass === passRepeat) {
             api.user
                 .register({ username, email, password: passRepeat }, { flag: false })
                 .then((res) => {
-                    localStorage.setItem('access_token', res.data.jwt)
-                    bc.postMessage('Token')
-                    bc.close()
+                    localStorage.setItem('access_token', res.data.jwt);
+                    bc.postMessage('Token');
+                    bc.close();
                 })
-                .catch((err) => {
-                    if (err.response.status > 299 || err.response.status < 200) {
-                        console.log('Ошибка сервера')
-                        setModalError(true)
+                .catch((error) => {
+                    if (error.response.status > 299 || error.response.status < 200) {
+                        console.log('Ошибка сервера');
+                        setModalError(true);
                     }
-                })
-            setModalOpen(false)
+                });
+            setModalOpen(false);
         }
-    }
+    };
 
     const togglePasswordVisibility = () => {
-        setPasswordVisible(!isPasswordVisible)
+        setPasswordVisible(!isPasswordVisible);
 
-        const inputs = document.querySelectorAll('.modal-register__input')
+        const inputs = document.querySelectorAll('.modal-register__input');
         for (let i = 1; i < inputs.length; i++) {
-            if (inputs[i].type === 'password') {
-                inputs[i].type = 'text'
-            } else {
-                inputs[i].type = 'password'
-            }
+            inputs[i].type = inputs[i].type === 'password' ? 'text' : 'password';
         }
-    }
+    };
 
     return modalOpen ? (
         <Modal onClose={onClose} isOpen={isOpen} title="Регистрация">
@@ -144,11 +140,12 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
                         type="submit"
                         className="modal-register__button"
                         onClick={() => {
-                            const inputs = document.querySelectorAll('.modal-register__input')
-                            setUsername(inputs[0].value)
-                            setPass(inputs[1].value)
-                            setPassRepeat(inputs[2].value)
-                        }}>
+                            const inputs = document.querySelectorAll('.modal-register__input');
+                            setUsername(inputs[0].value);
+                            setPass(inputs[1].value);
+                            setPassRepeat(inputs[2].value);
+                        }}
+                    >
                         Зарегистрироваться
                     </button>
                 </form>
@@ -156,5 +153,5 @@ export default function ModalAuthRegister({ onClose, isOpen, email }) {
         </Modal>
     ) : modalError ? (
         <ModalError onClose={onClose} isOpen={isOpen} />
-    ) : null
+    ) : null;
 }
